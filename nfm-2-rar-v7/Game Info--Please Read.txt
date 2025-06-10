@@ -1,0 +1,39 @@
+NEED FOR MADNESS REVISED AND RECHARGED--PAN-JAVA EDITION
+(7th Release PROTOTYPE)
+
+This is the 7th release of NfM Revised and Recharged--my modified version of Radicalplay.com's Need for Madness. (I dropped the '2' since the game no longer tries to emulate any particular NfM--RaR is its own design.) Hopefully it will be compatible with all Java versions and the latest Javas won't have trouble running it.
+Before playing, there are a few things you ought to know:
+
+1. This release is just a prototype--IT IS NOT A STABLE RELEASE.
+I've worked as hard as possible to get this released earlier, but you will still find many issues and will probably come across errors.
+It is most definitely unfinished. The next release should be far more stable.
+
+2. Before playing the game, extract this entire folder from its compressed format to your computer. The game might not run otherwise, but even if it did, it would need to 'extract' every time you were to launch it and would load much slower, especially if you have the game's music as well.
+
+3. If you haven't experienced RaR before, please read the game instructions before playing. Revised and Recharged is actually quite different from the classic NfM. On the other hand, if you're more experienced, you may want to set the game difficulty to 'HARDER'.
+
+
+Major Improvements
+
+Recoded in 64-bit
+More precise graphics rendering
+Much smoother game movements
+Under the right conditions, frame rate can be well over 60fps.
+Some 'deprecated' code modernized, which may help with stability.
+
+Even if the game crashes, it will now return to the main menu--rather than freeze. For this release, the most likely cause of such will be that most of the music hasn't been added to the game. Unlike before, where the sound folders could just be dragged out, they can't now without crashing the game. 
+
+
+Major Deviations from the Original Game
+
+New types of vehicles, including several aircraft and gun turrets.
+
+Speaking of guns, some vehicles now have weapons. This adds another dimension to gameplay, in which it's now possible to defeat opponents without having to catch up to or crash into them, which can damage your own vehicle. Other cars like the Phantom will have more special abilities in the future.
+
+Cars can be driven with the Cursor. Read the game instructions to learn more.
+
+The game comes with a wide variety of options which can also be adjusted during a race in the paused menu.
+The default settings for those options (upon game launch) are also definable in the 'DefaultSettings' file in the main folder. Just revalue everythig to your liking, and you'll be able to launch the game with preferred settings.
+
+
+I take all questions, comments, and suggestions at RyanAlbano1@gmail.com

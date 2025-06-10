@@ -1,0 +1,60 @@
+I've assembled this troubleshooter based on problems discovered by my fans and myself, so this should be pretty comprehensive.
+I thank everyone who came forth with their issues!
+
+SETUP:
+Before everything else, check to see if all these files and folders are within the main folder. They must be there for the game to work properly:
+stages, sound, NFM RAR, models, and DefaultSettings.
+
+If any of these files/folders are missing, either your internet browser downloaded the game incorrectly (try downloading with another browser), or you may just be having connection issues. For the record, Google Chrome has a long history of not downloading the game properly.
+
+HOW TO LAUNCH THE GAME:
+Open 'NFM RAR' with Java(TM) Platform SE Binary. If this isn't the default set program for opening the file, right click on the file. Find 'Open with', click 'Choose default program...', and look for 'Java(TM) Platform SE Binary'. If it's not there, select 'Browse' or 'More options', and open the folder where your Java's installed (ususally in 'Program files (x86)' in your computer's local hard drive ('OS' or 'Local Disk')). If it has two sub-folders ('bin' and 'lib'), choose 'bin'. Look for 'Java' and try running the game with that.
+
+HOW TO CLOSE THE GAME:
+Reduce the ScreenSize until you can see your computer's taskbar. Right click on the RaR application (should be the Java symbol) and close it from there.
+
+IF THE GAME DOES NOT LAUNCH SUCCESSFULLY:
+Chances are that the game was partially downloaded by your internet browser and that the package is corrupt (if you were downloading--that is). Try downloading again with another browser and, once again, avoid using Google Chrome, which has a long history of not handling RaR downloads (and in the past, operation) properly. Be sure your internet connection is good as well.
+Make sure you're running the game with Java(TM) Platform SE Binary (see 'HOW TO LAUNCH THE GAME').
+Try getting the latest Java version (history recommends you keep the old one though!). This is contrary to what I've said before, but the game has been greatly modernized now and might not even work on much older Javas.
+If all else fails, try lowering your Java security settings in the Java control Panel or contact me.
+I must also point out that this NFM was modified entirely on Windows computers. If you're using a different operating system, you may not be able to run it. But do try. I'd love to see someone run RaR on Mac!
+
+IF THE GAME RUNS SLOW/LAGS:
+Since the 5th release, I've put in great effort to reduce lag in this game.
+First check and see if you have a graphics accelerator on your device that's not being utilized. This may solve the lag before even having to sacrifice anything in the game.
+If you're using a laptop, make sure the battery settings are at 'high-performance'. This can make a huge difference (you may also want to plug it in).
+If not, go to the game's options menu. There are several options to make the game run faster and smoother on your device.
+First, turn off the Game Scenery if you don't care for aesthetics. This will help a lot.
+If the game still lags, increase 'Graphics Reduction' but not to the point that graphics look bad. This works by omitting smaller less-noticeable polygons and may save a bit of memory, though it hasn't yet proven as effective as the other options.
+Reducing the number of cars will improve performance everywhere quite dramatically.
+Reduce the screen size--although even large screen sizes perform pretty well now.
+Turn off the in-game 'Heads-Up-Display' if you don't need any guidance (may help a little bit).
+'Max Distance' should be a last resort in stopping lag. Reduce this until your viewing distance in the game is effectively cut off (around 16384 or so).
+All these settings can also be defined in the 'DefaultSettings' file.
+On some stages, the game is programmed to play sounds in several phases, producing the echo effect needed on some stages like The Tunnel of Doom. If there are a lot of cars however, this can also cause extreme lag. Mute the sound effects if that's the case.
+If you can, close other applications (including Web Browsers) that don't need to be running at the moment--this NFM uses a good amount of memory indeed. And definitely close unnecessary programs that use considerable CPU as well (assuming you're running the game with Windows, you can figure out what applications are using the most CPU with Windows Task Manager).
+One more thing--I spent the majority of time coding this game on Windows 7 and 8 computers. I've never tried it in its current state on much older computers like Windows XP. If you're using one of these, the lag might be a lot worse.
+
+IF THE GAME SCREEN FLICKERS:
+Though this issue's been improved, it may persist on some computer models.
+Go to 'Refresh Rate' in the game's Options and increase it until flickering stops. You should also define this in 'DefaultSettings' if it's an ongoing problem.
+If flickering is not an issue or you have an exceptional processor, try setting this to 0 to get the fastest animation rate and best gameplay. The lower the better!
+Also--closing other applications will help.
+
+IF GAMEPLAY MOMENTARILY FREEZES ONCE IN A WHILE:
+This was due to the game's old sound-handling methods, which caused the background processes (threads) to fall out of alignment and hold each other up. I've done a complete overhaul of the game's sound system and this should no longer be an issue. If it still is, contact me.
+
+IF KEY COMMANDS ARE NOT WORKING:
+Make sure Caps Lock is off. Caps lock can disable the specials, speed boost, and other key controls in the game.
+
+IF THE GAME IS TOO HARD/DIFFICULT:
+First read the game instructions if you haven't yet.
+Set the game's difficulty to 'EASIER' in the Game Options. Though 'HARDER' is recommended, since it maximizes the AI's abilities and feels more like competing against real opponents.
+Turn off the Firepower. Though keep in mind those cars that were slow beacuse they lost power shooting at you will move quite fast now (TRAIN of TERROR!)
+Lag can make the vehicles harder to control. See 'IF THE GAME RUNS SLOW/LAGS' for tips on stopping the lag.
+Put on Immortality--this is where the real epicness begins! It's also a great way to practice the mad driving skills needed with cars like Formula 7, Turbo Dragster, and the Bugatti.
+Some cars are overall better and some stages more difficult than others. In RaR you can usually judge this well simply by looking at the cars and stages--I've re-programmed the game based on that ideology.
+And be aware--this is also a strategy game! Use your wits. There's no mis-conduct in this game--do whatever it takes to win!
+
+If you still have problems, or you find another issue not listed, E-mail me at RyanAlbano1@gmail.com. And keep in mind that this release is only a prototype and that bugs will occur.

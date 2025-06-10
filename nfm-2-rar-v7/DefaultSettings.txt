@@ -1,0 +1,16 @@
+These are the default settings for the Game Options when the game is launched. Type in new values to change them:
+
+GameSpeed(20)
+RefreshRate(1)
+GameScenery(ON)
+Firepower(ON)
+MaxDistance(9223372036854775807)
+Zoom(100)%
+Immortality(OFF)
+Difficulty(1) (0 for Dummy-Mode, 1 for easy, 2 for hard)
+GraphicsReduction(0)
+#ofCars(1)
+ScreenSize(50)%
+Music(OFF) <--Not all Music's been added, so putting this on could crash the game.
+
+Important: Don't delete this file. The game might not start without it.
