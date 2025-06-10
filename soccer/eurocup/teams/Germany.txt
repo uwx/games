@@ -1,0 +1,40 @@
+plan(2,5,3)
+planpos(-120)
+
+shirt(0,0,20)
+short(0,0,19)
+socks(0,0,20)
+
+clash-shirt(202,5,7)
+clash-short(180,6,6)
+clash-socks(173,6,6)
+
+keeper-shirt(147,6,6)
+keeper-gloves(47,7,10)
+keeper-socks(145,4,2)
+
+// players num
+// 0 = goal keeper
+// 1,2,3 = defender
+// 4,5,6,7 = midfielder/attacker
+// 8,9,10 = attacker
+
+// syntax = newplayer(num,skintone,hairtype,haircolor,hairtone)
+// skintone from 3 to 10 | hairtype 0,1,2 | haircolor from 27 to 32 brown to yellow | hairtone 2 to 10
+// or playercopy(num,copynum);
+
+
+newplayer(9,8,2,28,3)
+newplayer(8,8,1,30,5)
+newplayer(7,8,1,27,2)
+newplayer(6,7,0,29,4)
+newplayer(5,9,0,29,4)
+newplayer(4,6,1,30,6)
+playercopy(3,7)
+newplayer(2,5,0,27,2)
+newplayer(1,9,1,29,4)
+newplayer(0,7,0,27,2)
+
+
+//keeper(skintone,hairtype,haircolor,hairtone)
+keeper(8,1,31,5)

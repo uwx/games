@@ -1,0 +1,14 @@
+# Radical Play - 3D Particle Format
+# Options:
+# scale(float)
+# enableAlpha()
+# xgrade(R1,G1,B1,A1,R2,G2,B2,A2)
+# ygrade(R1,G1,B1,A1,R2,G2,B2,A2)
+# zgrade(R1,G1,B1,A1,R2,G2,B2,A2)
+
+scale(50)
+ygrade(161,266,255,255,10,70,255,255) //70
+
+v(3.000000,0.660000,0.000000,-3.000000,-0.850000,0.000000,-3.000000,0.660000,0.000000,3.000000,-0.850000,0.000000)v
+p(0,1,2,1,0,3)p
+

@@ -1,0 +1,20 @@
+# Radical Play - 3D Object Format
+# Options:
+# scale(float)
+# enableAlpha()
+# texture(none,R,G,B,A)
+# texture(img-url,R,G,B,A)
+
+scale(5)
+enableAlpha()
+texture(data/3D/textures/dst10.png,100,100,255,100)
+texture(data/3D/textures/dst11.png)
+texture(data/3D/textures/dst12.png)
+texture(data/3D/textures/dst13.png)
+ownShade()
+
+v(1.000000,1.000000,0.000000,-1.000000,-1.000000,0.000000,-1.000000,1.000000,0.000000,1.000000,-1.000000,0.000000)v
+n(0.000000,0.000000,-1.000000)n
+t(1.000000,1.000000,0.000000,0.000000,0.000000,1.000000,1.000000,0.000000)t
+p(0,0,0,1,0,1,2,0,2,1,0,1,0,0,0,3,0,3)p
+

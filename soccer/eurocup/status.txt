@@ -1,0 +1,31 @@
+
+frontname(EURO CUP)
+
+name(Euro Cup)
+
+team(Albania,58,743,582)
+team(Austria,84,640,430)
+team(Belgium,76,460,386)
+team(Croatia,64,653,493)
+team(Czech Republic,60,647,416)
+team(Denmark,70,541,270)
+team(England,98,382,358)
+team(France,94,433,436)
+team(Georgia,78,1125,541)
+team(Germany,92,600,340)
+team(Hungary,66,687,455)
+team(Italy,82,623,569)
+team(Netherlands,96,480,360)
+team(Poland,54,715,350)
+team(Portugal,86,240,636)
+team(Romania,74,840,520)
+team(Scotland,56,356,260)
+team(Serbia,62,727,507)
+team(Slovakia,80,687,430)
+team(Slovenia,72,633,476)
+team(Spain,100,327,610)
+team(Switzerland,88,550,455)
+team(Turkey,90,946,604)
+team(Ukraine,68,916,404)
+
+
