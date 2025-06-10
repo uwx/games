@@ -1,0 +1,4909 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Panel;
+import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
+import java.awt.image.MemoryImageSource;
+import java.awt.image.PixelGrabber;
+import java.io.DataInputStream;
+import java.net.URL;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+public class xtGraphics extends Panel {
+   Medium m;
+   FontMetrics ftm;
+   ImageObserver ob;
+   GameSparker app;
+   int fase;
+   int oldfase;
+   int starcnt;
+   int unlocked;
+   int lockcnt;
+   int opselect;
+   boolean shaded;
+   int flipo;
+   boolean nextc;
+   int gatey;
+   int looped;
+   int[] sc;
+   int[] xstart = new int[]{0, -350, 350, 0, 0};
+   int[] zstart = new int[]{-100, 500, 500, 500, 1100};
+   float[] proba = new float[]{
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F,
+      0.0F
+   };
+   float[] dishandle = new float[]{
+      0.65F,
+      0.6F,
+      0.55F,
+      0.77F,
+      0.7F,
+      0.9F,
+      0.7F,
+      0.4F,
+      1.0F,
+      0.85F,
+      0.65F,
+      1.0F,
+      0.65F,
+      0.77F,
+      Float.POSITIVE_INFINITY,
+      0.9F,
+      0.9F,
+      1.0F,
+      0.7F,
+      0.7F,
+      0.7F,
+      0.7F,
+      0.8F,
+      1.0F,
+      0.9F,
+      0.0F,
+      0.3F,
+      0.4F,
+      1.0F,
+      Float.POSITIVE_INFINITY
+   };
+   int holdcnt;
+   boolean winner;
+   int[] flexpix;
+   Image fleximg;
+   Image odmg;
+   Image opwr;
+   Image opos;
+   Image owas;
+   Image olap;
+   Image oyourwasted;
+   Image oyoulost;
+   Image oyouwon;
+   Image oyouwastedem;
+   Image ogameh;
+   Image oloadingmusic;
+   Image omdness;
+   Image dmg;
+   Image pwr;
+   Image pos;
+   Image was;
+   Image lap;
+   Image trackbg;
+   Image bl;
+   Image bt;
+   Image br;
+   Image bb;
+   Image select;
+   Image loadingmusic;
+   Image yourwasted;
+   Image youlost;
+   Image youwon;
+   Image youwastedem;
+   Image gameh;
+   Image congrd;
+   Image gameov;
+   Image carsbg;
+   Image pgate;
+   Image selectcar;
+   Image statb;
+   Image mdness;
+   Image paused;
+   Image radicalplay;
+   Image maini;
+   Image opti;
+   Image bgmain;
+   Image inst1;
+   Image inst2;
+   Image inst3;
+   Image rpro;
+   Image nfmcom;
+   Image[] next;
+   Image[] back;
+   Image[] contin1;
+   Image[] contin2;
+   Image[] ostar;
+   Image[] star;
+   int pcontin;
+   int pnext;
+   int pback;
+   int pstar;
+   Image[] orank;
+   Image[] rank;
+   Image[] ocntdn;
+   Image[] cntdn;
+   int gocnt;
+   AudioClip[][] engs;
+   boolean[] pengs;
+   int[][] enginsignature = new int[][]{
+      {0, 0, 1, 1, 0},
+      {0, 1, 1, 0, 1},
+      {0, 0, 0, 0, 0},
+      {0, 1, 1, 1, 1},
+      {0, 0, 0, 1, 0},
+      {0, 1, 1, 1, 1},
+      {0, 1, 0, 1, 0},
+      {1, 0, 0, 0, 0},
+      {0, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1},
+      {0, 0, 1, 1, 0},
+      {0, 1, 1, 0, 1},
+      {0, 0, 0, 0, 0},
+      {3, 3, 3, 3, 3},
+      {2, 2, 2, 2, 2},
+      {3, 3, 3, 3, 3},
+      {3, 3, 3, 3, 3},
+      {6, 6, 6, 6, 6},
+      {5, 1, 0, 1, 0},
+      {7, 7, 7, 7, 7},
+      {7, 7, 7, 7, 7},
+      {4, 4, 4, 4, 4},
+      {5, 1, 1, 1, 1},
+      {0, 8, 8, 8, 8},
+      {8, 8, 8, 8, 8},
+      {8, 8, 8, 8, 8},
+      {4, 4, 4, 4, 4},
+      {2, 2, 2, 2, 2},
+      {2, 2, 2, 2, 2},
+      {2, 2, 2, 2, 2}
+   };
+   AudioClip[] air;
+   boolean aird;
+   boolean grrd;
+   AudioClip[] crash;
+   AudioClip[] lowcrash;
+   AudioClip tires;
+   AudioClip checkpoint;
+   AudioClip carfixed;
+   AudioClip powerup;
+   AudioClip three;
+   AudioClip two;
+   AudioClip one;
+   AudioClip go;
+   AudioClip wastd;
+   AudioClip firewasted;
+   boolean pwastd;
+   AudioClip[] skid;
+   AudioClip[] dustskid;
+   boolean mutes;
+   RadicalMod stages;
+   RadicalMod cars;
+   RadicalMod[] stracks;
+   boolean[] loadedt;
+   boolean mutem;
+   boolean arrace;
+   int ana;
+   int cntan;
+   int cntovn;
+   boolean flk;
+   int tcnt;
+   boolean tflk;
+   String say;
+   boolean wasay;
+   int clear;
+   int posit;
+   int wasted;
+   int laps;
+   int[] dested;
+   String[] names = new String[]{
+      "Tornado Shark",
+      "Formula 7",
+      "Wow Caninaro",
+      "La-Vite Crab",
+      "Nimi",
+      "MAX Revenge",
+      "Lead Oxide",
+      "EL KING",
+      "Radical One",
+      "DRMonstaa",
+      "Basic Racer",
+      "Turbo Dragster",
+      "Desert Humvee",
+      "Lamborghini Gallardo",
+      "Nuclear Warhead",
+      "Radical Racer",
+      "Saleen S7 Twin Turbo",
+      "The Phantom",
+      "Sting Rod",
+      "Zonich Tank",
+      "Matlos Tank",
+      "TURBO TANK",
+      "Air Rebound",
+      "Lightning Rod",
+      "Armored Corvette",
+      "(empty)",
+      "KILL-O-MATIC",
+      "EL ROCKET KING",
+      "The Awesome Radical One",
+      "The Destroyer",
+      "???",
+      "Invisible"
+   };
+   int dmcnt;
+   boolean dmflk;
+   int pwcnt;
+   boolean pwflk;
+   String[][] adj = new String[][]{
+      {"Cool", "Alright", "Nice", "Good", "Decent"},
+      {"Wicked", "Amazing", "Super", "Tight", "Great"},
+      {"Awesome", "Ripping", "Radical", "Incredible", "Unbelievable"},
+      {"What the...?!", "You're a super star!!!!", "Who are you again...?", "!??!?!!?!???!?!!", "Radical Dude!!!!", "HOLY ****!!!!"},
+      {"surf style", "off the lip", "bounce back"}
+   };
+   String[] exlm = new String[]{"!", "!!", "!!!"};
+   String loop;
+   String spin;
+   String asay;
+   int auscnt;
+   boolean aflk;
+   int[] hipno = new int[]{
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      6
+   };
+   int[] sndsize = new int[]{
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      80
+   };
+   Image hello;
+   Image sign;
+   Image loadbar;
+   int kbload;
+   int dnload;
+   int pin;
+   int pwait;
+   int stopcnt;
+   int cntwis;
+   int crshturn;
+   int bfcrash;
+   int bfskid;
+   boolean crashup;
+   int skflg;
+   int dskflg;
+
+   public void framer(int i, Graphics g) {
+      int j = (int)(230.0F - 230.0F * ((float)this.m.snap[0] / (100 * this.hipno[i - 1])));
+      if (j > 255) {
+         j = 255;
+      }
+
+      if (j < 0) {
+         j = 0;
+      }
+
+      int k = (int)(230.0F - 230.0F * ((float)this.m.snap[1] / (100 * this.hipno[i - 1])));
+      if (k > 255) {
+         k = 255;
+      }
+
+      if (k < 0) {
+         k = 0;
+      }
+
+      int l = (int)(230.0F - 230.0F * ((float)this.m.snap[2] / (100 * this.hipno[i - 1])));
+      if (l > 255) {
+         l = 255;
+      }
+
+      if (l < 0) {
+         l = 0;
+      }
+
+      if (this.hipno[i - 1] == 0) {
+         j = 255;
+         k = 230;
+         l = 201;
+      }
+
+      g.setColor(new Color(j, k, l));
+      g.fillRect(0, 0, 550, 400);
+      g.drawImage(this.loadingmusic, 164, 90, null);
+      this.drawcs(g, 225, "" + this.sndsize[i - 1] + " KB", 0, 0, 0, 3);
+      this.drawcs(g, 260, " Please Wait...", 0, 0, 0, 3);
+      if (i == 10) {
+         this.drawcs(g, 300, "> Note: Guidance Arrow is disabled in this stage!", 100, 100, 100, 4);
+      }
+
+      if (i == 20) {
+         this.drawcs(g, 300, "> Note: Guidance Arrow is disabled in this stage!", 100, 100, 100, 4);
+      }
+
+      if (i == this.unlocked) {
+         if (i == 1) {
+            this.drawcs(g, 300, "> Don't forget, you must pass in all checkpoints to complete a lap...", 100, 100, 100, 4);
+         }
+
+         if (i == 2) {
+            this.drawcs(g, 300, "> Don't forget, you need power to be up to race faster...", 100, 100, 100, 4);
+         }
+
+         if (i == 3) {
+            this.drawcs(g, 300, "> Note: This stage contains heavy fog!", 100, 100, 100, 4);
+            this.drawcs(g, 320, "( Press [A] to make Guidance Arrow point to cars )", 100, 100, 100, 4);
+         }
+
+         if (i == 4) {
+            this.drawcs(g, 300, "> Remember the better the stunt the better the power you get...", 100, 100, 100, 4);
+         }
+
+         if (i == 5) {
+            this.drawcs(g, 300, "> Note: EL KING is invisible in this stage!", 100, 100, 100, 4);
+         }
+      }
+   }
+
+   public void cantgo(Graphics g, Control control) {
+      this.pnext = 0;
+      g.drawImage(this.trackbg, 0, 0, null);
+      g.setFont(new Font("SansSerif", 1, 13));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 110, "> You need to complete current stage " + this.unlocked + " before playing this one...", 0, 0, 0, 3);
+      g.drawImage(this.pgate, 96, 150, null);
+      if (this.aflk) {
+         this.drawcs(g, 160, "[ Stage " + (this.unlocked + 1) + " Locked ]", 0, 0, 0, 3);
+         this.aflk = false;
+      } else {
+         this.drawcs(g, 160, "[ Stage " + (this.unlocked + 1) + " Locked ]", 255, 0, 0, 3);
+         this.aflk = true;
+      }
+
+      g.drawImage(this.select, 201, 45, null);
+      g.drawImage(this.bl, 0, 0, null);
+      g.drawImage(this.bt, 0, 0, null);
+      g.drawImage(this.br, 509, 0, null);
+      g.drawImage(this.bb, 0, 357, null);
+      g.drawImage(this.back[this.pback], 245, 320, null);
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 396, "Use keyboard Arrows and press Enter to continue", 0, 0, 0, 3);
+      this.lockcnt--;
+      if (this.lockcnt == 0 || control.enter || control.handb || control.left) {
+         control.left = false;
+         control.handb = false;
+         control.enter = false;
+         this.fase = 1;
+      }
+   }
+
+   public boolean over(Image image, int i, int j, int k, int l) {
+      int i1 = image.getHeight(this.ob);
+      int j1 = image.getWidth(this.ob);
+      return i > k - 5 && i < k + j1 + 5 && j > l - 5 && j < l + i1 + 5;
+   }
+
+   public void loadingstage(int i, Graphics g) {
+      this.cars.stop();
+      this.stages.stop();
+      g.drawImage(this.trackbg, 0, 0, null);
+      g.setFont(new Font("SansSerif", 1, 13));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 180, "Loading Stage " + i + ", please wait...", 0, 255, 0, 3);
+      g.drawImage(this.select, 201, 45, null);
+      g.drawImage(this.bl, 0, 0, null);
+      g.drawImage(this.bt, 0, 0, null);
+      g.drawImage(this.br, 509, 0, null);
+      g.drawImage(this.bb, 0, 357, null);
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 396, "Use keyboard Arrows and press Enter to continue", 0, 0, 0, 3);
+      this.app.repaint();
+   }
+
+   public void inst(Graphics g, Control control) {
+      if (this.flipo == 0) {
+         g.setColor(new Color(214, 218, 252));
+         g.fillRect(0, 0, 550, 400);
+         g.drawImage(this.inst1, 0, 0, null);
+         this.flipo = 1;
+      }
+
+      if (this.flipo == 2) {
+         g.setColor(new Color(214, 218, 252));
+         g.fillRect(0, 0, 550, 400);
+         g.drawImage(this.inst2, 0, 0, null);
+         this.flipo = 3;
+      }
+
+      if (this.flipo == 4) {
+         g.setColor(new Color(214, 218, 252));
+         g.fillRect(0, 0, 550, 400);
+         g.drawImage(this.inst3, 0, 0, null);
+         this.flipo = 5;
+      }
+
+      if (this.flipo == 1 || this.flipo == 3) {
+         g.drawImage(this.next[this.pnext], 460, 370, null);
+      }
+
+      if (this.flipo == 5) {
+         g.drawImage(this.contin2[this.pcontin], 230, 370, null);
+      }
+
+      if (control.enter) {
+         if (this.flipo == 1) {
+            this.flipo = 2;
+         }
+
+         if (this.flipo == 3) {
+            this.flipo = 4;
+         }
+
+         if (this.flipo == 5) {
+            this.flipo = 0;
+            this.fase = this.oldfase;
+            if (this.fase == -7) {
+               g.drawImage(this.fleximg, 0, 0, null);
+            }
+         }
+
+         control.enter = false;
+      }
+   }
+
+   public void fleximage(Image image, Graphics g, int i) {
+      if (i == 0) {
+         PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, 550, 400, this.flexpix, 0, 550);
+
+         try {
+            pixelgrabber.grabPixels();
+         } catch (InterruptedException var10) {
+         }
+
+         int k = 0;
+
+         do {
+            Color color1 = new Color(this.flexpix[k]);
+            float[] af = new float[3];
+            Color.RGBtoHSB(color1.getRed(), color1.getGreen(), color1.getBlue(), af);
+            Color color2 = Color.getHSBColor(0.7F, af[1], af[2]);
+            this.flexpix[k] = color2.getRGB();
+         } while (++k < 220000);
+      }
+
+      int j = 0;
+
+      do {
+         if (this.m.random() > 0.2) {
+            Color color = new Color(this.flexpix[j]);
+            int l = (int)(color.getRed() - color.getRed() * 0.4);
+            if (l > 225) {
+               l = 225;
+            }
+
+            if (l < 0) {
+               l = 0;
+            }
+
+            int i1 = (int)(color.getGreen() - color.getGreen() * 0.35);
+            if (i1 > 225) {
+               i1 = 225;
+            }
+
+            if (i1 < 0) {
+               i1 = 0;
+            }
+
+            int j1 = (int)(color.getBlue() - color.getBlue() * (0.25 + i / 30.0F));
+            if (j1 > 225) {
+               j1 = 225;
+            }
+
+            if (j1 < 0) {
+               j1 = 0;
+            }
+
+            Color color3 = new Color(l, i1, j1);
+            this.flexpix[j] = color3.getRGB();
+         }
+      } while (++j < 220000);
+
+      this.fleximg = this.createImage(new MemoryImageSource(550, 400, this.flexpix, 0, 550));
+      g.drawImage(this.fleximg, 0, 0, null);
+   }
+
+   public void arrow(Graphics g, int i, int j, CheckPoints checkpoints, boolean flag) {
+      int[] ai = new int[7];
+      int[] ai1 = new int[7];
+      int[] ai2 = new int[7];
+      char c = 275;
+      byte byte0 = -90;
+      char c1 = 700;
+      int k = 0;
+
+      do {
+         ai1[k] = byte0;
+      } while (++k < 7);
+
+      ai[0] = c;
+      ai2[0] = c1 + 'n';
+      ai[1] = c - '#';
+      ai2[1] = c1 + '2';
+      ai[2] = c - 15;
+      ai2[2] = c1 + '2';
+      ai[3] = c - 15;
+      ai2[3] = c1 - '2';
+      ai[4] = c + 15;
+      ai2[4] = c1 - '2';
+      ai[5] = c + 15;
+      ai2[5] = c1 + '2';
+      ai[6] = c + '#';
+      ai2[6] = c1 + '2';
+      int var17 = 0;
+      if (!flag) {
+         char c2 = 0;
+         if (checkpoints.x[i] - checkpoints.opx[0] >= 0) {
+            c2 = 180;
+         }
+
+         var17 = (int)('Z' + c2 + Math.atan((double)(checkpoints.z[i] - checkpoints.opz[0]) / (checkpoints.x[i] - checkpoints.opx[0])) / (Math.PI / 180.0));
+      } else {
+         int l = 0;
+         int k1 = -1;
+         boolean flag1 = false;
+         int l2 = 1;
+
+         do {
+            if ((this.py(checkpoints.opx[0] / 100, checkpoints.opx[l2] / 100, checkpoints.opz[0] / 100, checkpoints.opz[l2] / 100) < k1 || k1 == -1)
+               && (!flag1 || checkpoints.onscreen[l2] != 0)
+               && checkpoints.dested[l2] == 0) {
+               l = l2;
+               k1 = this.py(checkpoints.opx[0] / 100, checkpoints.opx[l2] / 100, checkpoints.opz[0] / 100, checkpoints.opz[l2] / 100);
+               if (checkpoints.onscreen[l2] != 0) {
+                  flag1 = true;
+               }
+            }
+         } while (++l2 < 5);
+
+         int var42 = 0;
+         if (checkpoints.opx[l] - checkpoints.opx[0] >= 0) {
+            var42 = 180;
+         }
+
+         var17 = (int)(
+            90 + var42 + Math.atan((double)(checkpoints.opz[l] - checkpoints.opz[0]) / (checkpoints.opx[l] - checkpoints.opx[0])) / (Math.PI / 180.0)
+         );
+         this.drawcs(g, 13, "[                                                 ]", 100, 100, 100, 0);
+         this.drawcs(g, 13, this.names[this.sc[l]], 100, 100, 100, 0);
+      }
+
+      var17 += this.m.xz;
+
+      while (var17 < 0) {
+         var17 += 360;
+      }
+
+      while (var17 > 180) {
+         var17 -= 360;
+      }
+
+      if (!flag) {
+         if (var17 > 130) {
+            var17 = 130;
+         }
+
+         if (var17 < -130) {
+            var17 = -130;
+         }
+      } else {
+         if (var17 > 100) {
+            var17 = 100;
+         }
+
+         if (var17 < -100) {
+            var17 = -100;
+         }
+      }
+
+      if (Math.abs(this.ana - var17) < 180) {
+         if (Math.abs(this.ana - var17) < 10) {
+            this.ana = var17;
+         } else if (this.ana < var17) {
+            this.ana += 10;
+         } else {
+            this.ana -= 10;
+         }
+      } else {
+         if (var17 < 0) {
+            this.ana += 15;
+            if (this.ana > 180) {
+               this.ana -= 360;
+            }
+         }
+
+         if (var17 > 0) {
+            this.ana -= 15;
+            if (this.ana < -180) {
+               this.ana += 360;
+            }
+         }
+      }
+
+      this.rot(ai, ai2, c, c1, this.ana, 7);
+      var17 = Math.abs(this.ana);
+      if (!flag) {
+         if (var17 > 7 || j > 0 || j == -2 || this.cntan != 0) {
+            int i1 = 0;
+
+            do {
+               ai[i1] = this.xs(ai[i1], ai2[i1]);
+               ai1[i1] = this.ys(ai1[i1], ai2[i1]);
+            } while (++i1 < 7);
+
+            i1 = (int)(190.0F + 190.0F * (this.m.snap[0] / 100.0F));
+            if (i1 > 255) {
+               i1 = 255;
+            }
+
+            if (i1 < 0) {
+               i1 = 0;
+            }
+
+            int l1 = (int)(255.0F + 255.0F * (this.m.snap[1] / 100.0F));
+            if (l1 > 255) {
+               l1 = 255;
+            }
+
+            if (l1 < 0) {
+               l1 = 0;
+            }
+
+            int j2 = 0;
+            if (j <= 0) {
+               if (var17 <= 45 && j != -2 && this.cntan == 0) {
+                  i1 = (i1 * var17 + this.m.csky[0] * (45 - var17)) / 45;
+                  l1 = (l1 * var17 + this.m.csky[1] * (45 - var17)) / 45;
+                  j2 = (j2 * var17 + this.m.csky[2] * (45 - var17)) / 45;
+               }
+
+               if (var17 >= 90) {
+                  int i3 = (int)(255.0F + 255.0F * (this.m.snap[0] / 100.0F));
+                  if (i3 > 255) {
+                     i3 = 255;
+                  }
+
+                  if (i3 < 0) {
+                     i3 = 0;
+                  }
+
+                  i1 = (i1 * (140 - var17) + i3 * (var17 - 90)) / 50;
+                  if (i1 > 255) {
+                     i1 = 255;
+                  }
+               }
+            } else if (this.flk) {
+               i1 = (int)(255.0F + 255.0F * (this.m.snap[0] / 100.0F));
+               if (i1 > 255) {
+                  i1 = 255;
+               }
+
+               if (i1 < 0) {
+                  i1 = 0;
+               }
+
+               this.flk = false;
+            } else {
+               i1 = (int)(255.0F + 255.0F * (this.m.snap[0] / 100.0F));
+               if (i1 > 255) {
+                  i1 = 255;
+               }
+
+               if (i1 < 0) {
+                  i1 = 0;
+               }
+
+               l1 = (int)(220.0F + 220.0F * (this.m.snap[1] / 100.0F));
+               if (l1 > 255) {
+                  l1 = 255;
+               }
+
+               if (l1 < 0) {
+                  l1 = 0;
+               }
+
+               this.flk = true;
+            }
+
+            g.setColor(new Color(i1, l1, j2));
+            g.fillPolygon(ai, ai1, 7);
+            i1 = (int)(115.0F + 115.0F * (this.m.snap[0] / 100.0F));
+            if (i1 > 255) {
+               i1 = 255;
+            }
+
+            if (i1 < 0) {
+               i1 = 0;
+            }
+
+            l1 = (int)(170.0F + 170.0F * (this.m.snap[1] / 100.0F));
+            if (l1 > 255) {
+               l1 = 255;
+            }
+
+            if (l1 < 0) {
+               l1 = 0;
+            }
+
+            j2 = 0;
+            if (j <= 0) {
+               if (var17 <= 45 && j != -2 && this.cntan == 0) {
+                  i1 = (i1 * var17 + this.m.csky[0] * (45 - var17)) / 45;
+                  l1 = (l1 * var17 + this.m.csky[1] * (45 - var17)) / 45;
+                  j2 = (j2 * var17 + this.m.csky[2] * (45 - var17)) / 45;
+               }
+            } else if (this.flk) {
+               i1 = (int)(255.0F + 255.0F * (this.m.snap[0] / 100.0F));
+               if (i1 > 255) {
+                  i1 = 255;
+               }
+
+               if (i1 < 0) {
+                  i1 = 0;
+               }
+
+               l1 = 0;
+            }
+
+            g.setColor(new Color(i1, l1, j2));
+            g.drawPolygon(ai, ai1, 7);
+         }
+      } else {
+         int j1 = 0;
+
+         do {
+            ai[j1] = this.xs(ai[j1], ai2[j1]);
+            ai1[j1] = this.ys(ai1[j1], ai2[j1]);
+         } while (++j1 < 7);
+
+         j1 = (int)(159.0F + 159.0F * (this.m.snap[0] / 100.0F));
+         if (j1 > 255) {
+            j1 = 255;
+         }
+
+         if (j1 < 0) {
+            boolean var27 = false;
+         }
+
+         int i2 = (int)(207.0F + 207.0F * (this.m.snap[1] / 100.0F));
+         if (i2 > 255) {
+            i2 = 255;
+         }
+
+         if (i2 < 0) {
+            boolean var33 = false;
+         }
+
+         int k2 = (int)(255.0F + 255.0F * (this.m.snap[2] / 100.0F));
+         if (k2 > 255) {
+            k2 = 255;
+         }
+
+         if (k2 < 0) {
+            boolean var39 = false;
+         }
+
+         g.setColor(new Color(0, 0, 0));
+         g.fillPolygon(ai, ai1, 7);
+         j1 = (int)(120.0F + 120.0F * (this.m.snap[0] / 100.0F));
+         if (j1 > 255) {
+            j1 = 255;
+         }
+
+         if (j1 < 0) {
+            boolean var29 = false;
+         }
+
+         i2 = (int)(114.0F + 114.0F * (this.m.snap[1] / 100.0F));
+         if (i2 > 255) {
+            i2 = 255;
+         }
+
+         if (i2 < 0) {
+            boolean var35 = false;
+         }
+
+         k2 = (int)(255.0F + 255.0F * (this.m.snap[2] / 100.0F));
+         if (k2 > 255) {
+            k2 = 255;
+         }
+
+         if (k2 < 0) {
+            boolean var41 = false;
+         }
+
+         g.setColor(new Color(255, 255, 255));
+         g.drawPolygon(ai, ai1, 7);
+      }
+   }
+
+   public void levelhigh(Graphics g, int i, int j) {
+      g.drawImage(this.gameh, 176, 20, null);
+      if (i != 0) {
+         this.drawcs(g, 60, "You destroyed 'em!", 255, 0, 0, 0);
+      } else if (j == 229) {
+         this.drawcs(g, 60, "Destroyed!", 255, 0, 0, 0);
+      } else {
+         this.drawcs(g, 60, "Stunts!", 0, 255, 0, 0);
+      }
+
+      this.drawcs(g, 380, "Press  [ Enter ]  to continue", 0, 0, 0, 0);
+   }
+
+   public void playsounds(Madness madness, Control control, int i) {
+      if (this.fase == 0 && this.starcnt < 35 && this.cntwis != 8 && !this.mutes) {
+         boolean flag = control.up && madness.speed > 0.0F || control.down && madness.speed < 10.0F;
+         boolean flag1 = madness.skid == 1 && control.handb
+            || Math.abs(madness.scz[0] - (madness.scz[1] + madness.scz[0] + madness.scz[2] + madness.scz[3]) / 4.0F) > 1.0F
+            || Math.abs(madness.scx[0] - (madness.scx[1] + madness.scx[0] + madness.scx[2] + madness.scx[3]) / 4.0F) > 1.0F;
+         boolean flag2 = false;
+         if (control.up && madness.speed < 10.0F) {
+            flag1 = true;
+            flag = true;
+            flag2 = true;
+         }
+
+         if (flag && madness.mtouch) {
+            if (!madness.capsized) {
+               if (!flag1) {
+                  if (madness.power != 98.0F) {
+                     if (Math.abs(madness.speed) > 0.0F && Math.abs(madness.speed) <= madness.swits[madness.cn][0]) {
+                        int j = (int)(3.0F * Math.abs(madness.speed) / madness.swits[madness.cn][0]);
+                        if (j == 2) {
+                           if (this.pwait == 0) {
+                              j = 0;
+                           } else {
+                              this.pwait--;
+                           }
+                        } else {
+                           this.pwait = 7;
+                        }
+
+                        this.sparkeng(j);
+                     }
+
+                     if (Math.abs(madness.speed) > madness.swits[madness.cn][0] && Math.abs(madness.speed) <= madness.swits[madness.cn][1]) {
+                        int k = (int)(
+                           3.0F * (Math.abs(madness.speed) - madness.swits[madness.cn][0]) / (madness.swits[madness.cn][1] - madness.swits[madness.cn][0])
+                        );
+                        if (k == 2) {
+                           if (this.pwait == 0) {
+                              k = 0;
+                           } else {
+                              this.pwait--;
+                           }
+                        } else {
+                           this.pwait = 7;
+                        }
+
+                        this.sparkeng(k);
+                     }
+
+                     if (Math.abs(madness.speed) > madness.swits[madness.cn][1] && Math.abs(madness.speed) <= madness.swits[madness.cn][2]) {
+                        int l = (int)(
+                           3.0F * (Math.abs(madness.speed) - madness.swits[madness.cn][1]) / (madness.swits[madness.cn][2] - madness.swits[madness.cn][1])
+                        );
+                        this.sparkeng(l);
+                     }
+                  } else {
+                     byte byte0 = 2;
+                     if (this.pwait == 0) {
+                        if (Math.abs(madness.speed) > madness.swits[madness.cn][1]) {
+                           byte0 = 3;
+                        }
+                     } else {
+                        this.pwait--;
+                     }
+
+                     this.sparkeng(byte0);
+                  }
+               } else {
+                  this.sparkeng(-1);
+                  if (flag2) {
+                     if (this.stopcnt <= 0) {
+                        this.air[5].loop();
+                        this.stopcnt = 10;
+                     }
+                  } else if (this.stopcnt <= -2) {
+                     this.air[2 + (int)(this.m.random() * 3.0F)].loop();
+                     this.stopcnt = 7;
+                  }
+               }
+            } else {
+               this.sparkeng(3);
+            }
+
+            this.grrd = false;
+            this.aird = false;
+         } else {
+            this.pwait = 15;
+            if (!madness.mtouch && !this.grrd && this.m.random() > 0.4) {
+               this.air[(int)(this.m.random() * 4.0F)].loop();
+               this.stopcnt = 5;
+               this.grrd = true;
+            }
+
+            if (!madness.wtouch && !this.aird) {
+               this.stopairs();
+               this.air[(int)(this.m.random() * 4.0F)].loop();
+               this.stopcnt = 10;
+               this.aird = true;
+            }
+
+            this.sparkeng(-1);
+         }
+
+         if (madness.cntdest != 0 && this.cntwis < 7) {
+            if (!this.pwastd) {
+               this.wastd.loop();
+               this.pwastd = true;
+            }
+         } else {
+            if (this.pwastd) {
+               this.wastd.stop();
+               this.pwastd = false;
+            }
+
+            if (this.cntwis == 7 && !this.mutes) {
+               this.firewasted.play();
+            }
+         }
+      } else {
+         this.sparkeng(-2);
+         if (this.pwastd) {
+            this.wastd.stop();
+            this.pwastd = false;
+         }
+      }
+
+      if (this.stopcnt != -20) {
+         if (this.stopcnt == 1) {
+            this.stopairs();
+         }
+
+         this.stopcnt--;
+      }
+
+      if (this.bfcrash != 0) {
+         this.bfcrash--;
+      }
+
+      if (this.bfskid != 0) {
+         this.bfskid--;
+      }
+
+      if (madness.newcar) {
+         this.cntwis = 0;
+      }
+
+      if (this.fase == 0 || this.fase == 6 || this.fase == -1 || this.fase == -2 || this.fase == -3 || this.fase == -4 || this.fase == -5) {
+         if (this.mutes != control.mutes) {
+            this.mutes = control.mutes;
+         }
+
+         if (control.mutem != this.mutem) {
+            this.mutem = control.mutem;
+            if (this.mutem) {
+               if (this.loadedt[i - 1]) {
+                  this.stracks[i - 1].stop();
+               }
+            } else if (this.loadedt[i - 1]) {
+               this.stracks[i - 1].resume();
+            }
+         }
+      }
+
+      if (madness.cntdest != 0 && this.cntwis < 7) {
+         if (madness.dest) {
+            this.cntwis++;
+         }
+      } else {
+         if (madness.cntdest == 0) {
+            this.cntwis = 0;
+         }
+
+         if (this.cntwis == 7) {
+            this.cntwis = 8;
+         }
+      }
+   }
+
+   public void crash(float f, int i) {
+      if (this.bfcrash == 0) {
+         if (i == 0) {
+            if (Math.abs(f) > 25.0F && Math.abs(f) < 170.0F) {
+               if (!this.mutes) {
+                  this.lowcrash[this.crshturn].play();
+               }
+
+               this.bfcrash = 2;
+            }
+
+            if (Math.abs(f) > 170.0F) {
+               if (!this.mutes) {
+                  this.crash[this.crshturn].play();
+               }
+
+               this.bfcrash = 2;
+            }
+
+            if (Math.abs(f) > 25.0F) {
+               if (this.crashup) {
+                  this.crshturn--;
+               } else {
+                  this.crshturn++;
+               }
+
+               if (this.crshturn == -1) {
+                  this.crshturn = 2;
+               }
+
+               if (this.crshturn == 3) {
+                  this.crshturn = 0;
+               }
+            }
+         }
+
+         if (i == -1) {
+            if (Math.abs(f) > 25.0F && Math.abs(f) < 170.0F) {
+               if (!this.mutes) {
+                  this.lowcrash[2].play();
+               }
+
+               this.bfcrash = 2;
+            }
+
+            if (Math.abs(f) > 170.0F) {
+               if (!this.mutes) {
+                  this.crash[2].play();
+               }
+
+               this.bfcrash = 2;
+            }
+         }
+
+         if (i == 1) {
+            if (!this.mutes) {
+               this.tires.play();
+            }
+
+            this.bfcrash = 3;
+         }
+      }
+   }
+
+   public int ys(int i, int j) {
+      if (j < 50) {
+         j = 50;
+      }
+
+      return (j - this.m.focus_point) * (this.m.cy - i) / j + i;
+   }
+
+   public void replyn(Graphics g) {
+      if (this.aflk) {
+         this.drawcs(g, 30, "", 0, 0, 0, 0);
+         this.aflk = false;
+      } else {
+         this.drawcs(g, 30, "", 0, 128, 255, 0);
+         this.aflk = true;
+      }
+   }
+
+   private Image pressed(Image image) {
+      int i = image.getHeight(this.ob);
+      int j = image.getWidth(this.ob);
+      int[] ai = new int[j * i];
+      PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, j, i, ai, 0, j);
+
+      try {
+         pixelgrabber.grabPixels();
+      } catch (InterruptedException var7) {
+      }
+
+      for (int k = 0; k < j * i; k++) {
+         if (ai[k] != ai[j * i - 1]) {
+            ai[k] = -16777216;
+         }
+      }
+
+      return this.createImage(new MemoryImageSource(j, i, ai, 0, j));
+   }
+
+   public void loadpak1(MediaTracker mediatracker, Toolkit toolkit) {
+      try {
+         URL url = new URL(this.app.getRoot(), "graphics/images1.zipo");
+         DataInputStream datainputstream = new DataInputStream(url.openStream());
+         ZipInputStream zipinputstream = new ZipInputStream(datainputstream);
+
+         for (ZipEntry zipentry = zipinputstream.getNextEntry(); zipentry != null; zipentry = zipinputstream.getNextEntry()) {
+            int i = (int)zipentry.getSize();
+            String s = zipentry.getName();
+            byte[] abyte0 = new byte[i];
+            int j = 0;
+
+            while (i > 0) {
+               int k = zipinputstream.read(abyte0, j, i);
+               j += k;
+               i -= k;
+            }
+
+            if (s.equals("cars.gif")) {
+               this.carsbg = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("1.gif")) {
+               this.orank[0] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("gameh.gif")) {
+               this.ogameh = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("gameov.gif")) {
+               this.gameov = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("lap.gif")) {
+               this.olap = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("paused.gif")) {
+               this.paused = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("select.gif")) {
+               this.select = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("yourwasted.gif")) {
+               this.oyourwasted = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("youwastedem.gif")) {
+               this.oyouwastedem = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+         }
+
+         datainputstream.close();
+         zipinputstream.close();
+      } catch (Exception var12) {
+         System.out.println("Error Loading Images Pak 1: " + var12);
+      }
+
+      System.gc();
+   }
+
+   public void nofocus(Graphics g) {
+      g.setColor(new Color(255, 255, 255));
+      g.fillRect(0, 0, 550, 20);
+      g.fillRect(0, 0, 20, 400);
+      g.fillRect(0, 380, 550, 20);
+      g.fillRect(530, 0, 20, 400);
+      g.setColor(new Color(192, 192, 192));
+      g.drawRect(20, 20, 510, 360);
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 14, "Game lost its focus -Click- screen with mouse to continue.", 0, 0, 0, 3);
+      this.drawcs(g, 395, "Game lost its focus -Click- screen with mouse to continue.", 0, 0, 0, 3);
+   }
+
+   public void rot(int[] ai, int[] ai1, int i, int j, int k, int l) {
+      if (k != 0) {
+         for (int i1 = 0; i1 < l; i1++) {
+            int j1 = ai[i1];
+            int k1 = ai1[i1];
+            ai[i1] = i + (int)((j1 - i) * this.m.cos(k) - (k1 - j) * this.m.sin(k));
+            ai1[i1] = j + (int)((j1 - i) * this.m.sin(k) + (k1 - j) * this.m.cos(k));
+         }
+      }
+   }
+
+   public boolean overon(int i, int j, int k, int l, int i1, int j1) {
+      return i1 > i && i1 < i + k && j1 > j && j1 < j + l;
+   }
+
+   public void pauseimage(Image image, Graphics g) {
+      PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, 550, 400, this.flexpix, 0, 550);
+
+      try {
+         pixelgrabber.grabPixels();
+      } catch (InterruptedException var15) {
+      }
+
+      int i = 0;
+      int j = 0;
+      int k = 0;
+      int l = 0;
+      int i1 = 0;
+
+      do {
+         Color color = new Color(this.flexpix[i1]);
+         int j1 = 0;
+         if (l == 0) {
+            j1 = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
+            k = j1;
+         } else {
+            j1 = (color.getRed() + color.getGreen() + color.getBlue() + k * 30) / 33;
+            k = j1;
+         }
+
+         if (++l == 550) {
+            l = 0;
+         }
+
+         if (i1 > 550 * (106 + j) + 156 && j < 188) {
+            int k1 = (j1 + 60) / 3;
+            int l1 = (j1 + 135) / 3;
+            int i2 = (j1 + 220) / 3;
+            if (++i == 237) {
+               j++;
+               i = 0;
+            }
+
+            Color color2 = new Color(k1, l1, i2);
+            this.flexpix[i1] = color2.getRGB();
+         } else {
+            Color color1 = new Color(j1, j1, j1);
+            this.flexpix[i1] = color1.getRGB();
+         }
+      } while (++i1 < 220000);
+
+      this.fleximg = this.createImage(new MemoryImageSource(550, 400, this.flexpix, 0, 550));
+      g.drawImage(this.fleximg, 0, 0, null);
+      this.m.flex = 0;
+   }
+
+   public void loadmusic(int i, int j, Graphics g) {
+      int k = (int)(230.0F - 230.0F * ((float)this.m.snap[0] / (100 * this.hipno[i - 1])));
+      if (k > 255) {
+         k = 255;
+      }
+
+      if (k < 0) {
+         k = 0;
+      }
+
+      int l = (int)(230.0F - 230.0F * ((float)this.m.snap[1] / (100 * this.hipno[i - 1])));
+      if (l > 255) {
+         l = 255;
+      }
+
+      if (l < 0) {
+         l = 0;
+      }
+
+      int i1 = (int)(230.0F - 230.0F * ((float)this.m.snap[2] / (100 * this.hipno[i - 1])));
+      if (i1 > 255) {
+         i1 = 255;
+      }
+
+      if (i1 < 0) {
+         i1 = 0;
+      }
+
+      if (this.hipno[i - 1] == 0) {
+         k = 255;
+         l = 230;
+         i1 = 201;
+      }
+
+      g.setColor(new Color(k, l, i1));
+      g.fillRect(0, 0, 550, 400);
+      g.drawImage(this.loadingmusic, 164, 90, null);
+      this.drawcs(g, 225, "" + this.sndsize[i - 1] + " KB", 0, 0, 0, 3);
+      this.drawcs(g, 260, " Please Wait...", 0, 0, 0, 3);
+      if (i == 10) {
+         this.drawcs(g, 300, "> Note: Guidance Arrow is disabled in this stage!", 100, 100, 100, 4);
+      }
+
+      if (i == this.unlocked) {
+         if (i == 1) {
+            this.drawcs(g, 300, "> Don't forget, you must pass in all checkpoints to complete a lap...", 100, 100, 100, 4);
+         }
+
+         if (i == 2) {
+            this.drawcs(g, 300, "> Don't forget, you need power to be up to race faster...", 100, 100, 100, 4);
+         }
+
+         if (i == 3) {
+            this.drawcs(g, 300, "> Note: This stage contains heavy fog!", 100, 100, 100, 4);
+            this.drawcs(g, 320, "( Press [A] to make Guidance Arrow point to cars )", 100, 100, 100, 4);
+         }
+
+         if (i == 4) {
+            this.drawcs(g, 300, "> Remember the better the stunt the better the power you get...", 100, 100, 100, 4);
+         }
+
+         if (i == 5) {
+            this.drawcs(g, 300, "> Note: EL KING is invisible in this stage!", 100, 100, 100, 4);
+         }
+      }
+
+      this.app.setCursor(new Cursor(3));
+      this.app.repaint();
+      if (i == 1 && !this.loadedt[0]) {
+         this.stracks[0] = new RadicalMod("music/stage1.zipo", 350, 8400, 135, this.app);
+         if (this.stracks[0].stream != null) {
+            this.loadedt[0] = true;
+         }
+      }
+
+      if (i == 2 && !this.loadedt[1]) {
+         this.stracks[1] = new RadicalMod("music/stage2.zipo", 370, 9000, 145, this.app);
+         if (this.stracks[1].stream != null) {
+            this.loadedt[1] = true;
+         }
+      }
+
+      if (i == 3 && !this.loadedt[2]) {
+         this.stracks[2] = new RadicalMod("music/stage3.zipo", 350, 8500, 145, this.app);
+         if (this.stracks[2].stream != null) {
+            this.loadedt[2] = true;
+         }
+      }
+
+      if (i == 4 && !this.loadedt[3]) {
+         this.stracks[3] = new RadicalMod("music/stage4.zipo", 300, 7500, 125, this.app);
+         if (this.stracks[3].stream != null) {
+            this.loadedt[3] = true;
+         }
+      }
+
+      if (i == 5 && !this.loadedt[4]) {
+         this.stracks[4] = new RadicalMod("music/stage5.zipo", 250, 7900, 125, this.app);
+         if (this.stracks[4].stream != null) {
+            this.loadedt[4] = true;
+         }
+      }
+
+      if (i == 6 && !this.loadedt[5]) {
+         this.stracks[5] = new RadicalMod("music/stage6.zipo", 760, 7900, 125, this.app);
+         if (this.stracks[5].stream != null) {
+            this.loadedt[5] = true;
+         }
+      }
+
+      if (i == 7 && !this.loadedt[6]) {
+         this.stracks[6] = new RadicalMod("music/stage7.zipo", 300, 7500, 125, this.app);
+         if (this.stracks[6].stream != null) {
+            this.loadedt[6] = true;
+         }
+      }
+
+      if (i == 8 && !this.loadedt[7]) {
+         this.stracks[7] = new RadicalMod("music/stage8.zipo", 400, 7900, 125, this.app);
+         if (this.stracks[7].stream != null) {
+            this.loadedt[7] = true;
+         }
+      }
+
+      if (i == 9 && !this.loadedt[8]) {
+         this.stracks[8] = new RadicalMod("music/stage9.zipo", 300, 7900, 125, this.app);
+         if (this.stracks[8].stream != null) {
+            this.loadedt[8] = true;
+         }
+      }
+
+      if (i == 10 && !this.loadedt[9]) {
+         this.stracks[9] = new RadicalMod("music/stage10.zipo", 550, 8100, 145, this.app);
+         if (this.stracks[9].stream != null) {
+            this.loadedt[9] = true;
+         }
+      }
+
+      if (i == 11 && !this.loadedt[10]) {
+         this.stracks[10] = new RadicalMod("music/stage11.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[10].stream != null) {
+            this.loadedt[10] = true;
+         }
+      }
+
+      if (i == 12 && !this.loadedt[11]) {
+         this.stracks[11] = new RadicalMod("music/stage12.zipo", 550, 8000, 128, this.app);
+         if (this.stracks[11].stream != null) {
+            this.loadedt[11] = true;
+         }
+      }
+
+      if (i == 13 && !this.loadedt[12]) {
+         this.stracks[12] = new RadicalMod("music/stage13.zipo", 550, 8000, 145, this.app);
+         if (this.stracks[12].stream != null) {
+            this.loadedt[12] = true;
+         }
+      }
+
+      if (i == 14 && !this.loadedt[13]) {
+         this.stracks[13] = new RadicalMod("music/stage14.zipo", 550, 8100, 125, this.app);
+         if (this.stracks[13].stream != null) {
+            this.loadedt[13] = true;
+         }
+      }
+
+      if (i == 15 && !this.loadedt[14]) {
+         this.stracks[14] = new RadicalMod("music/stage15.zipo", 550, 8000, 145, this.app);
+         if (this.stracks[14].stream != null) {
+            this.loadedt[14] = true;
+         }
+      }
+
+      if (i == 16 && !this.loadedt[15]) {
+         this.stracks[15] = new RadicalMod("music/stage16.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[15].stream != null) {
+            this.loadedt[15] = true;
+         }
+      }
+
+      if (i == 17 && !this.loadedt[16]) {
+         this.stracks[16] = new RadicalMod("music/stage17.zipo", 550, 7800, 125, this.app);
+         if (this.stracks[16].stream != null) {
+            this.loadedt[16] = true;
+         }
+      }
+
+      if (i == 18 && !this.loadedt[17]) {
+         this.stracks[17] = new RadicalMod("music/stage18.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[17].stream != null) {
+            this.loadedt[17] = true;
+         }
+      }
+
+      if (i == 19 && !this.loadedt[18]) {
+         this.stracks[18] = new RadicalMod("music/stage19.zipo", 550, 7600, 145, this.app);
+         if (this.stracks[18].stream != null) {
+            this.loadedt[18] = true;
+         }
+      }
+
+      if (i == 20 && !this.loadedt[19]) {
+         this.stracks[19] = new RadicalMod("music/stage20.zipo", 550, 8000, 145, this.app);
+         if (this.stracks[19].stream != null) {
+            this.loadedt[19] = true;
+         }
+      }
+
+      if (i == 21 && !this.loadedt[20]) {
+         this.stracks[20] = new RadicalMod("music/stage21.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[20].stream != null) {
+            this.loadedt[20] = true;
+         }
+      }
+
+      if (i == 22 && !this.loadedt[21]) {
+         this.stracks[21] = new RadicalMod("music/stage22.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[21].stream != null) {
+            this.loadedt[21] = true;
+         }
+      }
+
+      if (i == 23 && !this.loadedt[22]) {
+         this.stracks[22] = new RadicalMod("music/stage23.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[22].stream != null) {
+            this.loadedt[22] = true;
+         }
+      }
+
+      if (i == 24 && !this.loadedt[23]) {
+         this.stracks[23] = new RadicalMod("music/stage24.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[23].stream != null) {
+            this.loadedt[23] = true;
+         }
+      }
+
+      if (i == 25 && !this.loadedt[24]) {
+         this.stracks[24] = new RadicalMod("music/stage25.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[24].stream != null) {
+            this.loadedt[24] = true;
+         }
+      }
+
+      if (i == 26 && !this.loadedt[25]) {
+         this.stracks[25] = new RadicalMod("music/stage26.zipo", 300, 8100, 125, this.app);
+         if (this.stracks[25].stream != null) {
+            this.loadedt[25] = true;
+         }
+      }
+
+      if (i == 27 && !this.loadedt[26]) {
+         this.stracks[26] = new RadicalMod("music/stage27.zipo", 300, 8100, 125, this.app);
+         if (this.stracks[26].stream != null) {
+            this.loadedt[26] = true;
+         }
+      }
+
+      if (i == 28 && !this.loadedt[27]) {
+         this.stracks[27] = new RadicalMod("music/stage28.zipo", 300, 8100, 125, this.app);
+         if (this.stracks[27].stream != null) {
+            this.loadedt[27] = true;
+         }
+      }
+
+      if (i == 29 && !this.loadedt[28]) {
+         this.stracks[28] = new RadicalMod("music/stage29.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[28].stream != null) {
+            this.loadedt[28] = true;
+         }
+      }
+
+      if (i == 30 && !this.loadedt[29]) {
+         this.stracks[29] = new RadicalMod("music/stage30.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[29].stream != null) {
+            this.loadedt[29] = true;
+         }
+      }
+
+      if (i == 31 && !this.loadedt[30]) {
+         this.stracks[30] = new RadicalMod("music/stage31.zipo", 550, 8000, 145, this.app);
+         if (this.stracks[30].stream != null) {
+            this.loadedt[30] = true;
+         }
+      }
+
+      if (i == 32 && !this.loadedt[31]) {
+         this.stracks[31] = new RadicalMod("music/stage32.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[31].stream != null) {
+            this.loadedt[31] = true;
+         }
+      }
+
+      if (i == 33 && !this.loadedt[32]) {
+         this.stracks[32] = new RadicalMod("music/stage33.zipo", 550, 8000, 125, this.app);
+         if (this.stracks[32].stream != null) {
+            this.loadedt[32] = true;
+         }
+      }
+
+      if (i == 34 && !this.loadedt[33]) {
+         this.stracks[33] = new RadicalMod("music/stage34.zipo", 550, 8000, 145, this.app);
+         if (this.stracks[33].stream != null) {
+            this.loadedt[33] = true;
+         }
+      }
+
+      if (i == 35 && !this.loadedt[34]) {
+         this.stracks[34] = new RadicalMod("music/stage35.zipo", 550, 8000, 125, this.app);
+         if (this.stracks[34].stream != null) {
+            this.loadedt[34] = true;
+         }
+      }
+
+      if (i == 36 && !this.loadedt[35]) {
+         this.stracks[35] = new RadicalMod("music/stage36.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[35].stream != null) {
+            this.loadedt[35] = true;
+         }
+      }
+
+      if (i == 37 && !this.loadedt[36]) {
+         this.stracks[36] = new RadicalMod("music/stage37.zipo", 750, 8100, 125, this.app);
+         if (this.stracks[36].stream != null) {
+            this.loadedt[36] = true;
+         }
+      }
+
+      if (i == 38 && !this.loadedt[37]) {
+         this.stracks[37] = new RadicalMod("music/stage38.zipo", 550, 8000, 125, this.app);
+         if (this.stracks[37].stream != null) {
+            this.loadedt[37] = true;
+         }
+      }
+
+      if (i == 39 && !this.loadedt[38]) {
+         this.stracks[38] = new RadicalMod("music/stage39.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[38].stream != null) {
+            this.loadedt[38] = true;
+         }
+      }
+
+      if (i == 40 && !this.loadedt[39]) {
+         this.stracks[39] = new RadicalMod("music/stage40.zipo", 760, 7900, 125, this.app);
+         if (this.stracks[39].stream != null) {
+            this.loadedt[39] = true;
+         }
+      }
+
+      if (i == 41 && !this.loadedt[40]) {
+         this.stracks[40] = new RadicalMod("music/stage41.zipo", 550, 8000, 125, this.app);
+         if (this.stracks[40].stream != null) {
+            this.loadedt[40] = true;
+         }
+      }
+
+      if (i == 42 && !this.loadedt[41]) {
+         this.stracks[41] = new RadicalMod("music/stage42.zipo", 550, 8000, 145, this.app);
+         if (this.stracks[41].stream != null) {
+            this.loadedt[41] = true;
+         }
+      }
+
+      if (i == 43 && !this.loadedt[42]) {
+         this.stracks[42] = new RadicalMod("music/stage43.zipo", 550, 8100, 125, this.app);
+         if (this.stracks[42].stream != null) {
+            this.loadedt[42] = true;
+         }
+      }
+
+      if (i == 44 && !this.loadedt[43]) {
+         this.stracks[43] = new RadicalMod("music/stage44.zipo", 550, 8100, 125, this.app);
+         if (this.stracks[43].stream != null) {
+            this.loadedt[43] = true;
+         }
+      }
+
+      if (i == 45 && !this.loadedt[44]) {
+         this.stracks[44] = new RadicalMod("music/stage45.zipo", 500, 8100, 125, this.app);
+         if (this.stracks[44].stream != null) {
+            this.loadedt[44] = true;
+         }
+      }
+
+      if (i == 46 && !this.loadedt[45]) {
+         this.stracks[45] = new RadicalMod("music/stage46.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[45].stream != null) {
+            this.loadedt[45] = true;
+         }
+      }
+
+      if (i == 47 && !this.loadedt[46]) {
+         this.stracks[46] = new RadicalMod("music/stage47.zipo", 550, 9000, 145, this.app);
+         if (this.stracks[46].stream != null) {
+            this.loadedt[46] = true;
+         }
+      }
+
+      if (i == 48 && !this.loadedt[47]) {
+         this.stracks[47] = new RadicalMod("music/stage48.zipo", 400, 7900, 125, this.app);
+         if (this.stracks[47].stream != null) {
+            this.loadedt[47] = true;
+         }
+      }
+
+      if (i == 49 && !this.loadedt[48]) {
+         this.stracks[48] = new RadicalMod("music/stage49.zipo", 550, 8100, 125, this.app);
+         if (this.stracks[48].stream != null) {
+            this.loadedt[48] = true;
+         }
+      }
+
+      if (i == 50 && !this.loadedt[49]) {
+         this.stracks[49] = new RadicalMod("music/stage50.zipo", 550, 8100, 145, this.app);
+         if (this.stracks[49].stream != null) {
+            this.loadedt[49] = true;
+         }
+      }
+
+      if (j == 0) {
+         if (this.loadedt[i - 1]) {
+            this.stracks[i - 1].play();
+         }
+
+         this.app.setCursor(new Cursor(0));
+         this.fase = 6;
+      } else {
+         this.fase = 176;
+      }
+
+      this.pcontin = 0;
+      this.mutem = false;
+      this.mutes = false;
+   }
+
+   public void pausedgame(Graphics g, int i, Control control, Record record) {
+      if (control.up) {
+         g.drawImage(this.fleximg, 0, 0, null);
+         this.opselect--;
+         if (this.opselect == -1) {
+            this.opselect = 3;
+         }
+
+         control.up = false;
+      }
+
+      if (control.down) {
+         g.drawImage(this.fleximg, 0, 0, null);
+         this.opselect++;
+         if (this.opselect == 4) {
+            this.opselect = 0;
+         }
+
+         control.down = false;
+      }
+
+      if (this.shaded) {
+         g.drawImage(this.fleximg, 0, 0, null);
+      }
+
+      if (this.opselect == 0) {
+         g.setColor(new Color(150, 150, 150));
+         g.fillRoundRect(204, 143, 137, 22, 7, 20);
+         if (this.shaded) {
+            g.setColor(new Color(225, 200, 255));
+         } else {
+            g.setColor(new Color(0, 0, 0));
+         }
+
+         g.drawRoundRect(204, 143, 137, 22, 7, 20);
+      }
+
+      if (this.opselect == 1) {
+         g.setColor(new Color(0, 0, 0));
+         g.fillRoundRect(195, 171, 155, 22, 7, 20);
+         if (this.shaded) {
+            g.setColor(new Color(225, 200, 255));
+         } else {
+            g.setColor(new Color(255, 255, 255));
+         }
+
+         g.drawRoundRect(195, 171, 155, 22, 7, 20);
+      }
+
+      if (this.opselect == 2) {
+         g.setColor(new Color(0, 255, 0));
+         g.fillRoundRect(178, 197, 190, 22, 7, 20);
+         if (this.shaded) {
+            g.setColor(new Color(225, 200, 255));
+         } else {
+            g.setColor(new Color(0, 255, 0));
+         }
+
+         g.drawRoundRect(178, 197, 190, 22, 7, 20);
+      }
+
+      if (this.opselect == 3) {
+         g.setColor(new Color(255, 0, 0));
+         g.fillRoundRect(216, 223, 109, 22, 7, 20);
+         if (this.shaded) {
+            g.setColor(new Color(225, 200, 255));
+         } else {
+            g.setColor(new Color(255, 0, 0));
+         }
+
+         g.drawRoundRect(216, 223, 109, 22, 7, 20);
+      }
+
+      g.drawImage(this.paused, 156, 106, null);
+      if (control.enter || control.handb) {
+         if (this.opselect == 0) {
+            if (this.loadedt[i - 1] && !this.mutem) {
+               this.stracks[i - 1].resume();
+            }
+
+            this.fase = 0;
+         }
+
+         if (this.opselect == 1) {
+            if (record.caught >= 300) {
+               if (this.loadedt[i - 1] && !this.mutem) {
+                  this.stracks[i - 1].resume();
+               }
+
+               this.fase = -1;
+            } else {
+               this.fase = -8;
+            }
+         }
+
+         if (this.opselect == 2) {
+            this.oldfase = -7;
+            this.fase = 11;
+         }
+
+         if (this.opselect == 3) {
+            this.fase = 10;
+            this.opselect = 0;
+         }
+
+         control.enter = false;
+         control.handb = false;
+      }
+   }
+
+   public void credits(Graphics g, Control control) {
+      if (this.flipo == 0) {
+         this.powerup.play();
+         this.flipo = 1;
+      }
+
+      if (this.flipo == 1) {
+         g.setColor(new Color(0, 0, 0));
+         g.fillRect(0, 0, 550, 400);
+         g.drawImage(this.radicalplay, 87, 110, null);
+         g.setFont(new Font("Impact", 1, 20));
+         this.ftm = g.getFontMetrics();
+         if (this.aflk) {
+            this.drawcs(g, 190, "And we found the new cause we got a little crazy!", 0, 0, 0, 3);
+            this.aflk = false;
+         } else {
+            this.drawcs(g, 192, "And we found the new cause we got a little crazy!", 255, 255, 255, 3);
+            this.aflk = true;
+            this.drawcs(g, 220, "Radicalplay.com", 255, 0, 0, 3);
+            this.drawcs(g, 240, "Radicalplay.com", 0, 255, 0, 3);
+            this.drawcs(g, 260, "Radicalplay.com", 0, 0, 255, 3);
+            this.drawcs(g, 280, "Radicalplay.com", 255, 255, 0, 3);
+            this.drawcs(g, 300, "NeedForMadnessExpert", 255, 255, 255, 3);
+         }
+
+         g.setFont(new Font("SansSerif", 1, 11));
+         this.ftm = g.getFontMetrics();
+         if (this.aflk) {
+            this.drawcs(g, 164, "www.radicalplay.com", 255, 255, 255, 3);
+            this.aflk = true;
+         } else {
+            this.drawcs(g, 166, "www.radicalplay.com", 255, 255, 255, 3);
+            this.aflk = false;
+         }
+      }
+
+      if (this.flipo == 2) {
+         g.drawImage(this.bgmain, 0, 0, null);
+         g.drawImage(this.omdness, -75, 7, null);
+         g.drawImage(this.omdness, 158, 7, null);
+         g.drawImage(this.omdness, 391, 7, null);
+         g.drawImage(this.omdness, -75, 157, null);
+         g.drawImage(this.omdness, 391, 157, null);
+         g.drawImage(this.omdness, -75, 257, null);
+         g.drawImage(this.omdness, 391, 257, null);
+         g.drawImage(this.omdness, -75, 357, null);
+         g.drawImage(this.omdness, 391, 357, null);
+         g.setFont(new Font("SansSerif", 1, 13));
+         this.ftm = g.getFontMetrics();
+         this.drawcs(g, 65, "At Radicalplay.com", 0, 0, 0, 3);
+         this.drawcs(g, 100, "Cartoon 3D Engine, Game Programming, 3D Models, Graphics and Sound Effects", 100, 100, 100, 3);
+         this.drawcs(g, 120, "By Omar Waly", 0, 0, 0, 3);
+         this.drawcs(g, 150, "Game Edited By NeedForMadnessExpert  N.F.M.E.  R.A.", 0, 0, 0, 3);
+         this.drawcs(g, 165, "whatever you call me!", 0, 0, 0, 3);
+         this.drawcs(g, 200, "Thanks for Game Testing", 100, 100, 100, 3);
+         this.drawcs(g, 220, "Khaled Helmy, Ismail Gorilaz,", 0, 0, 0, 3);
+         this.drawcs(g, 235, "Karim AboSamra, Mahmoud Waly", 0, 0, 0, 3);
+         this.drawcs(g, 250, "Karim Khadem, Ahmed Ismail", 0, 0, 0, 3);
+         this.drawcs(g, 265, "and Mahmoud EzzElDien (Turbo)", 0, 0, 0, 3);
+         this.drawcs(g, 305, "Music From", 100, 100, 100, 3);
+         this.drawcs(g, 325, "www.ModArchive.com", 0, 0, 0, 3);
+         this.drawcs(g, 360, "For any comments: Omar@radicalplay.com", 0, 0, 0, 3);
+         this.drawcs(g, 375, "or", 0, 0, 0, 3);
+         this.drawcs(g, 390, "RyanAlbano1@gmail.com", 0, 0, 0, 3);
+      }
+
+      if (this.flipo == 3) {
+         g.drawImage(this.bgmain, 0, 0, null);
+         g.drawImage(this.nfmcom, 69, 100, null);
+         g.drawImage(this.nfmcom, 69, 210, null);
+         g.drawImage(this.nfmcom, 69, 320, null);
+         g.drawImage(this.omdness, -75, 7, null);
+         g.drawImage(this.omdness, 158, 7, null);
+         g.drawImage(this.omdness, 391, 7, null);
+         g.drawImage(this.omdness, -75, 157, null);
+         g.drawImage(this.omdness, 391, 157, null);
+         g.drawImage(this.omdness, -75, 257, null);
+         g.drawImage(this.omdness, 391, 257, null);
+         g.drawImage(this.omdness, -75, 357, null);
+         g.drawImage(this.omdness, 391, 357, null);
+      }
+
+      if (this.flipo == 4) {
+         g.drawImage(this.bgmain, 0, 0, null);
+         g.drawImage(this.next[this.pnext], 460, 370, null);
+         g.setFont(new Font("SansSerif", 1, 13));
+         this.ftm = g.getFontMetrics();
+         this.drawcs(g, 65, "Changes to the Game:", 0, 0, 0, 3);
+         this.drawcs(g, 100, "Better cars with better stats", 0, 0, 0, 3);
+         this.drawcs(g, 120, "Bigger stages", 0, 0, 0, 3);
+         this.drawcs(g, 140, "New music (of course)", 0, 0, 0, 3);
+         this.drawcs(g, 160, "More superior cars (Destroyer, Warhead, Awesome Radical One, TURBO TANK etc.)", 0, 0, 0, 3);
+         this.drawcs(g, 180, "New colors", 0, 0, 0, 3);
+         this.drawcs(g, 200, "Power BEYOND the MAX", 0, 0, 0, 3);
+         this.drawcs(g, 220, "Possibility of two or more of the same car being selected during gameplay", 0, 0, 0, 3);
+         this.drawcs(g, 240, "More car/jet engine sounds", 0, 0, 0, 3);
+         this.drawcs(g, 260, "FLOATING STAGES! (If you didn't notice already)", 0, 0, 0, 3);
+         this.drawcs(g, 280, "Cars can fly in some stages", 0, 0, 0, 3);
+         this.drawcs(g, 300, "More Challenging Gameplay", 0, 0, 0, 3);
+         this.drawcs(g, 320, "More realistic (includes trees, clouds, mountains etc.)", 0, 0, 0, 3);
+         this.drawcs(g, 340, "A total of 32 CARS and 50 STAGES", 0, 0, 0, 3);
+         this.drawcs(g, 360, "Includes all the original stages and cars (with original stats) as well", 0, 0, 0, 3);
+         g.drawImage(this.omdness, 158, 7, null);
+      }
+
+      g.drawImage(this.next[this.pnext], 460, 370, null);
+      if (control.enter || control.handb || control.right) {
+         this.flipo++;
+         if (this.flipo == 5) {
+            this.flipo = 0;
+            this.fase = 10;
+         }
+
+         control.enter = false;
+         control.handb = false;
+         control.right = false;
+      }
+   }
+
+   public void stat(Madness madness, CheckPoints checkpoints, Control control, boolean flag, Graphics g) {
+      boolean flag1 = false;
+      if (this.wasted == 4) {
+         if (this.m.flex != 2) {
+            g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+            g.fillRect(166, 70, this.youwastedem.getWidth(this.ob), this.youwastedem.getHeight(this.ob));
+            g.setColor(new Color(this.m.cfade[0], this.m.cfade[1], this.m.cfade[2]));
+            g.drawRect(166, 70, this.youwastedem.getWidth(this.ob), this.youwastedem.getHeight(this.ob));
+         }
+
+         g.drawImage(this.youwastedem, 166, 70, null);
+         if (this.aflk) {
+            this.drawcs(g, 120, "You Won, all cars have been destroyed!", 0, 0, 0, 0);
+            this.aflk = false;
+         } else {
+            this.drawcs(g, 120, "You Won, all cars have been destroyed!", 255, 0, 0, 0);
+            this.aflk = true;
+         }
+
+         this.drawcs(g, 350, "Press  [ Enter ]  to continue", 0, 0, 0, 0);
+         checkpoints.haltall = false;
+         flag1 = true;
+         this.winner = true;
+      }
+
+      if (!flag1 && madness.dest && this.cntwis == 8) {
+         if (this.m.flex != 2) {
+            g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+            g.fillRect(172, 70, this.yourwasted.getWidth(this.ob), this.yourwasted.getHeight(this.ob));
+            g.setColor(new Color(this.m.cfade[0], this.m.cfade[1], this.m.cfade[2]));
+            g.drawRect(172, 70, this.yourwasted.getWidth(this.ob), this.yourwasted.getHeight(this.ob));
+         }
+
+         g.drawImage(this.yourwasted, 172, 70, null);
+         if (this.aflk) {
+            this.drawcs(g, 120, "You got destroyed!", 0, 0, 0, 0);
+            this.aflk = false;
+         } else {
+            this.drawcs(g, 120, "You got destroyed!", 255, 0, 0, 0);
+            this.aflk = true;
+         }
+
+         this.drawcs(g, 350, "Press  [ Enter ]  to continue", 0, 0, 0, 0);
+         flag1 = true;
+         this.winner = false;
+      }
+
+      if (!flag1) {
+         int i = 0;
+
+         do {
+            if (checkpoints.clear[i] == checkpoints.nlaps * checkpoints.nsp && checkpoints.pos[i] == 0) {
+               if (i == 0) {
+                  if (this.m.flex != 2) {
+                     g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+                     g.fillRect(208, 70, this.youwon.getWidth(this.ob), this.youwon.getHeight(this.ob));
+                     g.setColor(new Color(this.m.cfade[0], this.m.cfade[1], this.m.cfade[2]));
+                     g.drawRect(208, 70, this.youwon.getWidth(this.ob), this.youwon.getHeight(this.ob));
+                  }
+
+                  g.drawImage(this.youwon, 208, 70, null);
+                  if (this.aflk) {
+                     this.drawcs(g, 120, "You finished first, nice job!", 0, 0, 0, 0);
+                     this.aflk = false;
+                  } else {
+                     this.drawcs(g, 120, "You finished first, nice job!", 255, 255, 255, 0);
+                     this.aflk = true;
+                  }
+
+                  this.winner = true;
+               } else {
+                  if (this.m.flex != 2) {
+                     g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+                     g.fillRect(211, 70, this.youlost.getWidth(this.ob), this.youlost.getHeight(this.ob));
+                     g.setColor(new Color(this.m.cfade[0], this.m.cfade[1], this.m.cfade[2]));
+                     g.drawRect(211, 70, this.youlost.getWidth(this.ob), this.youlost.getHeight(this.ob));
+                  }
+
+                  g.drawImage(this.youlost, 211, 70, null);
+                  if (this.aflk) {
+                     this.drawcs(g, 120, "" + this.names[this.sc[i]] + " finished first, race over!", 0, 0, 0, 0);
+                     this.aflk = false;
+                  } else {
+                     this.drawcs(g, 120, "" + this.names[this.sc[i]] + " finished first, race over!", 255, 255, 255, 0);
+                     this.aflk = true;
+                  }
+
+                  this.winner = false;
+               }
+
+               this.drawcs(g, 350, "Press  [ Enter ]  to continue", 0, 0, 0, 0);
+               checkpoints.haltall = true;
+               flag1 = true;
+            }
+         } while (++i < 5);
+      }
+
+      if (flag1) {
+         this.holdcnt++;
+         if (control.enter || this.holdcnt > 250) {
+            this.fase = -2;
+            control.enter = false;
+         }
+      } else {
+         if (this.holdcnt != 0) {
+            this.holdcnt = 0;
+         }
+
+         if (control.enter) {
+            if (this.loadedt[checkpoints.stage - 1]) {
+               this.stracks[checkpoints.stage - 1].stop();
+            }
+
+            this.fase = -6;
+            control.enter = false;
+         }
+      }
+
+      if (flag) {
+         if (checkpoints.stage != 10 && this.arrace != control.arrace) {
+            this.arrace = control.arrace;
+            if (this.arrace) {
+               this.wasay = true;
+               this.say = ">  Arrow now pointing at  Cars  <";
+               this.tcnt = -5;
+            }
+
+            if (!this.arrace) {
+               this.wasay = false;
+               this.say = ">  Arrow now pointing at  Track  <";
+               this.tcnt = -5;
+               this.cntan = 20;
+            }
+         }
+
+         if (!flag1 && checkpoints.stage != 10 && this.starcnt == 0) {
+            this.arrow(g, madness.point, madness.missedcp, checkpoints, this.arrace);
+            if (!this.arrace && this.auscnt == 45 && madness.capcnt == 0) {
+               if (madness.missedcp > 0) {
+                  if (madness.missedcp > 15 && madness.missedcp < 50) {
+                     if (this.flk) {
+                        this.drawcs(g, 70, "CheckPoint Missed!", 255, 150, 0, 2);
+                     } else {
+                        this.drawcs(g, 70, "CheckPoint Missed!", 255, 0, 0, 2);
+                     }
+                  }
+
+                  madness.missedcp++;
+                  if (madness.missedcp == 70) {
+                     madness.missedcp = -2;
+                  }
+               } else if (madness.mtouch && this.cntovn < 70) {
+                  if (Math.abs(this.ana) > 100) {
+                     this.cntan++;
+                  } else if (this.cntan != 0) {
+                     this.cntan--;
+                  }
+
+                  if (this.cntan > 40) {
+                     this.cntovn++;
+                     this.cntan = 40;
+                     if (this.flk) {
+                        this.drawcs(g, 70, "Wrong Way!", 255, 150, 0, 2);
+                        this.flk = false;
+                     } else {
+                        this.drawcs(g, 70, "Wrong Way!", 255, 0, 0, 2);
+                        this.flk = true;
+                     }
+                  }
+               }
+            }
+         }
+
+         if (this.m.flex != 2) {
+            g.drawImage(this.dmg, 360, 7, null);
+            g.drawImage(this.pwr, 360, 27, null);
+            g.drawImage(this.lap, 19, 7, null);
+            g.setColor(new Color(0, 150, 0));
+            g.drawString("" + (madness.nlaps + 1) + " / " + checkpoints.nlaps + "", 51, 18);
+            g.drawImage(this.was, 92, 7, null);
+            g.setColor(new Color(200, 0, 0));
+            g.drawString("" + checkpoints.wasted + " / 4", 150, 18);
+            g.drawImage(this.pos, 42, 27, null);
+            g.drawImage(this.rank[checkpoints.pos[madness.im]], 110, 28, null);
+            this.m.flex++;
+         } else {
+            if (this.posit != checkpoints.pos[madness.im]) {
+               g.drawImage(this.rank[checkpoints.pos[madness.im]], 110, 28, null);
+               this.posit = checkpoints.pos[madness.im];
+            }
+
+            if (this.wasted != checkpoints.wasted) {
+               g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+               g.fillRect(150, 8, 30, 10);
+               g.setColor(new Color(200, 0, 0));
+               g.drawString("" + checkpoints.wasted + " / 4", 150, 18);
+               this.wasted = checkpoints.wasted;
+            }
+
+            if (this.laps != madness.nlaps) {
+               g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+               g.fillRect(51, 8, 40, 10);
+               g.setColor(new Color(0, 150, 0));
+               g.drawString("" + (madness.nlaps + 1) + " / " + checkpoints.nlaps + "", 51, 18);
+               this.laps = madness.nlaps;
+            }
+         }
+
+         this.drawstat(g, madness.maxmag[madness.cn], madness.hitmag, madness.newcar, madness.power);
+      }
+
+      if (!flag1) {
+         if (this.starcnt != 0) {
+            if (this.starcnt == 35 && !this.mutes) {
+               this.three.play();
+            }
+
+            if (this.starcnt == 24) {
+               this.gocnt = 2;
+               if (!this.mutes) {
+                  this.two.play();
+               }
+            }
+
+            if (this.starcnt == 13) {
+               this.gocnt = 1;
+               if (!this.mutes) {
+                  this.one.play();
+               }
+            }
+
+            if (this.starcnt == 2) {
+               this.gocnt = 0;
+               if (!this.mutes) {
+                  this.go.play();
+               }
+            }
+
+            if (this.gocnt != 0) {
+               g.drawImage(this.cntdn[this.gocnt], 260, 50, null);
+            } else {
+               g.drawImage(this.cntdn[this.gocnt], 238, 50, null);
+            }
+         }
+
+         if (this.looped != 0 && madness.loop == 2) {
+            this.looped = 0;
+         }
+
+         if (madness.power < 45.0F) {
+            if (this.tcnt == 30 && this.auscnt == 45 && madness.mtouch && madness.capcnt == 0) {
+               if (this.pwcnt < 70) {
+                  if (this.looped != 3) {
+                     if (this.pwflk) {
+                        this.drawcs(g, 110, "Power low, perform stunt!", 0, 0, 0, 0);
+                        this.pwflk = false;
+                     } else {
+                        this.drawcs(g, 110, "Power low, perform stunt!", 255, 255, 255, 0);
+                        this.pwflk = true;
+                     }
+                  } else if (this.pwflk) {
+                     this.drawcs(g, 110, ">> Press Enter for game instructions! <<", 100, 100, 100, 0);
+                     this.pwflk = false;
+                  } else {
+                     this.drawcs(g, 110, ">> Press Enter for game instructions! <<", 0, 0, 0, 0);
+                     this.pwflk = true;
+                  }
+               }
+
+               this.pwcnt++;
+               if (this.pwcnt == 300) {
+                  this.pwcnt = 0;
+                  if (this.looped != 0) {
+                     this.looped++;
+                     if (this.looped == 4) {
+                        this.looped = 2;
+                     }
+                  }
+               }
+            }
+         } else if (this.pwcnt != 0) {
+            this.pwcnt = 0;
+         }
+
+         if (madness.capcnt == 0) {
+            if (this.tcnt < 30) {
+               if (this.tflk) {
+                  if (!this.wasay) {
+                     this.drawcs(g, 105, this.say, 255, 0, 0, 0);
+                  } else {
+                     this.drawcs(g, 105, this.say, 255, 255, 255, 0);
+                  }
+
+                  this.tflk = false;
+               } else {
+                  if (!this.wasay) {
+                     this.drawcs(g, 105, this.say, 150, 0, 0, 0);
+                  } else {
+                     this.drawcs(g, 105, this.say, 255, 0, 0, 0);
+                  }
+
+                  this.tflk = true;
+               }
+
+               this.tcnt++;
+            } else if (this.wasay) {
+               this.wasay = false;
+            }
+
+            if (this.auscnt < 45) {
+               if (this.aflk) {
+                  this.drawcs(g, 85, this.asay, 98, 200, 98, 0);
+                  this.aflk = false;
+               } else {
+                  this.drawcs(g, 85, this.asay, 0, 200, 0, 0);
+                  this.aflk = true;
+               }
+
+               this.auscnt++;
+            }
+         } else if (this.tflk) {
+            this.drawcs(g, 110, "Bad Landing!", 0, 0, 0, 0);
+            this.tflk = false;
+         } else {
+            this.drawcs(g, 110, "Bad Landing!", 255, 255, 255, 0);
+            this.tflk = true;
+         }
+
+         if (madness.trcnt == 10) {
+            this.loop = "";
+            this.spin = "";
+            this.asay = "";
+
+            int j;
+            for (j = 0; madness.travzy > 225; j++) {
+               madness.travzy -= 360;
+            }
+
+            while (madness.travzy < -225) {
+               madness.travzy += 360;
+               j--;
+            }
+
+            if (j == 1) {
+               this.loop = "Forward loop";
+            }
+
+            if (j == 2) {
+               this.loop = "double Forward";
+            }
+
+            if (j == 3) {
+               this.loop = "triple Forward";
+            }
+
+            if (j >= 4) {
+               this.loop = "massive Forward looping";
+            }
+
+            if (j == -1) {
+               this.loop = "Backloop";
+            }
+
+            if (j == -2) {
+               this.loop = "double Back";
+            }
+
+            if (j == -3) {
+               this.loop = "triple Back";
+            }
+
+            if (j <= -4) {
+               this.loop = "massive Back looping";
+            }
+
+            if (j == 0) {
+               if (madness.ftab && madness.btab) {
+                  this.loop = "Tabletop and reversed Tabletop";
+               } else if (madness.ftab || madness.btab) {
+                  this.loop = "Tabletop";
+               }
+            }
+
+            if (j > 0 && madness.btab) {
+               this.loop = "Hanged " + this.loop;
+            }
+
+            if (j < 0 && madness.ftab) {
+               this.loop = "Hanged " + this.loop;
+            }
+
+            if (this.loop != "") {
+               this.asay = this.asay + " " + this.loop;
+            }
+
+            j = 0;
+
+            for (madness.travxy = Math.abs(madness.travxy); madness.travxy > 270; j++) {
+               madness.travxy -= 360;
+            }
+
+            if (j == 0 && madness.rtab) {
+               if (this.loop == "") {
+                  this.spin = "Tabletop";
+               } else {
+                  this.spin = "Flipside";
+               }
+            }
+
+            if (j == 1) {
+               this.spin = "Rollspin";
+            }
+
+            if (j == 2) {
+               this.spin = "double Rollspin";
+            }
+
+            if (j == 3) {
+               this.spin = "triple Rollspin";
+            }
+
+            if (j >= 4) {
+               this.spin = "massive Roll spinning";
+            }
+
+            j = 0;
+            boolean flag2 = false;
+            madness.travxz = Math.abs(madness.travxz);
+
+            while (madness.travxz > 90) {
+               madness.travxz -= 180;
+               j += 180;
+               if (j > 900) {
+                  j = 900;
+                  flag2 = true;
+               }
+            }
+
+            if (j != 0) {
+               if (this.loop == "" && this.spin == "") {
+                  this.asay = this.asay + " " + j;
+                  if (flag2) {
+                     this.asay = this.asay + " and beyond";
+                  }
+               } else {
+                  if (this.spin != "") {
+                     if (this.loop == "") {
+                        this.asay = this.asay + " " + this.spin;
+                     } else {
+                        this.asay = this.asay + " with " + this.spin;
+                     }
+                  }
+
+                  this.asay = this.asay + " by " + j;
+                  if (flag2) {
+                     this.asay = this.asay + " and beyond";
+                  }
+               }
+            } else if (this.spin != "") {
+               if (this.loop == "") {
+                  this.asay = this.asay + " " + this.spin;
+               } else {
+                  this.asay = this.asay + " by " + this.spin;
+               }
+            }
+
+            if (this.asay != "") {
+               this.auscnt -= 15;
+            }
+
+            if (this.loop != "") {
+               this.auscnt -= 25;
+            }
+
+            if (this.spin != "") {
+               this.auscnt -= 25;
+            }
+
+            if (j != 0) {
+               this.auscnt -= 25;
+            }
+
+            if (this.auscnt < 45) {
+               if (!this.mutes) {
+                  this.powerup.play();
+               }
+
+               if (this.auscnt < -20) {
+                  this.auscnt = -20;
+               }
+
+               byte byte0 = 0;
+               if (madness.powerup > 20.0F) {
+                  byte0 = 1;
+               }
+
+               if (madness.powerup > 40.0F) {
+                  byte0 = 2;
+               }
+
+               if (madness.powerup > 150.0F) {
+                  byte0 = 3;
+               }
+
+               if (madness.surfer) {
+                  this.asay = " " + this.adj[4][(int)(this.m.random() * 3.0F)] + this.asay;
+               }
+
+               if (byte0 != 3) {
+                  this.asay = this.adj[byte0][(int)(this.m.random() * 3.0F)] + this.asay + this.exlm[byte0];
+               } else {
+                  this.asay = this.adj[byte0][(int)(this.m.random() * 3.0F)];
+               }
+
+               if (!this.wasay) {
+                  this.tcnt = this.auscnt;
+                  if (madness.power != 98.0F) {
+                     this.say = "Power Up " + (int)(100.0F * madness.powerup / 98.0F) + "%";
+                  } else {
+                     this.say = "Power To The MAX (100%)";
+                  }
+               }
+            }
+         }
+
+         if (madness.newcar) {
+            if (!this.wasay) {
+               this.say = "Car Fixed";
+               this.tcnt = 0;
+            }
+
+            if (this.crashup) {
+               this.crashup = false;
+            } else {
+               this.crashup = true;
+            }
+         }
+
+         if (this.clear != madness.clear && madness.clear != 0) {
+            if (!this.wasay) {
+               this.say = "CheckPoint";
+               this.tcnt = 15;
+            }
+
+            this.clear = madness.clear;
+            if (!this.mutes) {
+               this.checkpoint.play();
+            }
+
+            this.cntovn = 0;
+            if (this.cntan != 0) {
+               this.cntan = 0;
+            }
+         }
+
+         int k = 1;
+
+         do {
+            if (this.dested[k] != checkpoints.dested[k]) {
+               this.dested[k] = checkpoints.dested[k];
+               if (this.dested[k] == 1) {
+                  this.wasay = true;
+                  this.say = "" + this.names[this.sc[k]] + " has been destroyed!";
+                  this.tcnt = -15;
+               }
+
+               if (this.dested[k] == 2) {
+                  this.wasay = true;
+                  this.say = "You destroyed " + this.names[this.sc[k]] + "!";
+                  this.tcnt = -15;
+               }
+            }
+         } while (++k < 5);
+      }
+   }
+
+   public void finish(CheckPoints checkpoints, ContO[] aconto, Control control, Graphics g) {
+      g.drawImage(this.fleximg, 0, 0, null);
+      if (this.winner) {
+         if (checkpoints.stage == this.unlocked) {
+            if (checkpoints.stage != 50) {
+               g.drawImage(this.congrd, 140, 30, null);
+               this.drawcs(g, 80, "You completed stage " + checkpoints.stage + " : " + checkpoints.name + " !", 0, 255, 0, 3);
+            } else {
+               g.drawImage(this.congrd, 135 + (int)(this.m.random() * 10.0F), 30, null);
+            }
+
+            byte byte0 = 0;
+            int i = 0;
+            this.pin = 60;
+            if (checkpoints.stage == 2) {
+               byte0 = 5;
+               i = 60;
+               this.pin = 0;
+               this.sc[0] = 5;
+            }
+
+            if (checkpoints.stage == 4) {
+               byte0 = 6;
+               i = 40;
+               this.pin = 0;
+               this.sc[0] = 6;
+            }
+
+            if (checkpoints.stage == 6) {
+               byte0 = 7;
+               i = 25;
+               this.pin = 0;
+               this.sc[0] = 7;
+            }
+
+            if (checkpoints.stage == 8) {
+               byte0 = 8;
+               i = 70;
+               this.pin = 0;
+               this.sc[0] = 8;
+            }
+
+            if (checkpoints.stage == 10) {
+               byte0 = 9;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 9;
+            }
+
+            if (checkpoints.stage == 12) {
+               byte0 = 10;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 10;
+            }
+
+            if (checkpoints.stage == 14) {
+               byte0 = 11;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 11;
+            }
+
+            if (checkpoints.stage == 16) {
+               byte0 = 12;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 12;
+            }
+
+            if (checkpoints.stage == 18) {
+               byte0 = 13;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 13;
+            }
+
+            if (checkpoints.stage == 20) {
+               byte0 = 14;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 14;
+            }
+
+            if (checkpoints.stage == 22) {
+               byte0 = 15;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 15;
+            }
+
+            if (checkpoints.stage == 24) {
+               byte0 = 16;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 16;
+            }
+
+            if (checkpoints.stage == 26) {
+               byte0 = 17;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 17;
+            }
+
+            if (checkpoints.stage == 28) {
+               byte0 = 18;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 18;
+            }
+
+            if (checkpoints.stage == 30) {
+               byte0 = 19;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 19;
+            }
+
+            if (checkpoints.stage == 32) {
+               byte0 = 20;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 20;
+            }
+
+            if (checkpoints.stage == 34) {
+               byte0 = 21;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 21;
+            }
+
+            if (checkpoints.stage == 36) {
+               byte0 = 22;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 22;
+            }
+
+            if (checkpoints.stage == 38) {
+               byte0 = 23;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 23;
+            }
+
+            if (checkpoints.stage == 40) {
+               byte0 = 24;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 24;
+            }
+
+            if (checkpoints.stage == 42) {
+               byte0 = 25;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 25;
+            }
+
+            if (checkpoints.stage == 44) {
+               byte0 = 26;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 26;
+            }
+
+            if (checkpoints.stage == 46) {
+               byte0 = 27;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 27;
+            }
+
+            if (checkpoints.stage == 48) {
+               byte0 = 28;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 28;
+            }
+
+            if (checkpoints.stage == 50) {
+               byte0 = 29;
+               i = 80;
+               this.pin = 0;
+               this.sc[0] = 29;
+            }
+
+            if (checkpoints.stage != 50) {
+               g.setFont(new Font("SansSerif", 1, 13));
+               this.ftm = g.getFontMetrics();
+               if (this.aflk) {
+                  this.drawcs(g, 120 + this.pin, "Stage " + (checkpoints.stage + 1) + " unlocked!", 144, 167, 255, 3);
+               } else {
+                  this.drawcs(g, 120 + this.pin, "Stage " + (checkpoints.stage + 1) + " unlocked!", 208, 240, 255, 3);
+               }
+
+               if (byte0 != 0) {
+                  if (this.aflk) {
+                     this.drawcs(g, 150, "And:", 144, 167, 255, 3);
+                  } else {
+                     this.drawcs(g, 150, "And:", 208, 240, 255, 3);
+                  }
+
+                  g.setColor(new Color(208, 240, 255));
+                  g.fillRect(200, 170, 150, 100);
+                  g.setColor(new Color(176, 217, 240));
+                  g.fillRect(201, 171, 148, 4);
+                  g.fillRect(201, 171, 4, 98);
+                  g.fillRect(201, 265, 148, 4);
+                  g.fillRect(345, 171, 4, 98);
+                  aconto[byte0].y = i;
+                  this.m.crs = true;
+                  this.m.x = -275;
+                  this.m.y = -500;
+                  this.m.z = -50;
+                  this.m.xz = 0;
+                  this.m.zy = 10;
+                  this.m.ground = 2470;
+                  aconto[byte0].z = 1500;
+                  aconto[byte0].x = 0;
+                  aconto[byte0].xz += 5;
+                  aconto[byte0].zy = 0;
+                  aconto[byte0].wzy -= 10;
+                  aconto[byte0].d(g);
+                  if (this.aflk) {
+                     g.setColor(new Color(0, 128, 255));
+                  } else {
+                     g.setColor(new Color(255, 0, 0));
+                  }
+
+                  g.drawRect(197, 167, 155, 105);
+                  if (this.aflk) {
+                     this.drawcs(g, 300, "" + this.names[byte0] + " is now available!", 144, 167, 255, 3);
+                  } else {
+                     this.drawcs(g, 300, "" + this.names[byte0] + " is now available!", 208, 240, 255, 3);
+                  }
+               }
+
+               g.setFont(new Font("SansSerif", 1, 11));
+               this.ftm = g.getFontMetrics();
+               if (this.aflk) {
+                  this.drawcs(g, 335 - this.pin, "( Game Saved )", 112, 120, 143, 3);
+               } else {
+                  this.drawcs(g, 335 - this.pin, "( Game Saved )", 150, 150, 150, 3);
+               }
+            } else {
+               g.setFont(new Font("SansSerif", 1, 13));
+               this.ftm = g.getFontMetrics();
+               if (this.aflk) {
+                  this.drawcs(g, 120, "YOU FINISHED THE GAME", 255, 255, 255, 3);
+               } else {
+                  this.drawcs(g, 120, "YOU FINISHED THE GAME", 200, 200, 200, 3);
+               }
+
+               if (this.aflk) {
+                  this.drawcs(g, 150, "YOU'RE AWESOME!", 0, 0, 0, 3);
+               } else {
+                  this.drawcs(g, 152, "YOU'RE AWESOME!", 255, 255, 255, 3);
+               }
+
+               if (this.aflk) {
+                  this.drawcs(g, 200, "You're truly a RADICAL GAMER!", 0, 255, 0, 3);
+               } else {
+                  this.drawcs(g, 200, "You're truly a RADICAL GAMER!", 0, 100, 0, 3);
+               }
+
+               g.drawImage(this.radicalplay, 95, 205, null);
+               g.setFont(new Font("SansSerif", 1, 13));
+               this.ftm = g.getFontMetrics();
+               if (this.aflk) {
+                  this.drawcs(g, 280, "Be sure to check Radicalplay.com for more action!", 0, 0, 0, 3);
+               } else {
+                  this.drawcs(g, 280, "Be sure to check Radicalplay.com for more action!", 255, 0, 0, 3);
+               }
+
+               this.pin = 40;
+            }
+
+            if (this.aflk) {
+               this.aflk = false;
+            } else {
+               this.aflk = true;
+            }
+         } else {
+            this.pin = 100;
+            g.drawImage(this.congrd, 140, 117, null);
+            this.drawcs(g, 167, "You completed stage " + checkpoints.stage + " : " + checkpoints.name + " !", 0, 255, 0, 3);
+         }
+      } else {
+         this.pin = 100;
+         g.drawImage(this.gameov, 190, 117, null);
+         this.drawcs(g, 167, "You lost at stage " + checkpoints.stage + " : " + checkpoints.name + " !", 255, 0, 0, 3);
+         if (checkpoints.stage == this.unlocked) {
+            if (checkpoints.stage == 1) {
+               this.drawcs(g, 205, "> Don't forget, you must pass in all checkpoints to complete a lap...", 128, 128, 128, 3);
+            }
+
+            if (checkpoints.stage == 2) {
+               this.drawcs(g, 205, "> Don't forget, you need power to be up to race faster...", 128, 128, 128, 3);
+            }
+
+            if (checkpoints.stage == 3) {
+               this.drawcs(g, 205, "> Note: This stage contains heavy fog!", 128, 128, 128, 3);
+               this.drawcs(g, 220, "( Press [A] to make Guidance Arrow point to cars )", 128, 128, 128, 3);
+            }
+
+            if (checkpoints.stage == 4) {
+               this.drawcs(g, 205, "> Remember the better the stunt the better the power you get...", 128, 128, 128, 3);
+            }
+
+            if (checkpoints.stage == 5) {
+               this.drawcs(g, 205, "> Note: EL KING is invisible in this stage!", 128, 128, 128, 3);
+            }
+         }
+      }
+
+      g.drawImage(this.contin2[this.pcontin], 230, 350 - this.pin, null);
+      if (control.enter || control.handb) {
+         this.fase = 10;
+         if (this.loadedt[checkpoints.stage - 1]) {
+            this.stracks[checkpoints.stage - 1].stop();
+         }
+
+         if (checkpoints.stage == this.unlocked && this.winner && this.unlocked != 50) {
+            checkpoints.stage++;
+            this.unlocked++;
+         }
+
+         control.enter = false;
+         control.handb = false;
+      }
+   }
+
+   public void sortcars(int i) {
+      if (i != 0) {
+         boolean[] aflag = new boolean[5];
+         if (this.unlocked == i && this.unlocked != 30) {
+            this.sc[4] = 4 + (i + 1) / 2;
+            int j = 1;
+
+            do {
+               aflag[j] = false;
+
+               while (!aflag[j]) {
+                  this.sc[j] = (int)(Math.random() * (4 + (i + 1) / 2));
+                  aflag[j] = true;
+                  int k = 0;
+
+                  do {
+                     if (j != k && this.sc[j] == this.sc[k]) {
+                        aflag[j] = false;
+                     }
+                  } while (++k < 5);
+
+                  if (Math.random() < this.proba[this.sc[j]]) {
+                     aflag[j] = false;
+                  }
+
+                  if (this.sc[j] == 1 && i == 6) {
+                     aflag[j] = false;
+                  }
+
+                  if (this.sc[j] == 7 && (i == 8 || i == 9 || i == 7)) {
+                     aflag[j] = false;
+                  }
+               }
+            } while (++j < 4);
+
+            if (i == 10) {
+               if (this.sc[0] != 7) {
+                  boolean flag = false;
+                  int l = 0;
+
+                  do {
+                     if (this.sc[l] == 7) {
+                        flag = true;
+                     }
+                  } while (++l < 5);
+
+                  if (!flag) {
+                     if (Math.random() > Math.random()) {
+                        this.sc[1] = 7;
+                     } else {
+                        this.sc[2] = 7;
+                     }
+                  }
+               } else {
+                  boolean flag1 = false;
+                  int i1 = 0;
+
+                  do {
+                     if (this.sc[i1] == 8) {
+                        flag1 = true;
+                     }
+                  } while (++i1 < 5);
+
+                  if (!flag1) {
+                     if (Math.random() > Math.random()) {
+                        this.sc[1] = 8;
+                     }
+
+                     this.sc[2] = 8;
+                  }
+               }
+            }
+         } else {
+            byte byte0 = 5;
+            if (this.sc[0] != 4 + (i + 1) / 2 && i != 30) {
+               this.sc[4] = 4 + (i + 1) / 2;
+               byte0 = 4;
+            }
+
+            for (int j1 = 1; j1 < byte0; j1++) {
+               aflag[j1] = false;
+
+               while (!aflag[j1]) {
+                  int k1 = this.unlocked;
+                  if (k1 == 30) {
+                     k1 = 30;
+                  }
+
+                  this.sc[j1] = (int)(Math.random() * (5 + (k1 + 1) / 2));
+                  aflag[j1] = true;
+                  int l1 = 0;
+
+                  do {
+                     if (j1 != l1 && this.sc[j1] == this.sc[l1]) {
+                        aflag[j1] = true;
+                     }
+                  } while (++l1 < 5);
+
+                  if (Math.random() < this.proba[this.sc[j1]]) {
+                     aflag[j1] = true;
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   public void sparkeng(int i) {
+      i++;
+      int j = 0;
+
+      do {
+         if (i == j) {
+            if (!this.pengs[j]) {
+               this.engs[this.enginsignature[this.sc[0]][j]][j].loop();
+               this.pengs[j] = true;
+            }
+         } else if (this.pengs[j]) {
+            this.engs[this.enginsignature[this.sc[0]][j]][j].stop();
+            this.pengs[j] = false;
+         }
+      } while (++j < 5);
+   }
+
+   public void drawcs(Graphics g, int i, String s, int j, int k, int l, int i1) {
+      if (i1 != 3 && i1 != 4) {
+         j = (int)(j + j * (this.m.snap[0] / 100.0F));
+         if (j > 255) {
+            j = 255;
+         }
+
+         if (j < 0) {
+            j = 0;
+         }
+
+         k = (int)(k + k * (this.m.snap[1] / 100.0F));
+         if (k > 255) {
+            k = 255;
+         }
+
+         if (k < 0) {
+            k = 0;
+         }
+
+         l = (int)(l + l * (this.m.snap[2] / 100.0F));
+         if (l > 255) {
+            l = 255;
+         }
+
+         if (l < 0) {
+            l = 0;
+         }
+      }
+
+      if (i1 == 4) {
+         j = (int)(j - j * (this.m.snap[0] / 100.0F));
+         if (j > 255) {
+            j = 255;
+         }
+
+         if (j < 0) {
+            j = 0;
+         }
+
+         k = (int)(k - k * (this.m.snap[1] / 100.0F));
+         if (k > 255) {
+            k = 255;
+         }
+
+         if (k < 0) {
+            k = 0;
+         }
+
+         l = (int)(l - l * (this.m.snap[2] / 100.0F));
+         if (l > 255) {
+            l = 255;
+         }
+
+         if (l < 0) {
+            l = 0;
+         }
+      }
+
+      if (i1 == 1) {
+         g.setColor(new Color(0, 0, 0));
+         g.drawString(s, 275 - this.ftm.stringWidth(s) / 2 + 1, i + 1);
+      }
+
+      if (i1 == 2) {
+         g.setColor(new Color((j + this.m.csky[0] * 2) / 3, (k + this.m.csky[1] * 2) / 3, (l + this.m.csky[2] * 2) / 3));
+         g.drawString(s, 275 - this.ftm.stringWidth(s) / 2 + 1, i + 1);
+      }
+
+      g.setColor(new Color(j, k, l));
+      g.drawString(s, 275 - this.ftm.stringWidth(s) / 2, i);
+   }
+
+   public int py(int i, int j, int k, int l) {
+      return (i - j) * (i - j) + (k - l) * (k - l);
+   }
+
+   public void trackbg(Graphics g) {
+      if (this.stages.posit() > 240000 || this.m.nrnd <= 1) {
+         g.drawImage(this.trackbg, 0, 0, null);
+      }
+   }
+
+   public void stageselect(Graphics g, CheckPoints checkpoints, Control control) {
+      this.stages.play();
+      g.drawImage(this.bl, 0, 0, null);
+      g.drawImage(this.bt, 0, 0, null);
+      g.drawImage(this.br, 509, 0, null);
+      g.drawImage(this.bb, 0, 357, null);
+      g.drawImage(this.select, 201, 45, null);
+      if (checkpoints.stage != 1) {
+         g.drawImage(this.back[this.pback], 50, 110, null);
+      }
+
+      if (checkpoints.stage != 50) {
+         g.drawImage(this.next[this.pnext], 440, 110, null);
+      }
+
+      g.drawImage(this.contin1[this.pcontin], 232, 170, null);
+      g.setFont(new Font("SansSerif", 1, 13));
+      this.ftm = g.getFontMetrics();
+      if (checkpoints.stage != 50) {
+         this.drawcs(g, 110, "Stage " + checkpoints.stage + "  >", 255, 255, 255, 3);
+      } else {
+         this.drawcs(g, 110, "Final Stage  >", 255, 255, 255, 3);
+      }
+
+      this.drawcs(g, 130, "| " + checkpoints.name + " |", 255, 0, 0, 3);
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 396, "Use keyboard Arrows and press Enter to continue", 0, 0, 0, 3);
+      if (control.handb || control.enter) {
+         this.fase = 5;
+         this.m.trk = false;
+         control.handb = false;
+         control.enter = false;
+         this.stages.stop();
+      }
+
+      if (control.right && checkpoints.stage != 50) {
+         if (checkpoints.stage != this.unlocked) {
+            checkpoints.stage++;
+            this.fase = 2;
+            control.right = false;
+         } else {
+            this.fase = 4;
+            this.lockcnt = 70;
+            control.right = false;
+         }
+      }
+
+      if (control.left && checkpoints.stage != 1) {
+         checkpoints.stage--;
+         this.fase = 2;
+         control.left = false;
+      }
+   }
+
+   public void snap(int i) {
+      this.dmg = this.loadsnap(this.odmg);
+      this.pwr = this.loadsnap(this.opwr);
+      this.was = this.loadsnap(this.owas);
+      this.lap = this.loadsnap(this.olap);
+      this.pos = this.loadsnap(this.opos);
+      int j = 0;
+
+      do {
+         this.rank[j] = this.loadsnap(this.orank[j]);
+      } while (++j < 5);
+
+      j = 0;
+
+      do {
+         this.cntdn[j] = this.loadsnap(this.ocntdn[j]);
+      } while (++j < 4);
+
+      this.yourwasted = this.loadsnap(this.oyourwasted);
+      this.youlost = this.loadsnap(this.oyoulost);
+      this.youwon = this.loadsnap(this.oyouwon);
+      this.youwastedem = this.loadsnap(this.oyouwastedem);
+      this.gameh = this.loadsnap(this.ogameh);
+      this.mdness = this.loadsnap(this.omdness);
+      this.loadingmusic = this.loadopsnap(this.oloadingmusic, i);
+      this.star[0] = this.loadopsnap(this.ostar[0], i);
+      this.star[1] = this.loadopsnap(this.ostar[1], i);
+   }
+
+   private Image loadsnap(Image image) {
+      int i = image.getHeight(this.ob);
+      int j = image.getWidth(this.ob);
+      int[] ai = new int[j * i];
+      PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, j, i, ai, 0, j);
+
+      try {
+         pixelgrabber.grabPixels();
+      } catch (InterruptedException var12) {
+      }
+
+      for (int k = 0; k < j * i; k++) {
+         if (ai[k] != -4144960 && ai[k] != ai[j * i - 1]) {
+            Color color = new Color(ai[k]);
+            int l = (int)(color.getRed() + color.getRed() * (this.m.snap[0] / 100.0F));
+            if (l > 225) {
+               l = 225;
+            }
+
+            if (l < 0) {
+               l = 0;
+            }
+
+            int i1 = (int)(color.getGreen() + color.getGreen() * (this.m.snap[1] / 100.0F));
+            if (i1 > 225) {
+               i1 = 225;
+            }
+
+            if (i1 < 0) {
+               i1 = 0;
+            }
+
+            int j1 = (int)(color.getBlue() + color.getBlue() * (this.m.snap[2] / 100.0F));
+            if (j1 > 225) {
+               j1 = 225;
+            }
+
+            if (j1 < 0) {
+               j1 = 0;
+            }
+
+            Color color2 = new Color(l, i1, j1);
+            ai[k] = color2.getRGB();
+         } else if (ai[k] == -4144960) {
+            Color color1 = new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]);
+            ai[k] = color1.getRGB();
+         }
+      }
+
+      return this.createImage(new MemoryImageSource(j, i, ai, 0, j));
+   }
+
+   public void resetstat(int i) {
+      this.arrace = false;
+      this.ana = 0;
+      this.cntan = 0;
+      this.cntovn = 0;
+      this.tcnt = 30;
+      this.wasay = false;
+      this.clear = 0;
+      this.dmcnt = 0;
+      this.pwcnt = 0;
+      this.auscnt = 45;
+      this.pnext = 0;
+      this.pback = 0;
+      this.starcnt = 90;
+      this.gocnt = 3;
+      this.grrd = true;
+      this.aird = true;
+      this.bfcrash = 0;
+      this.cntwis = 0;
+      this.bfskid = 0;
+      this.pwait = 7;
+      this.holdcnt = 0;
+      this.winner = false;
+      this.wasted = 0;
+      int j = 0;
+
+      do {
+         this.dested[j] = 0;
+      } while (++j < 5);
+
+      this.sortcars(i);
+   }
+
+   public void loadpak2(MediaTracker mediatracker, Toolkit toolkit) {
+      try {
+         URL url = new URL(this.app.getRoot(), "graphics/images2.zipo");
+         DataInputStream datainputstream = new DataInputStream(url.openStream());
+         ZipInputStream zipinputstream = new ZipInputStream(datainputstream);
+
+         for (ZipEntry zipentry = zipinputstream.getNextEntry(); zipentry != null; zipentry = zipinputstream.getNextEntry()) {
+            int i = (int)zipentry.getSize();
+            String s = zipentry.getName();
+            byte[] abyte0 = new byte[i];
+            int j = 0;
+
+            while (i > 0) {
+               int k = zipinputstream.read(abyte0, j, i);
+               j += k;
+               i -= k;
+            }
+
+            if (s.equals("1c.gif")) {
+               this.ocntdn[1] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("2c.gif")) {
+               this.ocntdn[2] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("3c.gif")) {
+               this.ocntdn[3] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("2.gif")) {
+               this.orank[1] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("3.gif")) {
+               this.orank[2] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("4.gif")) {
+               this.orank[3] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("5.gif")) {
+               this.orank[4] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("bgmain.jpg")) {
+               this.bgmain = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("br.gif")) {
+               this.br = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("loadingmusic.gif")) {
+               this.oloadingmusic = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("main.png")) {
+               this.maini = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("radicalplay.png")) {
+               this.radicalplay = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+         }
+
+         datainputstream.close();
+         zipinputstream.close();
+      } catch (Exception var12) {
+         System.out.println("Error Reading Images Pak 2: " + var12);
+      }
+
+      System.gc();
+   }
+
+   public void drawstat(Graphics g, int i, int j, boolean flag, float f) {
+      int[] ai = new int[4];
+      int[] ai1 = new int[4];
+      if (flag) {
+         ai[0] = 423;
+         ai1[0] = 11;
+         ai[1] = 423;
+         ai1[1] = 19;
+         ai[2] = 520;
+         ai1[2] = 19;
+         ai[3] = 520;
+         ai1[3] = 11;
+         g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+         g.fillPolygon(ai, ai1, 4);
+      }
+
+      if (j > i) {
+         j = i;
+      }
+
+      int k = (int)(98.0F * ((float)j / i));
+      ai[0] = 422;
+      ai1[0] = 11;
+      ai[1] = 422;
+      ai1[1] = 20;
+      ai[2] = 422 + k;
+      ai1[2] = 20;
+      ai[3] = 422 + k;
+      ai1[3] = 11;
+      int l = 244;
+      int i1 = 244;
+      int j1 = 11;
+      if (k > 33) {
+         i1 = (int)(244.0F - 233.0F * ((k - 33) / 65.0F));
+      }
+
+      if (k > 70) {
+         if (this.dmcnt < 10) {
+            if (this.dmflk) {
+               i1 = 170;
+               this.dmflk = false;
+            } else {
+               this.dmflk = true;
+            }
+         }
+
+         this.dmcnt++;
+         if (this.dmcnt > 167.0 - k * 1.5) {
+            this.dmcnt = 0;
+         }
+      }
+
+      l = (int)(l + l * (this.m.snap[0] / 100.0F));
+      if (l > 255) {
+         l = 255;
+      }
+
+      if (l < 0) {
+         l = 0;
+      }
+
+      i1 = (int)(i1 + i1 * (this.m.snap[1] / 100.0F));
+      if (i1 > 255) {
+         i1 = 255;
+      }
+
+      if (i1 < 0) {
+         i1 = 0;
+      }
+
+      j1 = (int)(j1 + j1 * (this.m.snap[2] / 100.0F));
+      if (j1 > 255) {
+         j1 = 255;
+      }
+
+      if (j1 < 0) {
+         j1 = 0;
+      }
+
+      g.setColor(new Color(l, i1, j1));
+      g.fillPolygon(ai, ai1, 4);
+      ai[0] = 422;
+      ai1[0] = 31;
+      ai[1] = 422;
+      ai1[1] = 40;
+      ai[2] = (int)(422.0F + f);
+      ai1[2] = 40;
+      ai[3] = (int)(422.0F + f);
+      ai1[3] = 31;
+      int var13 = 128;
+      if (f == 98.0F) {
+         var13 = 64;
+      }
+
+      i1 = (int)(190.0 + f * 0.37);
+      int var19 = 244;
+      if (this.auscnt < 45 && this.aflk) {
+         var13 = 0;
+         i1 = 255;
+         var19 = 0;
+      }
+
+      var13 = (int)(var13 + var13 * (this.m.snap[0] / 100.0F));
+      if (var13 > 255) {
+         var13 = 255;
+      }
+
+      if (var13 < 0) {
+         var13 = 0;
+      }
+
+      i1 = (int)(i1 + i1 * (this.m.snap[1] / 100.0F));
+      if (i1 > 255) {
+         i1 = 255;
+      }
+
+      if (i1 < 0) {
+         i1 = 0;
+      }
+
+      var19 = (int)(var19 + var19 * (this.m.snap[2] / 100.0F));
+      if (var19 > 255) {
+         var19 = 255;
+      }
+
+      if (var19 < 0) {
+         var19 = 0;
+      }
+
+      g.setColor(new Color(var13, i1, var19));
+      g.fillPolygon(ai, ai1, 4);
+      if (this.m.flex == 2 && f != 98.0F) {
+         ai[0] = (int)(422.0F + f);
+         ai1[0] = 31;
+         ai[1] = (int)(422.0F + f);
+         ai1[1] = 39;
+         ai[2] = 520;
+         ai1[2] = 39;
+         ai[3] = 520;
+         ai1[3] = 31;
+         g.setColor(new Color(this.m.csky[0], this.m.csky[1], this.m.csky[2]));
+         g.fillPolygon(ai, ai1, 4);
+      }
+   }
+
+   private Image bressed(Image image) {
+      int i = image.getHeight(this.ob);
+      int j = image.getWidth(this.ob);
+      int[] ai = new int[j * i];
+      PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, j, i, ai, 0, j);
+
+      try {
+         pixelgrabber.grabPixels();
+      } catch (InterruptedException var8) {
+      }
+
+      Color color = new Color(206, 214, 255);
+
+      for (int k = 0; k < j * i; k++) {
+         if (ai[k] != ai[j * i - 1]) {
+            ai[k] = color.getRGB();
+         }
+      }
+
+      return this.createImage(new MemoryImageSource(j, i, ai, 0, j));
+   }
+
+   public void loading(Graphics g, Applet applet) {
+      g.setColor(new Color(0, 0, 0));
+      g.fillRect(0, 0, 550, 400);
+      g.drawImage(this.sign, 237, 10, this);
+      g.drawImage(this.hello, 0, 80, this);
+      g.setColor(new Color(198, 214, 255));
+      g.fillRoundRect(125, 315, 300, 80, 30, 70);
+      g.setColor(new Color(128, 167, 255));
+      g.drawRoundRect(125, 315, 300, 80, 30, 70);
+      g.drawImage(this.loadbar, 156, 340, this);
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 333, "Loading game, please wait.", 0, 0, 0, 3);
+      g.setColor(new Color(255, 255, 255));
+      g.fillRect(170, 373, 210, 17);
+      this.drawcs(
+         g,
+         385,
+         ""
+            + (int)((26.0F + (float)this.dnload / this.kbload * 200.0F) / 226.0F * 1000.0F)
+            + " % loaded    |    "
+            + (this.kbload - this.dnload)
+            + " KB remaining",
+         255,
+         0,
+         0,
+         3
+      );
+      g.setColor(new Color(255, 0, 0));
+      g.fillRect(162, 346, 26 + (int)((float)this.dnload / this.kbload * 200.0F), 10);
+      applet.repaint();
+   }
+
+   public xtGraphics(Medium medium, Graphics g, GameSparker applet, int i) {
+      this.fase = 111;
+      this.oldfase = 0;
+      this.starcnt = 0;
+      this.unlocked = 1;
+      this.lockcnt = 0;
+      this.opselect = 1;
+      this.shaded = false;
+      this.flipo = 0;
+      this.nextc = false;
+      this.gatey = 0;
+      this.looped = 1;
+      this.sc = new int[5];
+      this.holdcnt = 0;
+      this.winner = false;
+      this.flexpix = new int[220000];
+      this.next = new Image[3];
+      this.back = new Image[3];
+      this.contin1 = new Image[2];
+      this.contin2 = new Image[2];
+      this.ostar = new Image[2];
+      this.star = new Image[3];
+      this.pcontin = 0;
+      this.pnext = 0;
+      this.pback = 0;
+      this.pstar = 0;
+      this.orank = new Image[5];
+      this.rank = new Image[5];
+      this.ocntdn = new Image[4];
+      this.cntdn = new Image[4];
+      this.gocnt = 0;
+      this.engs = new AudioClip[9][5];
+      this.pengs = new boolean[5];
+      this.air = new AudioClip[6];
+      this.aird = false;
+      this.grrd = false;
+      this.crash = new AudioClip[3];
+      this.lowcrash = new AudioClip[3];
+      this.pwastd = false;
+      this.skid = new AudioClip[2];
+      this.dustskid = new AudioClip[2];
+      this.mutes = false;
+      this.stracks = new RadicalMod[50];
+      this.loadedt = new boolean[50];
+      this.mutem = false;
+      this.arrace = false;
+      this.ana = 0;
+      this.cntan = 0;
+      this.cntovn = 0;
+      this.flk = false;
+      this.tcnt = 30;
+      this.tflk = false;
+      this.say = "";
+      this.wasay = false;
+      this.clear = 0;
+      this.posit = 0;
+      this.wasted = 0;
+      this.laps = 0;
+      this.dested = new int[5];
+      this.dmcnt = 0;
+      this.dmflk = false;
+      this.pwcnt = 0;
+      this.pwflk = false;
+      this.loop = "";
+      this.spin = "";
+      this.asay = "";
+      this.auscnt = 45;
+      this.aflk = false;
+      this.kbload = 0;
+      this.dnload = 0;
+      this.pin = 60;
+      this.pwait = 7;
+      this.stopcnt = 0;
+      this.cntwis = 0;
+      this.crshturn = 0;
+      this.bfcrash = 0;
+      this.bfskid = 0;
+      this.crashup = false;
+      this.skflg = 0;
+      this.dskflg = 0;
+      this.m = medium;
+      this.app = applet;
+      Toolkit toolkit = Toolkit.getDefaultToolkit();
+      MediaTracker mediatracker = new MediaTracker(this.app);
+      this.hello = this.app.getImage(this.app.getRoot(), "hello.png");
+      mediatracker.addImage(this.hello, 0);
+
+      try {
+         mediatracker.waitForID(0);
+      } catch (Exception var11) {
+      }
+
+      this.sign = this.app.getImage(this.app.getRoot(), "sign.png");
+      mediatracker.addImage(this.sign, 0);
+
+      try {
+         mediatracker.waitForID(0);
+      } catch (Exception var10) {
+      }
+
+      this.loadbar = this.app.getImage(this.app.getRoot(), "loadbar.gif");
+      mediatracker.addImage(this.loadbar, 0);
+
+      try {
+         mediatracker.waitForID(0);
+      } catch (Exception var9) {
+      }
+
+      this.kbload = 416;
+      if (i == 2) {
+         this.kbload = 514;
+      }
+
+      this.loading(g, this.app);
+      this.loadpak1(mediatracker, toolkit);
+      this.dnload += 47;
+      this.loading(g, this.app);
+      this.loadpak2(mediatracker, toolkit);
+      this.dnload += 44;
+      this.loading(g, this.app);
+      this.loadpak3(mediatracker, toolkit);
+      this.dnload += 47;
+      this.loading(g, this.app);
+      this.loadpak4(mediatracker, toolkit);
+      this.dnload += 44;
+      this.loading(g, this.app);
+      this.next[1] = this.pressed(this.next[0]);
+      this.back[1] = this.pressed(this.back[0]);
+      this.next[2] = this.bressed(this.next[0]);
+      this.back[2] = this.bressed(this.back[0]);
+      this.contin1[1] = this.pressed(this.contin1[0]);
+      this.contin2[1] = this.bressed(this.contin2[0]);
+      this.contin1[1] = this.pressed(this.contin1[0]);
+      this.contin2[1] = this.bressed(this.contin2[0]);
+      this.star[2] = this.pressed(this.ostar[1]);
+      String s = "default/";
+      if (i == 2) {
+         s = "newsun/";
+      }
+
+      int j = 0;
+
+      do {
+         this.engs[0][j] = this.getSound("sounds/" + s + "a" + j + ".au");
+         this.dnload += 2;
+         this.loading(g, this.app);
+         this.engs[1][j] = this.getSound("sounds/" + s + "b" + j + ".au");
+         this.dnload += 3;
+         this.loading(g, this.app);
+         this.engs[2][j] = this.getSound("sounds/" + s + "c" + j + ".au");
+         this.dnload += 4;
+         this.loading(g, this.app);
+         this.engs[3][j] = this.getSound("sounds/" + s + "d" + j + ".au");
+         this.dnload += 5;
+         this.loading(g, this.app);
+         this.engs[4][j] = this.getSound("sounds/" + s + "e" + j + ".au");
+         this.dnload += 6;
+         this.loading(g, this.app);
+         this.engs[5][j] = this.getSound("sounds/" + s + "f" + j + ".au");
+         this.dnload += 7;
+         this.loading(g, this.app);
+         this.engs[6][j] = this.getSound("sounds/" + s + "g" + j + ".au");
+         this.dnload += 8;
+         this.loading(g, this.app);
+         this.engs[7][j] = this.getSound("sounds/" + s + "h" + j + ".au");
+         this.dnload += 9;
+         this.loading(g, this.app);
+         this.engs[8][j] = this.getSound("sounds/" + s + "i" + j + ".au");
+         this.dnload += 10;
+         this.loading(g, this.app);
+         this.pengs[j] = false;
+      } while (++j < 5);
+
+      j = 0;
+
+      do {
+         this.air[j] = this.getSound("sounds/" + s + "air" + j + ".au");
+         this.dnload += 2;
+         this.loading(g, this.app);
+      } while (++j < 6);
+
+      j = 0;
+
+      do {
+         this.crash[j] = this.getSound("sounds/" + s + "crash" + (j + 1) + ".au");
+         if (i == 2) {
+            this.dnload += 12;
+            this.loading(g, this.app);
+         } else {
+            this.dnload += 7;
+            this.loading(g, this.app);
+         }
+      } while (++j < 3);
+
+      j = 0;
+
+      do {
+         this.lowcrash[j] = this.getSound("sounds/" + s + "lowcrash" + (j + 1) + ".au");
+         if (i == 2) {
+            this.dnload += 8;
+            this.loading(g, this.app);
+         } else {
+            this.dnload += 3;
+            this.loading(g, this.app);
+         }
+      } while (++j < 3);
+
+      this.tires = this.getSound("sounds/" + s + "tires.au");
+      if (i == 2) {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 4;
+         this.loading(g, this.app);
+      }
+
+      this.checkpoint = this.getSound("sounds/" + s + "checkpoint.au");
+      if (i == 2) {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 7;
+         this.loading(g, this.app);
+      }
+
+      this.carfixed = this.getSound("sounds/" + s + "carfixed.au");
+      if (i == 2) {
+         this.dnload += 16;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      }
+
+      this.powerup = this.getSound("sounds/" + s + "powerup.au");
+      if (i == 2) {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 9;
+         this.loading(g, this.app);
+      }
+
+      this.three = this.getSound("sounds/" + s + "three.au");
+      if (i == 2) {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 4;
+         this.loading(g, this.app);
+      }
+
+      this.two = this.getSound("sounds/" + s + "two.au");
+      if (i == 2) {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 3;
+         this.loading(g, this.app);
+      }
+
+      this.one = this.getSound("sounds/" + s + "one.au");
+      if (i == 2) {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 4;
+         this.loading(g, this.app);
+      }
+
+      this.go = this.getSound("sounds/" + s + "go.au");
+      if (i == 2) {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 4;
+         this.loading(g, this.app);
+      }
+
+      j = 0;
+
+      do {
+         this.skid[j] = this.getSound("sounds/" + s + "skid" + (j + 1) + ".au");
+         if (i == 2) {
+            this.dnload += 9;
+            this.loading(g, this.app);
+         } else {
+            this.dnload += 6;
+            this.loading(g, this.app);
+         }
+      } while (++j < 2);
+
+      j = 0;
+
+      do {
+         this.dustskid[j] = this.getSound("sounds/" + s + "dustskid" + (j + 1) + ".au");
+         if (i == 2) {
+            this.dnload += 11;
+            this.loading(g, this.app);
+         } else {
+            this.dnload += 7;
+            this.loading(g, this.app);
+         }
+      } while (++j < 2);
+
+      this.wastd = this.getSound("sounds/" + s + "wasted.au");
+      this.dnload += 5;
+      this.loading(g, this.app);
+      this.firewasted = this.getSound("sounds/" + s + "firewasted.au");
+      if (i == 2) {
+         this.dnload += 13;
+         this.loading(g, this.app);
+      } else {
+         this.dnload += 12;
+         this.loading(g, this.app);
+      }
+
+      this.cars = new RadicalMod("music/cars.zipo", 500, 7900, 125, this.app);
+      this.dnload += 26;
+      this.loading(g, this.app);
+      this.stages = new RadicalMod("music/stages.zipo", 200, 9000, 145, this.app);
+      this.dnload += 22;
+      this.loading(g, this.app);
+      j = 0;
+
+      do {
+         this.loadedt[j] = false;
+      } while (++j < 10);
+   }
+
+   public void maini(Graphics g, Control control) {
+      if (this.flipo == 0) {
+         g.drawImage(this.bgmain, 0, 0, null);
+         g.drawImage(this.maini, 0, 0, null);
+         this.flipo = 1;
+      }
+
+      if (control.up) {
+         this.opselect--;
+         if (this.opselect == -1) {
+            this.opselect = 2;
+         }
+
+         control.up = false;
+      }
+
+      if (control.down) {
+         this.opselect++;
+         if (this.opselect == 3) {
+            this.opselect = 0;
+         }
+
+         control.down = false;
+      }
+
+      if (this.opselect == 0) {
+         if (this.shaded) {
+            g.setColor(new Color(160, 160, 160));
+            g.fillRect(218, 246, 110, 22);
+            this.aflk = false;
+         }
+
+         if (this.aflk) {
+            g.setColor(new Color(0, 0, 0));
+            this.aflk = false;
+         } else {
+            g.setColor(new Color(255, 255, 255));
+            this.aflk = true;
+         }
+
+         g.drawRoundRect(218, 246, 110, 22, 7, 20);
+      } else {
+         g.setColor(new Color(0, 0, 0));
+         g.drawRoundRect(218, 246, 110, 22, 7, 20);
+      }
+
+      if (this.opselect == 1) {
+         if (this.shaded) {
+            g.setColor(new Color(0, 255, 0));
+            g.fillRect(174, 275, 196, 22);
+            this.aflk = false;
+         }
+
+         if (this.aflk) {
+            g.setColor(new Color(0, 255, 0));
+            this.aflk = false;
+         } else {
+            g.setColor(new Color(0, 0, 0));
+            this.aflk = true;
+         }
+
+         g.drawRoundRect(174, 275, 196, 22, 7, 20);
+      } else {
+         g.setColor(new Color(0, 0, 0));
+         g.drawRoundRect(174, 275, 196, 22, 7, 20);
+      }
+
+      if (this.opselect == 2) {
+         if (this.shaded) {
+            g.setColor(new Color(255, 0, 0));
+            g.fillRect(230, 306, 85, 22);
+            this.aflk = false;
+         }
+
+         if (this.aflk) {
+            g.setColor(new Color(255, 0, 0));
+            this.aflk = false;
+         } else {
+            g.setColor(new Color(0, 0, 0));
+            this.aflk = true;
+         }
+
+         g.drawRoundRect(230, 306, 85, 22, 7, 20);
+      } else {
+         g.setColor(new Color(0, 0, 0));
+         g.drawRoundRect(230, 306, 85, 22, 7, 20);
+      }
+
+      g.drawImage(this.opti, 181, 250, null);
+      if (control.enter || control.handb) {
+         if (this.opselect == 0) {
+            if (this.unlocked == 1 && this.oldfase == 0) {
+               this.oldfase = 7;
+               this.fase = 11;
+            } else {
+               this.fase = -9;
+            }
+         }
+
+         if (this.opselect == 1) {
+            this.oldfase = 10;
+            this.fase = 11;
+         }
+
+         if (this.opselect == 2) {
+            this.fase = 8;
+         }
+
+         this.flipo = 0;
+         control.enter = false;
+         control.handb = false;
+      }
+   }
+
+   public void musicomp(int i, Graphics g, Control control) {
+      int j = (int)(230.0F - 230.0F * ((float)this.m.snap[0] / (100 * this.hipno[i - 1])));
+      if (j > 255) {
+         j = 255;
+      }
+
+      if (j < 0) {
+         j = 0;
+      }
+
+      int k = (int)(230.0F - 230.0F * ((float)this.m.snap[1] / (100 * this.hipno[i - 1])));
+      if (k > 255) {
+         k = 255;
+      }
+
+      if (k < 0) {
+         k = 0;
+      }
+
+      int l = (int)(230.0F - 230.0F * ((float)this.m.snap[2] / (100 * this.hipno[i - 1])));
+      if (l > 255) {
+         l = 255;
+      }
+
+      if (l < 0) {
+         l = 0;
+      }
+
+      if (this.hipno[i - 1] == 0) {
+         j = 0;
+         k = 0;
+         l = 0;
+      }
+
+      g.setColor(new Color(j, k, l));
+      g.fillRect(0, 0, 550, 400);
+      g.drawImage(this.loadingmusic, 164, 90, null);
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 250, "Loading complete!  press start to begin...", 0, 0, 0, 3);
+      g.drawImage(this.star[this.pstar], 234, 280, null);
+      if (i == 10) {
+         if (this.aflk) {
+            this.drawcs(g, 340, "> Note: Guidance Arrow is disabled in this stage!", 200, 0, 0, 3);
+            this.aflk = false;
+         } else {
+            this.drawcs(g, 340, "> Note: Guidance Arrow is disabled in this stage!", 0, 0, 0, 3);
+            this.aflk = true;
+         }
+      }
+
+      if (i == this.unlocked) {
+         if (i == 1) {
+            this.drawcs(g, 340, "> Don't forget, you must pass in all checkpoints to complete a lap...", 100, 100, 100, 4);
+         }
+
+         if (i == 2) {
+            this.drawcs(g, 340, "> Don't forget, you need power to be up to race faster...", 100, 100, 100, 4);
+         }
+
+         if (i == 3) {
+            this.drawcs(g, 340, "> Note: This stage contains heavy fog!", 100, 100, 100, 4);
+            this.drawcs(g, 360, "( Press [A] to make Guidance Arrow point to cars )", 100, 100, 100, 4);
+         }
+
+         if (i == 4) {
+            this.drawcs(g, 340, "> Remember the better the stunt the better the power you get...", 100, 100, 100, 4);
+         }
+
+         if (i == 5) {
+            this.drawcs(g, 340, "> Note: EL KING is invisible in this stage!", 100, 100, 100, 4);
+         }
+      }
+
+      if (this.pstar != 2) {
+         if (this.pstar == 0) {
+            this.pstar = 1;
+         } else {
+            this.pstar = 0;
+         }
+      }
+
+      if (control.handb || control.enter) {
+         System.gc();
+         this.fase = 0;
+         control.handb = false;
+         control.enter = false;
+      }
+   }
+
+   public void clicknow(Graphics g) {
+      g.setColor(new Color(0, 255, 0));
+      g.fillRoundRect(125, 315, 300, 80, 30, 70);
+      g.setColor(new Color(255, 255, 255));
+      g.drawRoundRect(125, 315, 300, 80, 30, 70);
+      if (this.aflk) {
+         this.drawcs(g, 355, "Click here to Start", 255, 255, 255, 3);
+         this.aflk = false;
+      } else {
+         this.drawcs(g, 355, "Click here to Start", 0, 0, 0, 3);
+         this.aflk = true;
+      }
+   }
+
+   private Image loadimage(byte[] abyte0, MediaTracker mediatracker, Toolkit toolkit) {
+      Image image = toolkit.createImage(abyte0);
+      mediatracker.addImage(image, 0);
+
+      try {
+         mediatracker.waitForID(0);
+      } catch (Exception var6) {
+      }
+
+      return image;
+   }
+
+   public void rad(Graphics g, int i) {
+      if (i == 0) {
+         this.powerup.play();
+      }
+
+      g.setColor(new Color(0, 0, 0));
+      g.fillRect(0, 0, 550, 400);
+      g.drawImage(this.radicalplay, 87, 110, null);
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      if (this.aflk) {
+         this.drawcs(g, 190, "And we are never going to find the new unless we get a little crazy...", 255, 255, 255, 3);
+         this.aflk = false;
+      } else {
+         this.drawcs(g, 192, "And we are never going to find the new unless we get a little crazy...", 255, 255, 255, 3);
+         this.aflk = true;
+         this.drawcs(g, 165, "www.radicalplay.com", 255, 255, 255, 3);
+         this.aflk = true;
+      }
+   }
+
+   public void skid(int i, float f) {
+      if (this.bfcrash == 0 && this.bfskid == 0 && f > 150.0F) {
+         if (i == 0) {
+            if (!this.mutes) {
+               this.skid[this.skflg].play();
+            }
+
+            if (this.skflg == 0) {
+               this.skflg = 1;
+            } else {
+               this.skflg = 0;
+            }
+         } else {
+            if (!this.mutes) {
+               this.dustskid[this.dskflg].play();
+            }
+
+            if (this.dskflg == 0) {
+               this.dskflg = 1;
+            } else {
+               this.dskflg = 0;
+            }
+         }
+
+         this.bfskid = 35;
+      }
+   }
+
+   public int xs(int i, int j) {
+      if (j < 50) {
+         j = 50;
+      }
+
+      return (j - this.m.focus_point) * (this.m.cx - i) / j + i;
+   }
+
+   public void cantreply(Graphics g) {
+      g.setColor(new Color(64, 143, 223));
+      g.fillRoundRect(75, 171, 400, 23, 7, 20);
+      g.setColor(new Color(0, 89, 223));
+      g.drawRoundRect(75, 171, 400, 23, 7, 20);
+      this.drawcs(g, 187, "Sorry not enough replay data to play available, please try again later.", 255, 255, 255, 1);
+   }
+
+   public void loadpak3(MediaTracker mediatracker, Toolkit toolkit) {
+      try {
+         URL url = new URL(this.app.getRoot(), "graphics/images3.zipo");
+         DataInputStream datainputstream = new DataInputStream(url.openStream());
+         ZipInputStream zipinputstream = new ZipInputStream(datainputstream);
+
+         for (ZipEntry zipentry = zipinputstream.getNextEntry(); zipentry != null; zipentry = zipinputstream.getNextEntry()) {
+            int i = (int)zipentry.getSize();
+            String s = zipentry.getName();
+            byte[] abyte0 = new byte[i];
+            int j = 0;
+
+            while (i > 0) {
+               int k = zipinputstream.read(abyte0, j, i);
+               j += k;
+               i -= k;
+            }
+
+            if (s.equals("back.gif")) {
+               this.back[0] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("continue1.gif")) {
+               this.contin1[0] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("continue2.gif")) {
+               this.contin2[0] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("inst3.gif")) {
+               this.inst3 = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("next.gif")) {
+               this.next[0] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("pgate.gif")) {
+               this.pgate = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("rpro.gif")) {
+               this.rpro = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("selectcar.gif")) {
+               this.selectcar = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("stages.jpg")) {
+               this.trackbg = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("youlost.gif")) {
+               this.oyoulost = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("youwon.gif")) {
+               this.oyouwon = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+         }
+
+         datainputstream.close();
+         zipinputstream.close();
+      } catch (Exception var12) {
+         System.out.println("Error Reading Images Pak 3: " + var12);
+      }
+
+      System.gc();
+   }
+
+   public void stopallnow() {
+      int i = 0;
+
+      do {
+         if (this.loadedt[i]) {
+            this.stracks[i].outwithit();
+         }
+      } while (++i < 11);
+
+      i = 0;
+
+      do {
+         this.engs[0][i].stop();
+         this.engs[1][i].stop();
+      } while (++i < 5);
+
+      i = 0;
+
+      do {
+         this.air[i].stop();
+      } while (++i < 6);
+
+      this.wastd.stop();
+      this.cars.outwithit();
+      this.stages.outwithit();
+   }
+
+   public void carselect(Control control, ContO[] aconto, Madness madness, Graphics g) {
+      this.cars.play();
+      g.drawImage(this.carsbg, 0, 0, null);
+      g.drawImage(this.selectcar, 184, 65, null);
+      this.m.crs = true;
+      this.m.x = -275;
+      this.m.y = -500;
+      this.m.z = -50;
+      this.m.xz = 0;
+      this.m.zy = 10;
+      this.m.ground = 470;
+      aconto[this.sc[0]].d(g);
+      if (this.flipo == 0) {
+         g.setFont(new Font("SansSerif", 1, 13));
+         this.ftm = g.getFontMetrics();
+         if (this.aflk) {
+            this.drawcs(g, 130, this.names[this.sc[0]], 255, 255, 255, 3);
+            this.aflk = false;
+         } else {
+            this.drawcs(g, 130, this.names[this.sc[0]], 0, 0, 0, 3);
+            this.aflk = true;
+         }
+
+         aconto[this.sc[0]].z = 950;
+         aconto[this.sc[0]].y = -34 - aconto[this.sc[0]].grat;
+         aconto[this.sc[0]].x = 0;
+         aconto[this.sc[0]].xz += 5;
+         aconto[this.sc[0]].zy = 0;
+         aconto[this.sc[0]].wzy -= 10;
+         if (aconto[this.sc[0]].wzy < -45) {
+            aconto[this.sc[0]].wzy += 45;
+         }
+
+         if (this.sc[0] != 0) {
+            g.drawImage(this.back[this.pback], 23, 270, null);
+         }
+
+         if (this.sc[0] != 100) {
+            g.drawImage(this.next[this.pnext], 467, 270, null);
+         }
+
+         if ((this.sc[0] - 4) * 0 >= this.unlocked) {
+            g.drawImage(this.pgate, 96, 145 - this.gatey, null);
+            if (this.gatey != 0) {
+               this.gatey -= 100;
+            }
+
+            this.drawcs(g, 320, "[ Car Locked ]", 224, 63, 63, 3);
+            this.drawcs(g, 345, "This car unlocks when stage " + (this.sc[0] - 4) * 2 + " is completed...", 160, 176, 255, 3);
+         } else {
+            g.setFont(new Font("SansSerif", 1, 11));
+            this.ftm = g.getFontMetrics();
+            g.setColor(new Color(255, 255, 255));
+            g.drawString("Top Speed:", 33, 313);
+            g.drawImage(this.statb, 97, 307, null);
+            g.drawString("Acceleration:", 23, 328);
+            g.drawImage(this.statb, 97, 322, null);
+            g.drawString("Handling:", 45, 343);
+            g.drawImage(this.statb, 97, 337, null);
+            g.drawString("Aerial Control:", 290, 313);
+            g.drawImage(this.statb, 371, 307, null);
+            g.drawString("Strength:", 318, 328);
+            g.drawImage(this.statb, 371, 322, null);
+            g.drawString("Power Save:", 301, 343);
+            g.drawImage(this.statb, 371, 337, null);
+            g.setColor(new Color(0, 0, 0));
+            float f = (madness.swits[this.sc[0]][2] - 220) / 90.0F;
+            g.fillRect((int)(97.0F + 156.0F * f), 307, (int)(156.0F * (1.0F - f) + 1.0F), 7);
+            f = madness.acelf[this.sc[0]][1] * madness.acelf[this.sc[0]][0] * madness.acelf[this.sc[0]][2] * madness.grip[this.sc[0]] / 7700.0F;
+            g.fillRect((int)(97.0F + 156.0F * f), 322, (int)(156.0F * (1.0F - f) + 1.0F), 7);
+            f = this.dishandle[this.sc[0]];
+            g.fillRect((int)(97.0F + 156.0F * f), 337, (int)(156.0F * (1.0F - f) + 1.0F), 7);
+            f = (madness.airc[this.sc[0]] * madness.airs[this.sc[0]] + 25.0F) / 125.0F;
+            if (f > 1.0F) {
+               f = 1.0F;
+            }
+
+            g.fillRect((int)(371.0F + 156.0F * f), 307, (int)(156.0F * (1.0F - f) + 1.0F), 7);
+            f = madness.outdam[this.sc[0]] * madness.moment[this.sc[0]] / 150.0F;
+            if (f > 1.0F) {
+               f = 1.0F;
+            }
+
+            g.fillRect((int)(371.0F + 156.0F * f), 322, (int)(156.0F * (1.0F - f) + 1.0F), 7);
+            f = madness.powerloss[this.sc[0]] / 5500000.0F;
+            g.fillRect((int)(371.0F + 156.0F * f), 337, (int)(156.0F * (1.0F - f) + 1.0F), 7);
+            g.drawImage(this.contin2[this.pcontin], 230, 357, null);
+         }
+      } else {
+         this.pback = 0;
+         this.pnext = 0;
+         this.gatey = 300;
+         if (this.flipo > 10) {
+            aconto[this.sc[0]].y -= 100;
+            if (this.nextc) {
+               aconto[this.sc[0]].zy += 60;
+            } else {
+               aconto[this.sc[0]].zy -= 60;
+            }
+         } else {
+            if (this.flipo == 10) {
+               if (this.nextc) {
+                  this.sc[0]++;
+               } else {
+                  this.sc[0]--;
+               }
+
+               aconto[this.sc[0]].z = 950;
+               aconto[this.sc[0]].y = -34 - aconto[this.sc[0]].grat - 1100;
+               aconto[this.sc[0]].x = 0;
+               aconto[this.sc[0]].zy = 0;
+            }
+
+            aconto[this.sc[0]].y += 100;
+         }
+
+         this.flipo--;
+      }
+
+      g.setFont(new Font("SansSerif", 1, 11));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 300, "Note: Cars are not in 'worst-to-best' order", 255, 255, 255, 3);
+      this.drawcs(g, 396, "Use keyboard Arrows and press Enter to continue", 255, 255, 255, 3);
+      if (control.right) {
+         control.right = false;
+         if (this.sc[0] != 100 && this.flipo == 0) {
+            this.nextc = true;
+            this.flipo = 20;
+         }
+      }
+
+      if (control.left) {
+         control.left = false;
+         if (this.sc[0] != 0 && this.flipo == 0) {
+            this.nextc = false;
+            this.flipo = 20;
+         }
+      }
+
+      if (control.handb || control.enter) {
+         if (this.flipo == 0 && (this.sc[0] - 4) * 0 < this.unlocked) {
+            this.m.crs = false;
+            this.fase = 2;
+         }
+
+         control.handb = false;
+         control.enter = false;
+      }
+   }
+
+   public void ctachm(int i, int j, int k, Control control) {
+      if (this.fase == 1) {
+         if (k == 1) {
+            if (this.over(this.next[0], i, j, 440, 110)) {
+               this.pnext = 1;
+            }
+
+            if (this.over(this.back[0], i, j, 50, 110)) {
+               this.pback = 1;
+            }
+
+            if (this.over(this.contin1[0], i, j, 232, 170)) {
+               this.pcontin = 1;
+            }
+         }
+
+         if (k == 2) {
+            if (this.pnext == 1) {
+               control.right = true;
+            }
+
+            if (this.pback == 1) {
+               control.left = true;
+            }
+
+            if (this.pcontin == 1) {
+               control.enter = true;
+            }
+         }
+      }
+
+      if (this.fase == 3) {
+         if (k == 1 && this.over(this.contin1[0], i, j, 232, 270)) {
+            this.pcontin = 1;
+         }
+
+         if (k == 2 && this.pcontin == 1) {
+            control.enter = true;
+            this.pcontin = 0;
+         }
+      }
+
+      if (this.fase == 4) {
+         if (k == 1 && this.over(this.back[0], i, j, 245, 320)) {
+            this.pback = 1;
+         }
+
+         if (k == 2 && this.pback == 1) {
+            control.enter = true;
+            this.pback = 0;
+         }
+      }
+
+      if (this.fase == 6) {
+         if (k == 1 && this.over(this.star[0], i, j, 234, 280)) {
+            this.pstar = 2;
+         }
+
+         if (k == 2 && this.pstar == 2) {
+            control.enter = true;
+            this.pstar = 1;
+         }
+      }
+
+      if (this.fase == 7) {
+         if (k == 1) {
+            if (this.over(this.next[0], i, j, 467, 276)) {
+               this.pnext = 2;
+            }
+
+            if (this.over(this.back[0], i, j, 23, 276)) {
+               this.pback = 2;
+            }
+
+            if (this.over(this.contin2[0], i, j, 232, 360)) {
+               this.pcontin = 1;
+            }
+         }
+
+         if (k == 2) {
+            if (this.pnext == 2) {
+               control.right = true;
+            }
+
+            if (this.pback == 2) {
+               control.left = true;
+            }
+
+            if (this.pcontin == 1) {
+               control.enter = true;
+               this.pcontin = 0;
+            }
+         }
+      }
+
+      if (this.fase == -5) {
+         if (k == 1 && this.over(this.contin2[0], i, j, 230, 350 - this.pin)) {
+            this.pcontin = 1;
+         }
+
+         if (k == 2 && this.pcontin == 1) {
+            control.enter = true;
+            this.pcontin = 0;
+         }
+      }
+
+      if (this.fase == -7) {
+         if (k == 1) {
+            if (this.overon(204, 143, 137, 22, i, j)) {
+               this.opselect = 0;
+               this.shaded = true;
+            }
+
+            if (this.overon(195, 171, 155, 22, i, j)) {
+               this.opselect = 1;
+               this.shaded = true;
+            }
+
+            if (this.overon(178, 197, 190, 22, i, j)) {
+               this.opselect = 2;
+               this.shaded = true;
+            }
+
+            if (this.overon(216, 223, 109, 22, i, j)) {
+               this.opselect = 3;
+               this.shaded = true;
+            }
+         }
+
+         if (k == 2 && this.shaded) {
+            control.enter = true;
+            this.shaded = false;
+         }
+      }
+
+      if (this.fase == 10) {
+         if (k == 1) {
+            if (this.overon(218, 246, 110, 22, i, j)) {
+               this.opselect = 0;
+               this.shaded = true;
+            }
+
+            if (this.overon(174, 275, 196, 22, i, j)) {
+               this.opselect = 1;
+               this.shaded = true;
+            }
+
+            if (this.overon(230, 306, 85, 22, i, j)) {
+               this.opselect = 2;
+               this.shaded = true;
+            }
+         }
+
+         if (k == 2 && this.shaded) {
+            control.enter = true;
+            this.shaded = false;
+         }
+      }
+
+      if (this.fase == 11) {
+         if (this.flipo == 1 || this.flipo == 3) {
+            if (k == 1 && this.over(this.next[0], i, j, 460, 370)) {
+               this.pnext = 1;
+            }
+
+            if (k == 2 && this.pnext == 1) {
+               control.enter = true;
+               this.pnext = 0;
+            }
+         }
+
+         if (this.flipo == 5) {
+            if (k == 1 && this.over(this.contin2[0], i, j, 230, 370)) {
+               this.pcontin = 1;
+            }
+
+            if (k == 2 && this.pcontin == 1) {
+               control.enter = true;
+               this.pcontin = 0;
+            }
+         }
+      }
+
+      if (this.fase == 8) {
+         if (k == 1 && this.over(this.next[0], i, j, 460, 370)) {
+            this.pnext = 1;
+         }
+
+         if (k == 2 && this.pnext == 1) {
+            control.enter = true;
+            this.pnext = 0;
+         }
+      }
+   }
+
+   public void stopairs() {
+      int i = 0;
+
+      do {
+         this.air[i].stop();
+      } while (++i < 6);
+   }
+
+   private Image loadopsnap(Image image, int i) {
+      int j = image.getHeight(this.ob);
+      int k = image.getWidth(this.ob);
+      int[] ai = new int[k * j];
+      PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, k, j, ai, 0, k);
+
+      try {
+         pixelgrabber.grabPixels();
+      } catch (InterruptedException var13) {
+      }
+
+      for (int l = 0; l < k * j; l++) {
+         if (ai[l] != ai[76]) {
+            Color color = new Color(ai[l]);
+            int i1 = 0;
+            int j1 = 0;
+            int k1 = 0;
+            if (this.hipno[i - 1] != 0) {
+               i1 = (int)(color.getRed() - color.getRed() * ((float)this.m.snap[0] / (50 * this.hipno[i - 1])));
+               if (i1 > 255) {
+                  i1 = 255;
+               }
+
+               if (i1 < 0) {
+                  i1 = 0;
+               }
+
+               j1 = (int)(color.getGreen() - color.getGreen() * ((float)this.m.snap[1] / (50 * this.hipno[i - 1])));
+               if (j1 > 255) {
+                  j1 = 255;
+               }
+
+               if (j1 < 0) {
+                  j1 = 0;
+               }
+
+               k1 = (int)(color.getBlue() - color.getBlue() * ((float)this.m.snap[2] / (50 * this.hipno[i - 1])));
+               if (k1 > 255) {
+                  k1 = 255;
+               }
+
+               if (k1 < 0) {
+                  k1 = 0;
+               }
+            } else {
+               i1 = (int)(color.getRed() + color.getRed() * 0.25F);
+               if (i1 > 255) {
+                  i1 = 255;
+               }
+
+               if (i1 < 0) {
+                  i1 = 0;
+               }
+
+               j1 = color.getGreen();
+               k1 = (int)(color.getBlue() - color.getBlue() * 0.25);
+               if (k1 > 255) {
+                  k1 = 255;
+               }
+
+               if (k1 < 0) {
+                  k1 = 0;
+               }
+            }
+
+            Color color1 = new Color(i1, j1, k1);
+            ai[l] = color1.getRGB();
+         }
+      }
+
+      return this.createImage(new MemoryImageSource(k, j, ai, 0, k));
+   }
+
+   public void loadingfailed(int i, Control control, Graphics g) {
+      g.drawImage(this.trackbg, 0, 0, null);
+      g.drawImage(this.select, 201, 45, null);
+      g.setFont(new Font("SansSerif", 1, 13));
+      this.ftm = g.getFontMetrics();
+      this.drawcs(g, 140, "Error Loading Stage " + i, 255, 0, 0, 3);
+      this.drawcs(g, 170, "Your internet connection may have been lost...", 100, 100, 100, 3);
+      this.drawcs(g, 185, "If you were hacking this stage, check for errors.", 100, 100, 100, 3);
+      this.drawcs(g, 220, "Press Enter to try again.", 255, 255, 255, 3);
+      g.drawImage(this.contin1[this.pcontin], 232, 270, null);
+      g.drawImage(this.bl, 0, 0, null);
+      g.drawImage(this.bt, 0, 0, null);
+      g.drawImage(this.br, 509, 0, null);
+      g.drawImage(this.bb, 0, 357, null);
+      if (control.handb || control.enter) {
+         this.fase = 2;
+         control.handb = false;
+         control.enter = false;
+      }
+   }
+
+   private AudioClip getSound(String s) {
+      AudioClip audioclip = this.app.getAudioClip(this.app.getRoot(), s);
+      if (s.startsWith("sounds/default")) {
+         audioclip.play();
+         Thread.yield();
+         audioclip.stop();
+      }
+
+      return audioclip;
+   }
+
+   public void loadpak4(MediaTracker mediatracker, Toolkit toolkit) {
+      try {
+         URL url = new URL(this.app.getRoot(), "graphics/images4.zipo");
+         DataInputStream datainputstream = new DataInputStream(url.openStream());
+         ZipInputStream zipinputstream = new ZipInputStream(datainputstream);
+
+         for (ZipEntry zipentry = zipinputstream.getNextEntry(); zipentry != null; zipentry = zipinputstream.getNextEntry()) {
+            int i = (int)zipentry.getSize();
+            String s = zipentry.getName();
+            byte[] abyte0 = new byte[i];
+            int j = 0;
+
+            while (i > 0) {
+               int k = zipinputstream.read(abyte0, j, i);
+               j += k;
+               i -= k;
+            }
+
+            if (s.equals("0c.gif")) {
+               this.ocntdn[0] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("damage.gif")) {
+               this.odmg = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("power.gif")) {
+               this.opwr = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("position.gif")) {
+               this.opos = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("wasted.gif")) {
+               this.owas = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("bl.gif")) {
+               this.bl = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("bt.gif")) {
+               this.bt = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("bb.gif")) {
+               this.bb = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("start1.gif")) {
+               this.ostar[0] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("start2.gif")) {
+               this.ostar[1] = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("congrad.gif")) {
+               this.congrd = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("statb.gif")) {
+               this.statb = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("madness.gif")) {
+               this.omdness = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("options.gif")) {
+               this.opti = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("inst1.gif")) {
+               this.inst1 = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("inst2.gif")) {
+               this.inst2 = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+
+            if (s.equals("nfmcom.gif")) {
+               this.nfmcom = this.loadimage(abyte0, mediatracker, toolkit);
+            }
+         }
+
+         datainputstream.close();
+         zipinputstream.close();
+      } catch (Exception var12) {
+         System.out.println("Error Reading Images Pak 4: " + var12);
+      }
+
+      System.gc();
+   }
+}
