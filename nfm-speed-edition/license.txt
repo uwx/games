@@ -1,0 +1,32 @@
+Need for Madness
+Copyright 2005 Radical Play.  All rights reserved.
+Distributed By ArcadeTown
+
+Please read this agreement ("Agreement") carefully before proceeding. This Agreement licenses software to you from AltoParc Solutions and contains warranty and liability disclaimers. By selecting the "I Accept" button or otherwise installing or using the Software, you are confirming that you have read and understand this Agreement, and agree to be bound by the terms of this Agreement, which supplement AltoParc Solutions’s terms of service. If you do not agree with the terms of this Agreement, you should exit this page without selecting the "I Accept" button or using the Software. 
+
+1.	Definitions 
+"Software" means the game provided by AltoParc Solutions (including any and all photographic and other content contained therein or provided in association therewith) and all related updates.
+
+2.	License
+This Agreement allows you, subject to the below restrictions, to: (a) use the Software for your own non-commercial, personal enjoyment on a single computer for its intended purposes; (b) make one copy of the Software in machine-readable form solely for backup purposes if it is intended for download as opposed to online use only; and (c) use the photographs and other content included with the Software as part of and with the Software. You must reproduce on any such copy all copyright notices and any other proprietary legends found on the original.  All rights not expressly granted are reserved.
+
+3.	Restrictions 
+(a)	You may not make or distribute copies of the Software, or electronically transfer the Software from one computer to another or over a network. You may not extract or otherwise use any image apart from the Software as it is included therein. You may not decompile, reverse engineer, disassemble, or otherwise reduce the Software to a human-perceivable form. You may not modify, sell, rent, transfer, resell for profit, distribute or create derivative works based upon the Software, or any part thereof. You may not export or reexport, directly or indirectly, the Software into any country prohibited by the United States Export Administration Act and the regulations thereunder. 
+
+(b)	You may not use the Software to: (i) save on any media, transmit, distribute, publish or display (other than on the single computer where the Software is resident); (ii) create derivative works; (iii) infringe upon or violate the intellectual property, privacy, publicity or other rights of third parties, including without limitation the rights of any third parties in any photographs, artwork, literary creations and/or other copyrightable works of any kind or nature; or (iv) engage in any defamatory or slanderous conduct.  All use of the Software shall be for your personal, non-commercial enjoyment. You hereby agree to defend, indemnify and hold harmless AltoParc Solutions and its parents, subsidiaries, affiliates, successors, licensees, agents, attorneys, heirs and assigns, and the officers, directors and employees of the foregoing, from and against any and all third-party claims, liabilities, costs and expenses (including attorneys' and accountants' fees reasonably incurred) in connection with any breach or alleged breach by you of any covenant, representation or other provision of this Agreement, or any of your obligations hereunder.
+
+4.	Ownership 
+The foregoing license gives you limited rights to use the Software. You do not become the owner of, and AltoParc Solutions and its partners retain title to, the Software and all copies thereof.
+
+5.	Disclaimer of Warranties and of Technical Support 
+THE SOFTWARE IS PROVIDED TO YOU FREE OF CHARGE, AND ON AN "AS IS" BASIS, WITHOUT ANY TECHNICAL SUPPORT OR WARRANTY OF ANY KIND INCLUDING, WITHOUT LIMITATION, A WARRANTY OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE NON-INFRINGEMENT. SOME STATES DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES, SO THE ABOVE EXCLUSION MAY NOT APPLY TO YOU. YOU MAY ALSO HAVE OTHER LEGAL RIGHTS WHICH VARY FROM STATE TO STATE. Your sole and exclusive remedy in the event the Software fails to function, or in the event of any other breach of this agreement by AltoParc Solutions, is to terminate this agreement and cease all use of the Software.
+
+6.	Limitation of Damages 
+(a) NEITHER AltoParc Solutions NOR ITS AFFILIATES OR SUPPLIERS SHALL BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES OR LOSS (INCLUDING DAMAGES FOR LOSS OF BUSINESS, LOSS OF PROFITS, OR THE LIKE), WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), PRODUCT LIABILITY OR OTHERWISE, EVEN IF AltoParc Solutions OR ITS REPRESENTATIVES HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. SOME STATES DO NOT ALLOW THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THIS LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.
+ 
+(b) The warranty disclaimer, exclusive remedies and limitation of liability set forth in this Agreement are fundamental elements of the basis of the bargain between AltoParc Solutions and you. You agree that AltoParc Solutions would not be able to provide the Software on an economic basis without such limitations.   
+
+7.	Government End Users (USA only)
+RESTRICTED RIGHTS LEGEND The Software is "Restricted Computer Software." Use, duplication, or disclosure by the U.S. Government is subject to restrictions as set forth in this agreement and as provided in DFARS 227.7202-1(a) and 227.7202-3(a) (1995), DFARS 252.227-7013 (OCT 1988), FAR 12.212(a)(1995), FAR 52.227-19, or FAR 52.227-14, as applicable.
+
+Copyright © 2005, Radical Play.
