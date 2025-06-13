@@ -1,3 +1,5 @@
+import sun.java2d.SunGraphics2D;
+
 import java.applet.Applet;
 import java.awt.AlphaComposite;
 import java.awt.Checkbox;
@@ -108,10 +110,14 @@ public class GameSparker extends Applet implements Runnable {
    Smenu icars = new Smenu(5);
    Smenu proitem = new Smenu(707);
 
-   private static final String datapath = "/files/";
+   public static final String datapath = "/files/";
 
    @Override
    public void run() {
+      if (!new File(datapath + "data").exists()) {
+         new File(datapath + "data").mkdirs();
+      }
+
       this.rd.setColor(new Color(0, 0, 0));
       this.rd.fillRect(0, 0, 800, 450);
       this.repaint();

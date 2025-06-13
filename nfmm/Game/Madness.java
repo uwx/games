@@ -1,3 +1,6 @@
+import sun.java2d.marlin.DMarlinRenderingEngine;
+import sun.java2d.pipe.RenderingEngine;
+
 import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -17,6 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URL;
 import java.util.Date;
@@ -43,6 +47,7 @@ public class Madness extends Panel {
    static long advtime = 0L;
 
    public static void main(String[] var0) {
+       System.out.println("Rendering engine: " + RenderingEngine.getInstance().getClass().getName());
 //      System.runFinalizersOnExit(true);
       frame = new Frame("Need for Madness");
       frame.setBackground(new Color(0, 0, 0));
@@ -550,7 +555,7 @@ public class Madness extends Panel {
 
    public static void advopen() {
       try {
-         File var0 = new File("" + fpath + "data/user.data");
+         File var0 = new File("" + GameSparker.datapath + "data/user.data");
          if (var0.exists()) {
             Date var1 = new Date();
             long var2 = var1.getTime();
