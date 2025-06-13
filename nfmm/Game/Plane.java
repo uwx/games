@@ -937,22 +937,22 @@ public class Plane {
             var71 = false;
          }
 
-         if (this.master == 2 && this.av > 1500 && !this.m.crs) {
+         if (this.master == 2 && (this.av > 1500 || GameSparker.lowDetail != 0) && !this.m.crs) {
             var71 = false;
          }
 
          if ((this.gr == -14 || this.gr == -15 || this.gr == -12)
-            && (this.av > 11000 || var47 || var87 == -111 || this.m.resdown == 2)
+            && (this.av > 11000 || var47 || var87 == -111 || (this.m.resdown == 2 || GameSparker.lowDetail != 0))
             && this.m.trk != 2
             && this.m.trk != 3) {
             var71 = false;
          }
 
-         if (this.gr == -11 && this.av > 11000 && this.m.trk != 2 && this.m.trk != 3) {
+         if (this.gr == -11 && (this.av > 11000 || GameSparker.lowDetail != 0) && this.m.trk != 2 && this.m.trk != 3) {
             var71 = false;
          }
 
-         if (this.glass == 2 && (this.m.trk != 0 || this.av > 6700)) {
+         if (this.glass == 2 && (this.m.trk != 0 || (this.av > 6700 || GameSparker.lowDetail != 0))) {
             var71 = false;
          }
 

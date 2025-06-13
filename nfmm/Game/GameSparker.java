@@ -41,6 +41,7 @@ public class GameSparker extends Applet implements Runnable {
    float reqmult = 0.0F;
    int smooth = 0;
    int moto = 0;
+   static int lowDetail = 0;
    int lastw = 0;
    int lasth = 0;
    boolean onbar = false;
@@ -1900,68 +1901,68 @@ public class GameSparker extends Applet implements Runnable {
                var2.clearRect(0, 0, this.getWidth(), this.getHeight());
             }
 
-            float var5 = (this.getWidth() - 40) / 800.0F - 1.0F;
-            if (var5 > (this.getHeight() - 70) / 450.0F - 1.0F) {
-               var5 = (this.getHeight() - 70) / 450.0F - 1.0F;
-            }
-
-            if (var5 > 1.0F) {
-               var5 = 1.0F;
-            }
-
-            if (var5 < 0.0F) {
-               var5 = 0.0F;
-            }
-
-            this.apmult = 1.0F + var5 * this.reqmult;
-            if (!this.oncarm) {
-               var2.drawImage(this.carmaker[0], 50, 14, this);
-            } else {
-               var2.drawImage(this.carmaker[1], 50, 14, this);
-            }
-
-            if (!this.onstgm) {
-               var2.drawImage(this.stagemaker[0], this.getWidth() - 208, 14, this);
-            } else {
-               var2.drawImage(this.stagemaker[1], this.getWidth() - 208, 14, this);
-            }
-
-            var2.drawImage(this.sizebar, this.getWidth() / 2 - 230, 23, this);
-            var2.drawImage(this.blb, (int)(this.getWidth() / 2 - 222 + 141.0F * this.reqmult), 23, this);
-            var2.drawImage(this.chkbx[this.smooth], this.getWidth() / 2 - 53, 23, this);
-            var2.setFont(new Font("Arial", 1, 11));
-            var2.setColor(new Color(74, 99, 125));
-            var2.drawString("Screen Size:", this.getWidth() / 2 - 224, 17);
-            var2.drawString("Smooth", this.getWidth() / 2 - 36, 34);
-            var2.drawImage(this.fulls, this.getWidth() / 2 + 27, 15, this);
-            var2.setColor(new Color(94, 126, 159));
-            var2.drawString("Fullscreen", this.getWidth() / 2 + 63, 30);
-            var2.drawImage(this.chkbx[Madness.anti], this.getWidth() / 2 + 135, 9, this);
-            var2.drawString("Antialiasing", this.getWidth() / 2 + 152, 20);
-            var2.drawImage(this.chkbx[this.moto], this.getWidth() / 2 + 135, 26, this);
-            var2.drawString("Motion Effects", this.getWidth() / 2 + 152, 37);
-            var2.setColor(new Color(0, 0, 0));
-            var2.fillRect(this.getWidth() / 2 - 153, 5, 80, 16);
-            var2.setColor(new Color(121, 135, 152));
-            String var6 = "" + (int)(this.apmult * 100.0F) + "%";
-            if (this.reqmult == 0.0F) {
-               var6 = "Original";
-            }
-
-            if (this.reqmult == 1.0F) {
-               var6 = "Maximum";
-            }
-
-            var2.drawString(var6, this.getWidth() / 2 - 150, 17);
             if (!this.oncarm && !this.onstgm) {
                this.showsize--;
             }
 
             if (this.showsize == 0) {
+               var2.clearRect(0, 0, this.getWidth(), this.getHeight());
+            } else {
+               float var5 = (this.getWidth() - 40) / 800.0F - 1.0F;
+               if (var5 > (this.getHeight() - 70) / 450.0F - 1.0F) {
+                  var5 = (this.getHeight() - 70) / 450.0F - 1.0F;
+               }
+
+               if (var5 > 1.0F) {
+                  var5 = 1.0F;
+               }
+
+               if (var5 < 0.0F) {
+                  var5 = 0.0F;
+               }
+
+               this.apmult = 1.0F + var5 * this.reqmult;
+               if (!this.oncarm) {
+                  var2.drawImage(this.carmaker[0], 50, 14, this);
+               } else {
+                  var2.drawImage(this.carmaker[1], 50, 14, this);
+               }
+
+               if (!this.onstgm) {
+                  var2.drawImage(this.stagemaker[0], this.getWidth() - 208, 14, this);
+               } else {
+                  var2.drawImage(this.stagemaker[1], this.getWidth() - 208, 14, this);
+               }
+
+               var2.drawImage(this.sizebar, this.getWidth() / 2 - 230, 23, this);
+               var2.drawImage(this.blb, (int)(this.getWidth() / 2 - 222 + 141.0F * this.reqmult), 23, this);
+               var2.drawImage(this.chkbx[this.smooth], this.getWidth() / 2 - 53, 23, this);
+               var2.setFont(new Font("Arial", 1, 11));
+               var2.setColor(new Color(74, 99, 125));
+               var2.drawString("Screen Size:", this.getWidth() / 2 - 224, 17);
+               var2.drawString("Smooth", this.getWidth() / 2 - 36, 34);
+               var2.drawImage(this.fulls, this.getWidth() / 2 + 27, 15, this);
+               var2.setColor(new Color(94, 126, 159));
+               var2.drawString("Fullscreen", this.getWidth() / 2 + 63, 30);
+               var2.drawImage(this.chkbx[Madness.anti], this.getWidth() / 2 + 135, 9 - 8, this);
+               var2.drawString("Antialiasing", this.getWidth() / 2 + 152, 20 - 8);
+               var2.drawImage(this.chkbx[this.moto], this.getWidth() / 2 + 135, 26 - 8, this);
+               var2.drawString("Motion Effects", this.getWidth() / 2 + 152, 37 - 8);
+               var2.drawImage(this.chkbx[lowDetail], this.getWidth() / 2 + 135, 26 + (26 - 9) - 8, this);
+               var2.drawString("Low Detail", this.getWidth() / 2 + 152, 37 + (37 - 20) - 8);
                var2.setColor(new Color(0, 0, 0));
-               var2.fillRect(this.getWidth() / 2 - 260, 0, 520, 40);
-               var2.fillRect(50, 14, 142, 23);
-               var2.fillRect(this.getWidth() - 208, 14, 158, 23);
+               var2.fillRect(this.getWidth() / 2 - 153, 5, 80, 16);
+               var2.setColor(new Color(121, 135, 152));
+               String var6 = "" + (int)(this.apmult * 100.0F) + "%";
+               if (this.reqmult == 0.0F) {
+                  var6 = "Original";
+               }
+
+               if (this.reqmult == 1.0F) {
+                  var6 = "Maximum";
+               }
+
+               var2.drawString(var6, this.getWidth() / 2 - 150, 17);
             }
          }
 
@@ -2637,7 +2638,7 @@ public class GameSparker extends Applet implements Runnable {
                }
 
                boolean var46 = true;
-               if (var35 >= 65 && var35 <= 75 && var5.notb) {
+               if (var35 >= 65 && var35 <= 75 && (var5.notb || GameSparker.lowDetail != 0)) {
                   var46 = false;
                }
 
@@ -2743,7 +2744,7 @@ public class GameSparker extends Applet implements Runnable {
                this.notb = this.nob;
             }
 
-            if (!var5.notb && var14.startsWith("pile")) {
+            if (!var5.notb && GameSparker.lowDetail == 0 && var14.startsWith("pile")) {
                var1[this.nob] = new ContO(
                   this.getint("pile", var14, 0),
                   this.getint("pile", var14, 1),
@@ -3552,7 +3553,7 @@ public class GameSparker extends Applet implements Runnable {
             var8[3] = "NFM2(" + var1 + "," + var5[1] + ")";
          }
 
-         var8[4] = "graphics(" + this.moto + "," + Madness.anti + ")";
+         var8[4] = "graphics(" + this.moto + "," + Madness.anti + "," + this.lowDetail + ")";
          BufferedWriter var14 = new BufferedWriter(new FileWriter(var7));
 
          for (int var17 = 0; var17 < 5; var17++) {
@@ -3676,6 +3677,14 @@ public class GameSparker extends Applet implements Runnable {
             if (var20 >= 0 && var20 <= 1) {
                Madness.anti = var20;
             }
+
+            try {
+               var20 = this.getint("graphics", var5[4], 2);
+               if (var20 >= 0 && var20 <= 1) {
+                  lowDetail = var20;
+               }
+            } catch (Exception e) {
+            }
          }
 
          if (var5[1].startsWith("lastcar")) {
@@ -3747,7 +3756,7 @@ public class GameSparker extends Applet implements Runnable {
             this.showsize = 60;
          }
 
-         if (var2 > this.getWidth() / 2 + 133 && var2 < this.getWidth() / 2 + 231 && var3 > 7 && var3 < 24 && !this.onbar) {
+         if (var2 > this.getWidth() / 2 + 133 && var2 < this.getWidth() / 2 + 231 && var3 > 7 - 8 && var3 < 24 - 8 && !this.onbar) {
             if (Madness.anti == 0) {
                Madness.anti = 1;
             } else {
@@ -3757,11 +3766,21 @@ public class GameSparker extends Applet implements Runnable {
             this.showsize = 60;
          }
 
-         if (var2 > this.getWidth() / 2 + 133 && var2 < this.getWidth() / 2 + 231 && var3 > 24 && var3 < 41 && !this.onbar) {
+         if (var2 > this.getWidth() / 2 + 133 && var2 < this.getWidth() / 2 + 231 && var3 > 24 - 8 && var3 < 41 - 8 && !this.onbar) {
             if (this.moto == 0) {
                this.moto = 1;
             } else {
                this.moto = 0;
+            }
+
+            this.showsize = 60;
+         }
+
+         if (var2 > this.getWidth() / 2 + 133 && var2 < this.getWidth() / 2 + 231 && var3 > 24 + (24 - 7) - 8 && var3 < 41 + (41 - 24) - 8 && !this.onbar) {
+            if (this.lowDetail == 0) {
+               this.lowDetail = 1;
+            } else {
+               this.lowDetail = 0;
             }
 
             this.showsize = 60;
