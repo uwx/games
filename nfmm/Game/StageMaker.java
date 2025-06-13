@@ -3941,7 +3941,7 @@ public class StageMaker extends Applet implements Runnable {
                            this.repaint();
 
                            try {
-                              String var104 = "http://multiplayer.needformadness.com/tracks/"
+                              String var104 = Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/"
                                  + this.mystages[var47]
                                  + ".radq?reqlo="
                                  + (int)(Math.random() * 1000.0)
@@ -4032,7 +4032,7 @@ public class StageMaker extends Applet implements Runnable {
                                              "Downloading stage's sound track...", 400 - this.ftm.stringWidth("Downloading stage's sound track...") / 2, 280
                                           );
                                        this.repaint();
-                                       var104 = "http://multiplayer.needformadness.com/tracks/music/" + var264 + ".zip";
+                                       var104 = Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/music/" + var264 + ".zip";
                                        var104 = var104.replace(' ', '_');
                                        var129 = new URL(var104);
                                        var179 = var129.openConnection().getContentLength();
@@ -4131,7 +4131,7 @@ public class StageMaker extends Applet implements Runnable {
                String var48 = "";
 
                try {
-                  String var62 = "http://multiplayer.needformadness.com/tracks/"
+                  String var62 = Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/"
                      + this.mystages[this.roto]
                      + ".txt?reqlo="
                      + (int)(Math.random() * 1000.0)
@@ -4204,7 +4204,7 @@ public class StageMaker extends Applet implements Runnable {
 
                try {
                   URL var80 = new URL(
-                     "http://multiplayer.needformadness.com/tracks/lists/" + this.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
+                     Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/lists/" + this.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
                   );
                   DataInputStream var111 = new DataInputStream(var80.openStream());
 

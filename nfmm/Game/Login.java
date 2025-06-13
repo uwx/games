@@ -247,7 +247,7 @@ public class Login implements Runnable {
       int var7 = 0;
 
       try {
-         URL var8 = new URL("http://multiplayer.needformadness.com/profiles/" + this.xt.nickname + "/notify.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var8 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/profiles/" + this.xt.nickname + "/notify.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var8.openConnection().setConnectTimeout(2000);
          String var9 = var8.openConnection().getContentType();
          if (var9.equals("text/plain")) {

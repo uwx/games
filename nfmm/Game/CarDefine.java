@@ -2280,7 +2280,7 @@ public class CarDefine implements Runnable {
 
             try {
                URL var48 = new URL(
-                  "http://multiplayer.needformadness.com/cars/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
+                  Madness.corsProxy + "http://multiplayer.needformadness.com/cars/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
                );
                DataInputStream var61 = new DataInputStream(var48.openStream());
 
@@ -2523,7 +2523,7 @@ public class CarDefine implements Runnable {
                   var39 = "AC";
                }
 
-               URL var52 = new URL("http://multiplayer.needformadness.com/cars/top20/" + var39 + ".txt");
+               URL var52 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/cars/top20/" + var39 + ".txt");
                DataInputStream var63 = new DataInputStream(var52.openStream());
 
                while ((var20 = var63.readLine()) != null) {
@@ -2596,7 +2596,7 @@ public class CarDefine implements Runnable {
             String var24 = "";
 
             try {
-               URL var40 = new URL("http://multiplayer.needformadness.com/cars/lists/" + this.viewname + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "");
+               URL var40 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/cars/lists/" + this.viewname + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "");
                DataInputStream var54 = new DataInputStream(var40.openStream());
 
                while ((var24 = var54.readLine()) != null) {
@@ -2852,7 +2852,7 @@ public class CarDefine implements Runnable {
 
    public int loadonlinecar(String var1, int var2) {
       try {
-         String var3 = "http://multiplayer.needformadness.com/cars/" + var1 + ".radq";
+         String var3 = Madness.corsProxy + "http://multiplayer.needformadness.com/cars/" + var1 + ".radq";
          var3 = var3.replace(' ', '_');
          URL var4 = new URL(var3);
          int var6 = var4.openConnection().getContentLength();
@@ -2953,7 +2953,7 @@ public class CarDefine implements Runnable {
 
       try {
          URL var5 = new URL(
-            "http://multiplayer.needformadness.com/tracks/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
+            Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
          );
          DataInputStream var12 = new DataInputStream(var5.openStream());
 
@@ -3041,7 +3041,7 @@ public class CarDefine implements Runnable {
             var5 = "M";
          }
 
-         URL var13 = new URL("http://multiplayer.needformadness.com/tracks/top20/" + var5 + ".txt");
+         URL var13 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/top20/" + var5 + ".txt");
          DataInputStream var7 = new DataInputStream(var13.openStream());
 
          while ((var4 = var7.readLine()) != null) {
@@ -3113,7 +3113,7 @@ public class CarDefine implements Runnable {
          String var4 = "";
 
          try {
-            URL var5 = new URL("http://multiplayer.needformadness.com/clans/" + var1 + "/stages.txt");
+            URL var5 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + var1 + "/stages.txt");
 
             DataInputStream var10;
             for (var10 = new DataInputStream(var5.openStream()); (var4 = var10.readLine()) != null && var3 < 700; var3++) {

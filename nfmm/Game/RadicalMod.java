@@ -27,7 +27,7 @@ public class RadicalMod {
             var8 = ModuleLoader.loadMod("" + Madness.fpath + "" + var1 + "");
          } else {
             var1 = var1.replace(' ', '_');
-            URL var9 = new URL("http://multiplayer.needformadness.com/tracks/music/" + var1 + ".zip");
+            URL var9 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/music/" + var1 + ".zip");
             var8 = ModuleLoader.loadMod(var9);
          }
 

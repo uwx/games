@@ -6853,6 +6853,10 @@ public class xtGraphics extends Panel implements Runnable {
             if (!this.remi && this.cfase != 10 && this.cfase != 11 && this.cfase != 100 && this.cfase != 101) {
                this.rd.drawImage(this.contin[this.pcontin], 355, 385, null);
             } else {
+               if ((this.cfase == 11 || this.cfase == 101) && this.drawcarb(true, null, "Race this car", 505, 385, var4, var5, var6) && this.cd.action == 0) {
+                  var1.handb = true;
+               }
+
                if (this.cfase == 11 && this.drawcarb(true, null, "Add to My Cars", 345, 385, var4, var5, var6) && this.cd.action == 0) {
                   this.cd.ac = this.sc[0];
                   if (this.logged) {
@@ -7034,7 +7038,7 @@ public class xtGraphics extends Panel implements Runnable {
             }
          }
 
-         if (this.cfase != 11 && this.cfase != 101 && var22 == 0 && this.flipo < 10 && (var1.handb || var1.enter)) {
+         if (/*this.cfase != 11 && this.cfase != 101 &&*/ var22 == 0 && this.flipo < 10 && (var1.handb || var1.enter)) {
             this.m.crs = false;
             this.app.mcars.show = false;
             if (this.multion != 0) {

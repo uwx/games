@@ -23,8 +23,10 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class Madness extends Panel {
+   public static String corsProxy = "https://corsproxy.io/?url=";
    static Frame frame;
    static Applet applet;
+   static final String mutableFpath = "/files/";
    static String fpath = "";
    static boolean fullscreen = false;
    static int anti = 0;
@@ -310,7 +312,7 @@ public class Madness extends Panel {
          var2 = false;
 
          try {
-            URL var8 = new URL("http://multiplayer.needformadness.com/update/" + var0 + ".txt");
+            URL var8 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/update/" + var0 + ".txt");
             var8.openConnection().setConnectTimeout(5000);
             var1 = var8.openConnection().getContentType();
             if (var1.equals("text/plain")) {

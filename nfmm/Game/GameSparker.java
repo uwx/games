@@ -2517,10 +2517,10 @@ public class GameSparker extends Applet implements Runnable {
             File var45 = new File("" + Madness.fpath + "" + var34 + ".txt");
             var15 = new DataInputStream(new FileInputStream(var45));
          } else if (var5.stage > 0) {
-            URL var33 = new URL("http://multiplayer.needformadness.com/stages/" + var5.stage + ".txt");
+            URL var33 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/stages/" + var5.stage + ".txt");
             var15 = new DataInputStream(var33.openStream());
          } else {
-            String var16 = "http://multiplayer.needformadness.com/tracks/" + var5.name + ".radq";
+            String var16 = Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/" + var5.name + ".radq";
             var16 = var16.replace(' ', '_');
             URL var17 = new URL(var16);
             int var18 = var17.openConnection().getContentLength();
@@ -3028,10 +3028,10 @@ public class GameSparker extends Applet implements Runnable {
       try {
          DataInputStream var14 = null;
          if (var6.stage > 0) {
-            URL var30 = new URL("http://multiplayer.needformadness.com/stages/" + var6.stage + ".txt");
+            URL var30 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/stages/" + var6.stage + ".txt");
             var14 = new DataInputStream(var30.openStream());
          } else {
-            String var15 = "http://multiplayer.needformadness.com/tracks/" + var6.name + ".radq";
+            String var15 = Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/" + var6.name + ".radq";
             var15 = var15.replace(' ', '_');
             URL var16 = new URL(var15);
             int var17 = var16.openConnection().getContentLength();
@@ -3403,7 +3403,7 @@ public class GameSparker extends Applet implements Runnable {
             File var10 = new File("" + Madness.fpath + "data/models.zip");
             var9 = new ZipInputStream(new FileInputStream(var10));
          } else {
-            URL var18 = new URL("http://multiplayer.needformadness.com/data/models.zip");
+            URL var18 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/data/models.zip");
             var9 = new ZipInputStream(var18.openStream());
          }
 
@@ -3961,7 +3961,7 @@ public class GameSparker extends Applet implements Runnable {
       Madness.inisetup = true;
 
       try {
-         File var1 = new File("" + Madness.fpath + "Madness.ini");
+         File var1 = new File("" + Madness.mutableFpath + "Madness.ini");
          if (var1.exists()) {
             String[] var2 = new String[40];
             int var3 = 0;

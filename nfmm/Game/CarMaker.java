@@ -2903,7 +2903,7 @@ public class CarMaker extends Applet implements Runnable, ActionListener {
                String var58 = "";
 
                try {
-                  String var72 = "http://multiplayer.needformadness.com/cars/" + this.mycars[this.roto] + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "";
+                  String var72 = Madness.corsProxy + "http://multiplayer.needformadness.com/cars/" + this.mycars[this.roto] + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "";
                   var72 = var72.replace(' ', '_');
                   URL var82 = new URL(var72);
                   DataInputStream var120 = new DataInputStream(var82.openStream());
@@ -2956,7 +2956,7 @@ public class CarMaker extends Applet implements Runnable, ActionListener {
 
                try {
                   URL var83 = new URL(
-                     "http://multiplayer.needformadness.com/cars/lists/" + this.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
+                     Madness.corsProxy + "http://multiplayer.needformadness.com/cars/lists/" + this.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
                   );
                   DataInputStream var122 = new DataInputStream(var83.openStream());
 

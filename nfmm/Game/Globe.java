@@ -11656,7 +11656,7 @@ public class Globe implements Runnable {
 
                      try {
                         URL var246 = new URL(
-                           "http://multiplayer.needformadness.com/cars/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
+                           Madness.corsProxy + "http://multiplayer.needformadness.com/cars/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
                         );
                         var246.openConnection().setConnectTimeout(2000);
                         String var322 = "";
@@ -11709,7 +11709,7 @@ public class Globe implements Runnable {
                            this.gs.senditem.add(this.rd, "Loading shareable cars,  " + (int)((float)var354 / var152 * 100.0F) + " %");
 
                            try {
-                              String var391 = "http://multiplayer.needformadness.com/cars/"
+                              String var391 = Madness.corsProxy + "http://multiplayer.needformadness.com/cars/"
                                  + var181[var354]
                                  + ".txt?reqlo="
                                  + (int)(Math.random() * 1000.0)
@@ -11757,7 +11757,7 @@ public class Globe implements Runnable {
 
                      try {
                         URL var248 = new URL(
-                           "http://multiplayer.needformadness.com/tracks/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
+                           Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
                         );
                         var248.openConnection().setConnectTimeout(2000);
                         String var327 = "";
@@ -11810,7 +11810,7 @@ public class Globe implements Runnable {
                            this.gs.senditem.add(this.rd, "Loading shareable stages,  " + (int)((float)var357 / var153 * 100.0F) + " %");
 
                            try {
-                              String var394 = "http://multiplayer.needformadness.com/tracks/"
+                              String var394 = Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/"
                                  + var182[var357]
                                  + ".txt?reqlo="
                                  + (int)(Math.random() * 1000.0)
@@ -12869,7 +12869,7 @@ public class Globe implements Runnable {
                      }
 
                      try {
-                        URL var190 = new URL("http://multiplayer.needformadness.com/interact/" + var159 + "/" + this.viewwar2 + ".txt");
+                        URL var190 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/interact/" + var159 + "/" + this.viewwar2 + ".txt");
                         var190.openConnection().setConnectTimeout(2000);
                         String var304 = var190.openConnection().getContentType();
                         if (var304.equals("text/plain")) {
@@ -13781,7 +13781,7 @@ public class Globe implements Runnable {
                         var163 = "pending_battle";
                      }
 
-                     URL var229 = new URL("http://multiplayer.needformadness.com/interact/" + var163 + "/" + this.viewwar1 + ".txt");
+                     URL var229 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/interact/" + var163 + "/" + this.viewwar1 + ".txt");
                      var229.openConnection().setConnectTimeout(2000);
                      String var309 = var229.openConnection().getContentType();
                      if (!var309.equals("text/plain")) {
@@ -14937,7 +14937,7 @@ public class Globe implements Runnable {
          this.logon[this.nlg] = false;
 
          try {
-            URL var9 = new URL("http://multiplayer.needformadness.com/profiles/" + this.logos[this.nlg] + "/logo.png");
+            URL var9 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/profiles/" + this.logos[this.nlg] + "/logo.png");
             var9.openConnection().setConnectTimeout(2000);
             String var10 = var9.openConnection().getContentType();
             if (var10.equals("image/png")) {
@@ -15200,9 +15200,9 @@ public class Globe implements Runnable {
          this.logon[this.nlg] = false;
 
          try {
-            String var21 = "http://multiplayer.needformadness.com/profiles/" + this.logos[this.nlg] + "/logo.png";
+            String var21 = Madness.corsProxy + "http://multiplayer.needformadness.com/profiles/" + this.logos[this.nlg] + "/logo.png";
             if (var3) {
-               var21 = "http://multiplayer.needformadness.com/clans/" + var5 + "/logo.png";
+               var21 = Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + var5 + "/logo.png";
             }
 
             URL var32 = new URL(var21);
@@ -15280,7 +15280,7 @@ public class Globe implements Runnable {
                var7 = "?req=" + (int)(Math.random() * 1000.0) + "";
             }
 
-            URL var4 = new URL("http://multiplayer.needformadness.com/profiles/" + this.proname + "/logo.png" + var7 + "");
+            URL var4 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/profiles/" + this.proname + "/logo.png" + var7 + "");
             var4.openConnection().setConnectTimeout(2000);
             String var5 = var4.openConnection().getContentType();
             if (var5.equals("image/png")) {
@@ -15328,7 +15328,7 @@ public class Globe implements Runnable {
                var9 = "?req=" + (int)(Math.random() * 1000.0) + "";
             }
 
-            URL var6 = new URL("http://multiplayer.needformadness.com/clans/" + var1 + "/logo.png" + var9 + "");
+            URL var6 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + var1 + "/logo.png" + var9 + "");
             var6.openConnection().setConnectTimeout(2000);
             String var7 = var6.openConnection().getContentType();
             if (var7.equals("image/png")) {
@@ -15351,7 +15351,7 @@ public class Globe implements Runnable {
       }
 
       try {
-         URL var2 = new URL("http://multiplayer.needformadness.com/profiles/" + this.proname + "/avatar.png" + var1 + "");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/profiles/" + this.proname + "/avatar.png" + var1 + "");
          var2.openConnection().setConnectTimeout(2000);
          String var3 = var2.openConnection().getContentType();
          if (var3.equals("image/png")) {
@@ -15370,7 +15370,7 @@ public class Globe implements Runnable {
       }
 
       try {
-         URL var2 = new URL("http://multiplayer.needformadness.com/clans/" + this.claname + "/bg.jpg" + var1 + "");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.claname + "/bg.jpg" + var1 + "");
          var2.openConnection().setConnectTimeout(2000);
          String var3 = var2.openConnection().getContentType();
          if (var3.equals("image/jpeg")) {
@@ -15386,7 +15386,7 @@ public class Globe implements Runnable {
          this.intclanbgloaded = false;
 
          try {
-            URL var2 = new URL("http://multiplayer.needformadness.com/clans/" + var1 + "/bg.jpg");
+            URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + var1 + "/bg.jpg");
             var2.openConnection().setConnectTimeout(2000);
             String var3 = var2.openConnection().getContentType();
             if (var3.equals("image/jpeg")) {
@@ -15410,7 +15410,7 @@ public class Globe implements Runnable {
          this.loadedmyclanbg = 2;
 
          try {
-            URL var2 = new URL("http://multiplayer.needformadness.com/clans/" + this.xt.clan + "/bg.jpg" + var1 + "");
+            URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.xt.clan + "/bg.jpg" + var1 + "");
             var2.openConnection().setConnectTimeout(2000);
             String var3 = var2.openConnection().getContentType();
             if (var3.equals("image/jpeg")) {
@@ -15432,7 +15432,7 @@ public class Globe implements Runnable {
       this.nrmb = 0;
 
       try {
-         URL var5 = new URL("http://multiplayer.needformadness.com/clans/" + this.claname + "/members.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var5 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.claname + "/members.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var5.openConnection().setConnectTimeout(2000);
          String var6 = var5.openConnection().getContentType();
          if (var6.equals("text/plain")) {
@@ -15505,7 +15505,7 @@ public class Globe implements Runnable {
       this.lurl = "";
 
       try {
-         URL var1 = new URL("http://multiplayer.needformadness.com/clans/" + this.claname + "/link.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var1 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.claname + "/link.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var1.openConnection().setConnectTimeout(2000);
          String var2 = var1.openConnection().getContentType();
          if (var2.equals("text/plain")) {
@@ -15540,7 +15540,7 @@ public class Globe implements Runnable {
       this.ncln = 0;
 
       try {
-         URL var1 = new URL("http://multiplayer.needformadness.com/clans/" + this.xt.clan + "/members.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var1 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.xt.clan + "/members.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var1.openConnection().setConnectTimeout(2000);
          DataInputStream var2 = new DataInputStream(var1.openStream());
          String var3 = "";
@@ -15574,7 +15574,7 @@ public class Globe implements Runnable {
       this.gs.clcars.add(this.rd, "Select Car");
 
       try {
-         URL var2 = new URL("http://multiplayer.needformadness.com/clans/" + this.claname + "/cars.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.claname + "/cars.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var2.openConnection().setConnectTimeout(2000);
          String var3 = var2.openConnection().getContentType();
          if (var3.equals("text/plain")) {
@@ -15616,7 +15616,7 @@ public class Globe implements Runnable {
       String[] var3 = new String[700];
 
       try {
-         URL var4 = new URL("http://multiplayer.needformadness.com/cars/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "");
+         URL var4 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/cars/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "");
          var4.openConnection().setConnectTimeout(2000);
          DataInputStream var15 = new DataInputStream(var4.openStream());
          String var6 = "";
@@ -15657,7 +15657,7 @@ public class Globe implements Runnable {
             this.perry = "" + (int)((float)var19 / var2 * 100.0F) + " %";
 
             try {
-               String var21 = "http://multiplayer.needformadness.com/cars/" + var3[var19] + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "";
+               String var21 = Madness.corsProxy + "http://multiplayer.needformadness.com/cars/" + var3[var19] + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "";
                var21 = var21.replace(' ', '_');
                URL var8 = new URL(var21);
                var8.openConnection().setConnectTimeout(2000);
@@ -15698,7 +15698,7 @@ public class Globe implements Runnable {
 
    public void loadiclancars(String var1) {
       try {
-         URL var2 = new URL("http://multiplayer.needformadness.com/clans/" + var1 + "/cars.txt");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + var1 + "/cars.txt");
          var2.openConnection().setConnectTimeout(2000);
          String var3 = var2.openConnection().getContentType();
          if (var3.equals("text/plain")) {
@@ -15730,7 +15730,7 @@ public class Globe implements Runnable {
       this.gs.clcars.add(this.rd, "Select Stage");
 
       try {
-         URL var2 = new URL("http://multiplayer.needformadness.com/clans/" + this.claname + "/stages.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.claname + "/stages.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var2.openConnection().setConnectTimeout(2000);
          String var3 = var2.openConnection().getContentType();
          if (var3.equals("text/plain")) {
@@ -15773,7 +15773,7 @@ public class Globe implements Runnable {
 
       try {
          URL var4 = new URL(
-            "http://multiplayer.needformadness.com/tracks/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
+            Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/lists/" + this.gs.tnick.getText() + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + ""
          );
          var4.openConnection().setConnectTimeout(2000);
          DataInputStream var15 = new DataInputStream(var4.openStream());
@@ -15815,7 +15815,7 @@ public class Globe implements Runnable {
             this.perry = "" + (int)((float)var19 / var2 * 100.0F) + " %";
 
             try {
-               String var21 = "http://multiplayer.needformadness.com/tracks/" + var3[var19] + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "";
+               String var21 = Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/" + var3[var19] + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "";
                var21 = var21.replace(' ', '_');
                URL var8 = new URL(var21);
                var8.openConnection().setConnectTimeout(2000);
@@ -15856,7 +15856,7 @@ public class Globe implements Runnable {
 
    public void loadiclanstages(String var1) {
       try {
-         URL var2 = new URL("http://multiplayer.needformadness.com/clans/" + var1 + "/stages.txt");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + var1 + "/stages.txt");
          var2.openConnection().setConnectTimeout(2000);
          String var3 = var2.openConnection().getContentType();
          if (var3.equals("text/plain")) {
@@ -15900,7 +15900,7 @@ public class Globe implements Runnable {
             var1 = "?req=" + (int)(Math.random() * 1000.0) + "";
          }
 
-         URL var2 = new URL("http://multiplayer.needformadness.com/profiles/" + this.proname + "/info.txt" + var1 + "");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/profiles/" + this.proname + "/info.txt" + var1 + "");
          var2.openConnection().setConnectTimeout(2000);
          String var3 = var2.openConnection().getContentType();
          if (var3.equals("text/plain")) {
@@ -15971,7 +15971,7 @@ public class Globe implements Runnable {
       String var3 = "";
 
       try {
-         URL var4 = new URL("http://multiplayer.needformadness.com/tracks/lists/" + this.proname + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "");
+         URL var4 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/tracks/lists/" + this.proname + ".txt?reqlo=" + (int)(Math.random() * 1000.0) + "");
          DataInputStream var11 = new DataInputStream(var4.openStream());
 
          while ((var3 = var11.readLine()) != null) {
@@ -16041,7 +16041,7 @@ public class Globe implements Runnable {
          this.freq = 0;
 
          try {
-            URL var1 = new URL("http://multiplayer.needformadness.com/profiles/" + this.xt.nickname + "/friends.txt?req=" + (int)(Math.random() * 1000.0) + "");
+            URL var1 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/profiles/" + this.xt.nickname + "/friends.txt?req=" + (int)(Math.random() * 1000.0) + "");
             var1.openConnection().setConnectTimeout(2000);
             String var2 = var1.openConnection().getContentType();
             if (var2.equals("text/plain")) {
@@ -16091,7 +16091,7 @@ public class Globe implements Runnable {
 
    public void loadnews() {
       try {
-         URL var1 = new URL("http://multiplayer.needformadness.com/interact/news.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var1 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/interact/news.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var1.openConnection().setConnectTimeout(2000);
          DataInputStream var2 = new DataInputStream(var1.openStream());
          String var3 = "";
@@ -16360,7 +16360,7 @@ public class Globe implements Runnable {
       this.verclan = new String[this.maxclans][this.maxclans];
 
       try {
-         URL var2 = new URL("http://multiplayer.needformadness.com/interact/clanstat.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var2 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/interact/clanstat.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var2.openConnection().setConnectTimeout(2000);
          DataInputStream var9 = new DataInputStream(var2.openStream());
          String var4 = "";
@@ -16581,7 +16581,7 @@ public class Globe implements Runnable {
 
    public void loadwarb() {
       try {
-         URL var1 = new URL("http://multiplayer.needformadness.com/clans/" + this.xt.clan + "/inter.txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var1 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/clans/" + this.xt.clan + "/inter.txt?req=" + (int)(Math.random() * 1000.0) + "");
          var1.openConnection().setConnectTimeout(2000);
          String var2 = var1.openConnection().getContentType();
          this.gs.warb.removeAll();
@@ -16653,7 +16653,7 @@ public class Globe implements Runnable {
       this.vclan = this.getSvalue(this.gs.warb.opts[this.gs.warb.sel], 1);
 
       try {
-         URL var3 = new URL("http://multiplayer.needformadness.com/interact/" + var2 + "/" + this.warbnum + ".txt?req=" + (int)(Math.random() * 1000.0) + "");
+         URL var3 = new URL(Madness.corsProxy + "http://multiplayer.needformadness.com/interact/" + var2 + "/" + this.warbnum + ".txt?req=" + (int)(Math.random() * 1000.0) + "");
          var3.openConnection().setConnectTimeout(2000);
          String var4 = var3.openConnection().getContentType();
          if (var4.equals("text/plain")) {
